@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 def current_date():
     from datetime import date

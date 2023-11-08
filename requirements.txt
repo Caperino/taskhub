@@ -13,3 +13,5 @@ pytz==2022.6
 requests==2.28.1
 sqlparse==0.4.3
 urllib3==1.26.12
+azure-storage-blob
+azure-identity
