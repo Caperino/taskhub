@@ -9,6 +9,8 @@ TaskHub is an MES for smaller businesses that do not want to / cannot pay large 
 - 'python create_secretkey'
 - 'python manage.py makemigrations'
 - 'python manage.py migrate'
+- 'python manage.py createsuperuser'
+- 'az login'
 - 'python manage.py runserver'
 
 ###### Version 0.1.0

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
@@ -96,7 +97,27 @@ class Shift(models.Model):
 
 
 # EMPLOYEES
-class Employee(models.Model):
+class Employee(AbstractUser):
+    """
+    An employee is a person, who is working for the company.
+    This class is also used for the user authentication.
+    inherited fields from AbstractUser:
+    username
+    first_name
+    last_name
+    email
+    password
+    groups
+    user_permissions
+    is_staff
+    is_active
+    is_superuser
+    last_login
+    date_joined
+
+    needed fields:
+    username, first_name, last_name, email, password, groups
+    """
 
     GENDER_CHOICES = (
         ('m', 'male'),
@@ -104,10 +125,7 @@ class Employee(models.Model):
         ('x', 'diverse'),
     )
 
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    mail = models.CharField(max_length=320)
-    password = models.CharField(max_length=128)
+    pfp_name = models.CharField(max_length=128, null=True)
     employee_type = models.ForeignKey("EmployeeType", on_delete=models.PROTECT)
     address = models.CharField(max_length=1024, null=True)
     phone = models.CharField(max_length=20, null=True)
