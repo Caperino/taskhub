@@ -32,19 +32,28 @@ class Customer(models.Model):
 
 # TASKS
 class Task(models.Model):
+    """
+    A task is a task, which is assigned to an employee.
+    """
+    SHIFT_CHOICES = (
+        ('am', 'am'),
+        ('pm', 'pm')
+    )
+
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
     title = models.CharField(max_length=1024)
     task_type = models.ForeignKey("TaskType", on_delete=models.PROTECT)
     task_status = models.ForeignKey("TaskStatus", on_delete=models.PROTECT)
     employees = models.ManyToManyField("Employee")
     vehicles = models.ManyToManyField("Vehicle")
+    images = models.ManyToManyField("AzureImage", blank=True, null=True)
     scheduled_from = models.DateTimeField()
-    from_shift = models.ForeignKey("Shift", on_delete=models.PROTECT)
+    from_shift = models.CharField(max_length=2, choices=SHIFT_CHOICES)
     scheduled_to = models.DateTimeField()
-    to_shift = models.ForeignKey("Shift", on_delete=models.PROTECT)
+    to_shift = models.CharField(max_length=2, choices=SHIFT_CHOICES)
 
     def __str__(self):
-        return self.title
+        return "%s - %s" % (self.title, self.order)
 
 
 class TaskType(models.Model):
@@ -53,12 +62,13 @@ class TaskType(models.Model):
     possibilities: assembly, delivery, installation, repair, service
     """
     TASK_TYPES = (
-	('as', 'assembly'),
-	('de', 'delivery'),
-	('in', 'installation'),
-	('re', 'repair'),
-	('se', 'service')
+        ('as', 'assembly'),
+        ('de', 'delivery'),
+        ('in', 'installation'),
+        ('re', 'repair'),
+        ('se', 'service')
     )
+
     title = models.CharField(max_length=2, choices=TASK_TYPES)
 
 
@@ -68,32 +78,22 @@ class TaskStatus(models.Model):
     possibilities: queued, in progress, done
     """
     TASK_STATUS = (
-	('qu', 'queued'),
-	('ip', 'in progress'),
-	('do', 'done')
+        ('qu', 'queued'),
+        ('ip', 'in progress'),
+        ('do', 'done')
     )
+
     title = models.CharField(max_length=2, choices=TASK_STATUS)
 
 
 class AzureImage(models.Model):
     """
-    An azure image is an image of a task.
+    An Azure Image is an image, which is stored in the Azure Cloud.
     """
-    image = models.CharField(max_length=1024)
-    task = models.ForeignKey(Task, on_delete=models.PROTECT)
+    image_name = models.CharField(max_length=128)
 
-
-class Shift(models.Model):
-    """
-    A shift is a period of time, when employees are working.
-    possibilities: morning, afternoon
-    """
-    SHIFT_TYPE = (
-	('mo', 'morning'),
-	('an', 'afternoon')
-    )
-    title = models.CharField(max_length=30)
-    short_name = models.CharField(max_length=2, db_index=True, choices=SHIFT_TYPE)
+    def __str__(self):
+        return self.image_name
 
 
 # EMPLOYEES
@@ -125,13 +125,13 @@ class Employee(AbstractUser):
         ('x', 'diverse'),
     )
 
-    pfp_name = models.CharField(max_length=128, null=True)
-    employee_type = models.ForeignKey("EmployeeType", on_delete=models.PROTECT)
-    address = models.CharField(max_length=1024, null=True)
-    phone = models.CharField(max_length=20, null=True)
-    birth_date = models.DateField(null=True)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True)
-    drivers_license_status = models.BooleanField(null=True)
+    pfp_name = models.ForeignKey("AzureImage", on_delete=models.SET_NULL, null=True, blank=True)
+    employee_type = models.ForeignKey("EmployeeType", on_delete=models.SET_NULL, null=True, blank=True)
+    address = models.CharField(max_length=1024, null=True, blank=True)
+    phone = models.CharField(max_length=20, null=True, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True, blank=True)
+    drivers_license_status = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
