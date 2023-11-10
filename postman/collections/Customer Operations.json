@@ -1,0 +1,531 @@
+{
+	"info": {
+		"_postman_id": "9868e838-4d60-451a-899d-40dfde6682e1",
+		"name": "Customer Operations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "20001436-9868e838-4d60-451a-899d-40dfde6682e1"
+	},
+	"item": [
+		{
+			"name": "List",
+			"id": "51403941-a00a-4094-888a-b856cf30ae37",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/customers",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customers"
+					],
+					"query": [
+						{
+							"key": "company",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "query",
+							"value": "some_string",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "75ad356d-ad29-47c7-8d34-d0f556e42970",
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/customers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers"
+							],
+							"query": [
+								{
+									"key": "company",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "query",
+									"value": "some_string",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 10 Nov 2023 21:09:58 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "103"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"TK Inc.\",\n        \"address\": \"Margarethenstraße 24\",\n        \"phone\": \"+436607039266\",\n        \"is_company\": true\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Create",
+			"id": "b2b7db24-6b84-475d-abe9-db082882a59b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Customer 1\",\r\n    \"address\": \"Address 1\",\r\n    \"phone\": \"Phone 1\",\r\n    \"is_company\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customers",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "e33a3928-0feb-47ad-814b-fd539d30e937",
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Customer 1\",\r\n    \"address\": \"Address 1\",\r\n    \"phone\": \"Phone 1\",\r\n    \"is_company\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 10 Nov 2023 21:06:50 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "79"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Customer 1\",\n    \"address\": \"Address 1\",\n    \"phone\": \"Phone 1\",\n    \"is_company\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Retrieve",
+			"id": "8a582436-7877-4f9e-a214-e8a6c1306994",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/customers/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customers",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "1cfc7163-e671-48cd-b228-87461302ac7e",
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/customers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 10 Nov 2023 21:07:53 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "101"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"name\": \"TK Inc.\",\n    \"address\": \"Margarethenstraße 24\",\n    \"phone\": \"+436607039266\",\n    \"is_company\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"id": "c6628b67-b545-4e11-841c-f95ebd55d17a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Customer 1\",\r\n    \"address\": \"Address 1\",\r\n    \"phone\": \"Phone 1\",\r\n    \"is_company\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customers/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customers",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "c7db4114-2820-438d-ba48-ead1acd8f973",
+					"name": "Success",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Customer 1\",\r\n    \"address\": \"Address 1\",\r\n    \"phone\": \"Phone 1\",\r\n    \"is_company\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customers/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 10 Nov 2023 21:09:17 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "80"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Customer 1\",\n    \"address\": \"Address 1\",\n    \"phone\": \"Phone 1\",\n    \"is_company\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"id": "6da13b3e-ccfd-41b7-9c42-1bc6914d5565",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/customers/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customers",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "f44a8e1b-1fe6-4929-a5fc-9b73550f4baa",
+					"name": "Success",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/customers/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"2"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 10 Nov 2023 21:09:54 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "03ab84e3-9e4d-4e9b-9250-e3b3ab0fd959",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "be8558b9-95b3-4288-a967-57d209aa35f7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "270b6df9-26f5-4839-a80f-6c4125be862c",
+			"key": "base_url",
+			"value": "localhost:8000/api",
+			"type": "string"
+		}
+	]
+}
