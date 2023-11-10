@@ -4,6 +4,7 @@ import string
 from django.shortcuts import render
 import re
 from rest_framework import viewsets
+from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 import random
@@ -11,7 +12,7 @@ import random
 # TaskHub imports
 from TaskHub import urls
 from . import renderers
-from . import azure, models, constants
+from . import azure, models, constants, serializers
 
 
 # Helpers
@@ -89,7 +90,7 @@ class ImageUploadViewSet(viewsets.ViewSet):
         print(file.content_type)
         print(file.read())
     """
-    renderer_classes = [renderers.PNGRenderer, renderers.JPEGRenderer]
+    renderer_classes = [renderers.PNGRenderer, renderers.JPEGRenderer, JSONRenderer]
 
     def download_pfp(self, request, user_pk):
         """
@@ -120,9 +121,9 @@ class ImageUploadViewSet(viewsets.ViewSet):
         em = get_object_or_404(models.Employee, pk=user_pk)
         for file in request.FILES.getlist('upload'):
             if file.size > 3000000:
-                return Response({"status": "too large"}, status=400)
+                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="file too large")).data, status=400)
             elif not validate_image_upload_type(file.name):
-                return Response({"status": "wrong format"}, status=400)
+                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="invalid file type")).data, status=400)
 
             # read file and create AzureImage
             c = file.read()
@@ -135,17 +136,17 @@ class ImageUploadViewSet(viewsets.ViewSet):
                 try:
                     azure.delete_profile_picture(em.pfp_name.image_name)
                     em.pfp_name.delete()
-                    # TODO: mail notification
                 except Exception as e:
                     print(e)
+                    # TODO: mail notification
             em.pfp_name = az_img
 
             # save changes in Employee
             em.save()
 
             # logging and response
-            return Response(c, status=201)
-        return Response({"no file detected": ""}, status=400)
+            return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(message="file uploaded to storage")).data, status=201)
+        return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="no file detected")).data, status=400)
 
     def delete_pfp(self, request, user_pk):
         """
@@ -165,47 +166,52 @@ class ImageUploadViewSet(viewsets.ViewSet):
             except Exception as e:
                 print(e)
                 # TODO: mail notification
-                return Response({"status": "error"}, status=500)
-
+                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(message="file uploaded to storage")).data, status=500)
 
     def download_task_image(self, request, task_pk, image_pk):
         """
         Downloads a task image from Azure Blob Storage
+        :param image_pk: the primary key of the image
+        :param task_pk: the primary key of the task
         :param request: the request
         :return:
         """
-        task = get_object_or_404(models.Task, pk=task_pk)
-        imgs = list(task.images.all())
-        if len(list(imgs)) is 0:
-            return Response({"status": "no images uploaded"}, status=404)
-        else:
-            # find object in list where pk is image_pk
-            img = next((x for x in imgs if x.pk == image_pk), None)
-            if img is None:
-                return Response({"status": "image not found"}, status=404)
-            try:
-                c = azure.download_task_image(img.image_name)
-                return Response(c, status=200)
-            except Exception as e:
-                print(e)
-                # TODO: mail notification
-                return Response({"status": "error"}, status=500)
+        try:
+            selected_image = models.Task.objects.get(pk=task_pk).images.get(pk=image_pk)
+        except Exception as e:
+            print(e)
+            return Response({"status": "image not found"}, status=404)
+
+        try:
+            c = azure.download_task_image(selected_image.image_name)
+            return Response(c, status=200)
+        except Exception as e:
+            print(e)
+            # TODO: mail notification
+            return Response({"status": "error"}, status=500)
 
     def upload_task_image(self, request, task_pk):
         """
         Uploads a task image to Azure Blob Storage
-        :param task_pk:
-        :param request:
+        :param task_pk: the primary key of the task
+        :param request: the request
         :return:
         """
-        task = get_object_or_404(models.Task, pk=task_pk)
-        c = 0
+        try:
+            task = models.Task.objects.get(pk=task_pk)
+        except Exception as e:
+            print(e)
+            return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="task not found")).data, status=404, content_type="application/json")
+        count = 0
+        uploaded_files: list = []
         for file in request.FILES.getlist('upload'):
-            c += 1
+            count += 1
             if file.size > 3000000:
-                return Response({"status": "too large"}, status=400)
+                task.save()
+                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="file too large, already uploaded: " + " ".join(uploaded_files))).data, status=400, content_type="application/json")
             elif not validate_image_upload_type(file.name):
-                return Response({"status": "wrong format"}, status=400)
+                task.save()
+                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="invalid file type, already uploaded: " + " ".join(uploaded_files))).data, status=400, content_type="application/json")
 
             # read file and create AzureImage
             c = file.read()
@@ -215,12 +221,36 @@ class ImageUploadViewSet(viewsets.ViewSet):
 
             # add image object to task
             task.images.add(az_img)
+            uploaded_files.append(file.name)
 
-            # save changes in Task
-            task.save()
-        if c is 0:
-            return Response({"no file detected": ""}, status=400)
-        return Response({"upload finished": ""}, status=201)
+        if count is 0:
+            return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="no images detected")).data, status=400, content_type="application/json")
+        # save changes in Task
+        task.save()
+        return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(message="%d images uploaded" % count)).data, status=201, content_type="application/json")
+
+    def delete_task_image(self, request, task_pk, image_pk):
+        """
+        Deletes a profile picture from Azure Blob Storage
+        :param image_pk: the primary key of the image
+        :param task_pk: the primary key of the task
+        :param request: the request
+        :return:
+        """
+        try:
+            task = get_object_or_404(models.Task, pk=task_pk)
+            imgs = task.images.filter(pk=image_pk)
+            if imgs.count() != 1:
+                return Response(None, status=404)
+            selected_image = imgs[0]
+            azure.delete_task_image(selected_image.image_name)
+            task.images.remove(selected_image)
+            selected_image.delete()
+            return Response(None, status=204)
+        except Exception as e:
+            print(e)
+            # TODO: mail notification
+            return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="image deletion failed")).data, status=500)
 
     def destroy(self, request, task_pk):
         """

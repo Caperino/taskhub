@@ -32,8 +32,10 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     # Image Action URLs
-    path('api/users/<user_pk>/image', available_views.ImageUploadViewSet.as_view({"get": "download_pfp", "post": "upload_pfp", "delete": "delete_pfp"})),
+    path('api/users/<user_pk>/image',
+         available_views.ImageUploadViewSet.as_view({"get": "download_pfp", "post": "upload_pfp", "delete": "delete_pfp"})),
     path('api/tasks/<task_pk>/images',
          available_views.ImageUploadViewSet.as_view({"post": "upload_task_image"})),
-    path('api/tasks/<task_pk>/images/<image_pk>', available_views.ImageUploadViewSet.as_view({"get": "download_task_image"})),
+    path('api/tasks/<task_pk>/images/<image_pk>',
+         available_views.ImageUploadViewSet.as_view({"get": "download_task_image", "delete": "delete_task_image"})),
 ]

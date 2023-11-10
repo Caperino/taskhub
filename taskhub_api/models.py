@@ -44,9 +44,9 @@ class Task(models.Model):
     title = models.CharField(max_length=1024)
     task_type = models.ForeignKey("TaskType", on_delete=models.PROTECT)
     task_status = models.ForeignKey("TaskStatus", on_delete=models.PROTECT)
-    employees = models.ManyToManyField("Employee")
-    vehicles = models.ManyToManyField("Vehicle")
-    images = models.ManyToManyField("AzureImage", blank=True, null=True)
+    employees = models.ManyToManyField("Employee", blank=True)
+    vehicles = models.ManyToManyField("Vehicle", blank=True)
+    images = models.ManyToManyField("AzureImage", blank=True)
     scheduled_from = models.DateTimeField()
     from_shift = models.CharField(max_length=2, choices=SHIFT_CHOICES)
     scheduled_to = models.DateTimeField()
@@ -162,3 +162,11 @@ class VehicleType(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class TaskHubApiResponse(models.Model):
+    """
+    A simple API response class
+    """
+    status = models.CharField(max_length=60, default="success")
+    message = models.CharField(max_length=1024, default="")
