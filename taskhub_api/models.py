@@ -21,6 +21,9 @@ class Order(models.Model):
 
 
 class Customer(models.Model):
+    """
+    A customer is a person or a company, who is ordering something.
+    """
     name = models.CharField(max_length=1024)
     address = models.CharField(max_length=1024)
     phone = models.CharField(max_length=20)
@@ -33,7 +36,7 @@ class Customer(models.Model):
 # TASKS
 class Task(models.Model):
     """
-    A task is a task, which is assigned to an employee.
+    A task is an activity, which is assigned to an employee.
     """
     SHIFT_CHOICES = (
         ('am', 'am'),

@@ -7,6 +7,8 @@ from rest_framework import viewsets
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+from datetime import datetime, timedelta
+import django.db.models as django_models
 import random
 
 # TaskHub imports
@@ -38,6 +40,19 @@ def validate_image_upload_type(file_name: str) -> bool:
     return True
 
 
+def to_date(date_string: str) -> datetime | None:
+    """
+    Converts a date string to a datetime object
+    :param date_string: the date string
+    :return: the datetime object
+    """
+    try:
+        return datetime.strptime(date_string, "%Y-%m-%d")
+    except:
+        return None
+
+
+
 class ApiView(viewsets.ViewSet):
 
     def list(self, request):
@@ -48,6 +63,80 @@ class ApiView(viewsets.ViewSet):
             if "api/" in endpoint and re.search("<.*>", endpoint) is None:
                 endpoints.append("http://localhost:8000/%s" % endpoint)
         return Response(endpoints)
+
+
+class CustomerViewSet(viewsets.ViewSet):
+    """
+    A simple ViewSet for listing or retrieving costumers.
+    """
+
+    def list(self, request):
+        is_company: str = request.GET.get("company", "")
+        query_string = request.GET.get("query", "")
+        if is_company.lower() == "true":
+            customers = models.Customer.objects.filter(name__icontains=query_string, is_company=True)
+        elif is_company.lower() == "false":
+            customers = models.Customer.objects.filter(name__icontains=query_string, is_company=False)
+        else:
+            customers = models.Customer.objects.filter(name__icontains=query_string)
+        return Response(serializers.CustomerSerializer(customers, many=True).data)
+
+
+    def retrieve(self, request, pk_customer):
+        """
+        Retrieves a customer
+        :param request:
+        :param pk_customer:
+        :return:
+        """
+        customer = get_object_or_404(models.Customer, pk=pk_customer)
+        return Response(serializers.CustomerSerializer(customer).data)
+
+    def create(self, request):
+        """
+        Creates a new customer
+        :param request:
+        :return:
+        """
+        ser = serializers.CustomerSerializer(data=request.data)
+        if ser.is_valid():
+            ser.save()
+            return Response(ser.validated_data, status=201)
+        else:
+            return Response(ser.errors, status=400)
+
+    def update(self, request, pk_customer):
+        """
+        Updates a customer
+        :param request:
+        :param pk:
+        :return:
+        """
+        customer = get_object_or_404(models.Customer, pk=pk_customer)
+        ser = serializers.CustomerSerializer(customer, data=request.data)
+        if ser.is_valid():
+            ser.save()
+            return Response(ser.validated_data, status=200)
+        else:
+            return Response(ser.errors, status=400)
+
+    def delete(self, request, pk_customer):
+        """
+        Deletes a customer
+        :param pk_customer: the primary key of the customer
+        :param request: the request
+        :return:
+        """
+        customer = get_object_or_404(models.Customer, pk=pk_customer)
+        try:
+            customer.delete()
+            return Response(None, status=204)
+        except django_models.ProtectedError as e:
+            print(e)
+            return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="customer has still orders assigned")).data, status=400)
+        except Exception as e:
+            print(e)
+            return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="an unforeseen error happened, please try again")).data, status=500)
 
 
 class EmployeeViewSet(viewsets.ViewSet):
@@ -252,11 +341,29 @@ class ImageUploadViewSet(viewsets.ViewSet):
             # TODO: mail notification
             return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="image deletion failed")).data, status=500)
 
-    def destroy(self, request, task_pk):
-        """
-        YET UNUSED
-        :param request:
-        :param pk:
-        :return:
-        """
+
+class TaskViewSet(viewsets.ViewSet):
+    """
+    A simple ViewSet for listing or retrieving tasks.
+    """
+
+    def list(self, request):
+        # safely get begin and end date for request
+        begin = to_date(request.GET.get("begin", ""))
+        end = to_date(request.GET.get("end", ""))
+        if begin is None:
+            begin = datetime.today() - timedelta(weeks=1)
+        if end is None:
+            end = datetime.today() + timedelta(weeks=3)
+
+    def retrieve(self, request, pk=None):
+        pass
+
+    def create(self, request):
+        pass
+
+    def update(self, request, pk=None):
+        pass
+
+    def destroy(self, request, pk=None):
         pass

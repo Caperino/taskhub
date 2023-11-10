@@ -11,8 +11,6 @@ class EmployeeAdmin(admin.ModelAdmin):
 
 
 class AzureImageAdmin(admin.ModelAdmin):pass
-
-
 class TaskAdmin(admin.ModelAdmin):pass
 class TaskTypeAdmin(admin.ModelAdmin):pass
 class TaskStatusAdmin(admin.ModelAdmin):pass

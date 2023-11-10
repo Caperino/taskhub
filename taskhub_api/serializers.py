@@ -9,3 +9,12 @@ class TaskHubApiResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.TaskHubApiResponse
         fields = ['status', 'message']
+
+
+class CustomerSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Costumer
+    """
+    class Meta:
+        model = models.Customer
+        fields = "__all__"

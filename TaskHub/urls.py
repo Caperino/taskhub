@@ -33,9 +33,18 @@ urlpatterns = [
 
     # Image Action URLs
     path('api/users/<user_pk>/image',
-         available_views.ImageUploadViewSet.as_view({"get": "download_pfp", "post": "upload_pfp", "delete": "delete_pfp"})),
+         available_views.ImageUploadViewSet.as_view({"get": "download_pfp", "post": "upload_pfp", "delete": "delete_pfp"}),
+         name="direct_pfp"),
     path('api/tasks/<task_pk>/images',
-         available_views.ImageUploadViewSet.as_view({"post": "upload_task_image"})),
+         available_views.ImageUploadViewSet.as_view({"post": "upload_task_image"}),
+         name="direct_task_image_upload"),
     path('api/tasks/<task_pk>/images/<image_pk>',
-         available_views.ImageUploadViewSet.as_view({"get": "download_task_image", "delete": "delete_task_image"})),
+         available_views.ImageUploadViewSet.as_view({"get": "download_task_image", "delete": "delete_task_image"}),
+         name="direct_task_image"),
+    path('api/customers',
+         available_views.CustomerViewSet.as_view({"get": "list", "post": "create"}),
+         name="customers"),
+    path('api/customers/<pk_customer>',
+         available_views.CustomerViewSet.as_view({"get": "retrieve", "put": "update", "delete": "delete"}),
+         name="direct_customer"),
 ]
