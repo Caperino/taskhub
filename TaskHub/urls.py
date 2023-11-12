@@ -50,4 +50,10 @@ urlpatterns = [
     path('api/employees',
          available_views.EmployeeViewSet.as_view({"get": "list", "post": "create"}),
          name="employees"),
+    path('api/employees/<employee_pk>',
+         available_views.EmployeeViewSet.as_view({"get": "retrieve", "put": "update", "delete": "delete"}),
+         name="direct_employee"),
+
+    # health checks
+    # TODO: add funny health checks
 ]

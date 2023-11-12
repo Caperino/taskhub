@@ -1,6 +1,7 @@
 from . import models
 from rest_framework import serializers
 from django.contrib.auth.models import Group
+from django.db.utils import IntegrityError
 
 
 class StringListField(serializers.ListField):
@@ -65,6 +66,19 @@ class EmployeeSerializer(serializers.Serializer):
         Create and return a new `Employee` instance, given the validated data.
         """
         # TODO: SECURITY for group assignment
+        # TODO: PASSWORD handling is incomplete
+
+        # EmployeeType
+        requested_employee_type = models.EmployeeType.objects.filter(pk=validated_data["employee_type"]).first()
+        if requested_employee_type is None:
+            print("Invalid employee type id")
+            raise IntegrityError("Invalid employee type id")
+        # Groups
+        requested_groups = Group.objects.filter(pk__in=validated_data["groups"])
+        if len(validated_data["groups"]) != len(requested_groups):
+            print("Invalid group id included")
+            raise IntegrityError("Invalid group id included")
+
         obj = models.Employee.objects.create(
             first_name=validated_data["first_name"],
             last_name=validated_data["last_name"],
@@ -77,14 +91,41 @@ class EmployeeSerializer(serializers.Serializer):
             drivers_license_status=validated_data["drivers_license_status"],
             is_active=validated_data["is_active"]
         )
-        obj.set_password(validated_data["password"])
-        requested_employee_type = models.EmployeeType.objects.filter(pk=validated_data["employee_type"])
-        requested_groups = Group.objects.filter(pk__in=validated_data["groups"])
-        if requested_employee_type.count() == 1:
-            obj.employee_type = requested_employee_type[0]
+        # PW
+        if validated_data["password"] is not None:
+            obj.set_password(validated_data["password"])
+        else:
+            raise IntegrityError("Password is required")
+        # EmployeeType and Groups
+        obj.employee_type = requested_employee_type
         [obj.groups.add(group) for group in requested_groups]
+
         obj.save()
         return obj
+
+    def update(self, instance, validated_data):
+        """
+        Update and return an existing `Employee` instance, given the validated data.
+        """
+        for attr, value in validated_data.items():
+            if attr == "password":
+                instance.set_password(value)
+            elif attr == "groups" and value is not None:
+                groups = [group for group in Group.objects.filter(pk__in=value)]
+                if len(value) != len(groups):
+                    raise serializers.ValidationError("Invalid group id included")
+                instance.groups.clear()
+                [instance.groups.add(group) for group in groups]
+            elif attr == "employee_type" and value is not None:
+                res = models.EmployeeType.objects.filter(pk=value).first()
+                if res is None:
+                    raise serializers.ValidationError("Invalid employee type id")
+                instance.employee_type = res
+            elif value is not None:
+                setattr(instance, attr, value)
+        instance.save()
+        return instance
+
 
 
 def manual_employee_serializer(data: models.Employee):

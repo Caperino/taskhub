@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 from datetime import datetime, timedelta
 import django.db.models as django_models
 from django.db import IntegrityError
+from rest_framework import serializers as drf_serializers
 import random
 
 # TaskHub imports
@@ -52,6 +53,50 @@ def to_date(date_string: str) -> datetime | None:
         return datetime.strptime(date_string, "%Y-%m-%d")
     except:
         return None
+
+
+def authorize_action(request, necessary_groups: list) -> constants.AuthorisationError | None:
+    """
+    Authorizes an action (i.e. endpoint) for a user
+    :param necessary_groups: all possible groups that have access to this endpoint
+    :param request: the request
+    :return: True if authorized, False if not
+    """
+    return None
+    if request.user.is_authenticated:
+        status = False
+        for group in request.user.groups.all():
+            if group.name in necessary_groups:
+                status = True
+                break
+        return None if status else constants.AuthorisationError.FORBIDDEN
+    else:
+        return constants.AuthorisationError.UNAUTHORIZED
+
+
+def authorize_by_group_or_users(request, necessary_groups: list, pks: list) -> constants.AuthorisationError | None:
+    """
+    Authorizes an action (i.e. endpoint) for a user
+    :param pks: a dynamically generated list of users who are allowed to access this endpoint in addition to the groups
+    :param necessary_groups: all possible groups that have access to this endpoint
+    :param request: the request
+    :return: True if authorized, False if not
+    """
+    return None
+    if request.user.is_authenticated:
+        status = False
+        for group in request.user.groups.all():
+            if group.name in necessary_groups:
+                status = True
+                break
+        if not status:
+            for pk in pks:
+                if request.user.pk == pk:
+                    status = True
+                    break
+        return None if status else constants.AuthorisationError.FORBIDDEN
+    else:
+        return constants.AuthorisationError.UNAUTHORIZED
 
 
 class ApiView(viewsets.ViewSet):
@@ -153,6 +198,14 @@ class EmployeeViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
+        match authorize_action(request, list(constants.UserGroups.ADMINISTRATOR.value)):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
+
         order_by = request.GET.get("order") if request.GET.get("order") in ["first_name", "last_name", "employee_type", "phone", "email", "is_active"] else "last_name"
         order_dir = request.GET.get("order_dir") if request.GET.get("order_dir") in ["asc", "desc"] else "asc"
         query_string = request.GET.get("query", "")
@@ -162,8 +215,24 @@ class EmployeeViewSet(viewsets.ViewSet):
             return_employee_list.append(serializers.manual_employee_serializer(employee))
         return Response(return_employee_list, status=200)
 
-    def retrieve(self, request, pk=None):
-        pass
+    def retrieve(self, request, employee_pk):
+        """
+        Retrieves an employee
+        :param request: the request
+        :param employee_pk: the primary key of the employee
+        :return:
+        """
+        match authorize_action(request, list(constants.UserGroups.ADMINISTRATOR.value)):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
+        employee = get_object_or_404(models.Employee, pk=employee_pk)
+        return Response(serializers.manual_employee_serializer(employee), status=200)
 
     def create(self, request):
         """
@@ -171,22 +240,78 @@ class EmployeeViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
+        match authorize_action(request, list(constants.UserGroups.ADMINISTRATOR.value)):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
         ser = serializers.EmployeeSerializer(data=request.data)
         if ser.is_valid():
             try:
-                ser.save()
+                emp = ser.save()
             except IntegrityError as e:
-                print(e)
-                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="username or email already exists")).data, status=400)
-            return Response(ser.validated_data, status=201)
+                return Response(e.args, status=400)
+            return Response(serializers.manual_employee_serializer(emp), status=201)
         else:
             return Response(ser.errors, status=400)
 
-    def update(self, request, pk=None):
-        pass
+    def update(self, request, employee_pk):
+        """
+        Updates an employee
+        :param request: the request
+        :param employee_pk: the primary key of the employee
+        :return:
+        """
+        match authorize_action(request, list(constants.UserGroups.ADMINISTRATOR.value)):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
+        employee = get_object_or_404(models.Employee, pk=employee_pk)
+        ser = serializers.EmployeeSerializer(employee, data=request.data, partial=True)
+        if ser.is_valid():
+            try:
+                emp = ser.save()
+            except IntegrityError as e:
+                print(e)
+                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="username or email already exists")).data, status=400)
+            return Response(serializers.manual_employee_serializer(emp), status=200)
+        else:
+            return Response(ser.errors, status=400)
 
-    def destroy(self, request, pk=None):
-        pass
+    def delete(self, request, employee_pk):
+        """
+        Deletes an employee
+        :param request: the request
+        :param employee_pk: the primary key of the employee
+        :return:
+        """
+        match authorize_action(request, list(constants.UserGroups.ADMINISTRATOR.value)):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
+        try:
+            models.Employee.objects.filter(pk=employee_pk).delete()
+            return Response(None, status=204)
+        except django_models.ProtectedError as e:
+            print(e)
+            return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="employee has still tasks assigned")).data, status=400)
+        except Exception as e:
+            print(e)
+            return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="an unforeseen error happened, please try again")).data, status=500)
 
 
 class ImageUploadViewSet(viewsets.ViewSet):
@@ -216,6 +341,10 @@ class ImageUploadViewSet(viewsets.ViewSet):
         :param user_pk:
         :return:
         """
+        if not request.user.is_authenticated:
+            return Response({"status": "error", "message": "unauthorized"}, status=401)
+        elif request.user.pk != user_pk and not request.user.groups.filter(name=constants.UserGroups.ADMINISTRATOR.value):
+            return Response({"status": "error", "message": "forbidden"}, status=403)
         em = get_object_or_404(models.Employee, pk=user_pk)
         if em.pfp_name is None:
             return Response({"status": "no profile picture"}, status=404)
