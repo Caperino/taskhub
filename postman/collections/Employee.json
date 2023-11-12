@@ -5,7 +5,271 @@
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "20001436-40b4f072-8f3b-4370-a157-14b2462caa3d"
 	},
-	"item": [],
+	"item": [
+		{
+			"name": "List",
+			"id": "1b0db54f-4ec8-4b0d-b829-a626c2c7f696",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/employees",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "5212387a-b75d-4de8-a464-74c3a903b4a7",
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 00:01:26 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "516"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"pk\": 5,\n        \"username\": \"User 2\",\n        \"first_name\": \"User\",\n        \"last_name\": \"2\",\n        \"email\": \"user_2@user.com\",\n        \"password\": null,\n        \"groups\": [],\n        \"is_active\": true,\n        \"employee_type\": null,\n        \"address\": \"ABC Street 123\",\n        \"phone\": \"066412345678\",\n        \"birth_date\": null,\n        \"gender\": null,\n        \"drivers_license_status\": true\n    },\n    {\n        \"pk\": 1,\n        \"username\": \"timok\",\n        \"first_name\": \"Timo\",\n        \"last_name\": \"Kappel\",\n        \"email\": \"tk@inc.com\",\n        \"password\": null,\n        \"groups\": [],\n        \"is_active\": true,\n        \"employee_type\": null,\n        \"address\": null,\n        \"phone\": null,\n        \"birth_date\": null,\n        \"gender\": null,\n        \"drivers_license_status\": null\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Create",
+			"id": "f48c0a34-1c63-4ae7-8f8f-f3b70328c988",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"User 3\",\r\n    \"first_name\": \"User\",\r\n    \"last_name\": \"3\",\r\n    \"email\": \"user_3@user.com\",\r\n    \"password\": \"somehighlysecurepassword\",\r\n    \"groups\": [\r\n        1\r\n    ],\r\n    \"is_active\": false,\r\n    \"employee_type\": 1,\r\n    \"address\": \"ABC Street 123\",\r\n    \"phone\": \"066412345678\",\r\n    \"birth_date\": null,\r\n    \"gender\": null,\r\n    \"drivers_license_status\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/employees",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "d37357fb-0860-4fd6-b9ad-697978537c10",
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"User 2\",\r\n    \"first_name\": \"User\",\r\n    \"last_name\": \"2\",\r\n    \"email\": \"user_2@user.com\",\r\n    \"password\": \"somehighlysecurepassword\",\r\n    \"groups\": [],\r\n    \"is_active\": true,\r\n    \"employee_type\": null,\r\n    \"address\": \"ABC Street 123\",\r\n    \"phone\": \"066412345678\",\r\n    \"birth_date\": null,\r\n    \"gender\": null,\r\n    \"drivers_license_status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/employees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 00:00:23 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "283"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"User 2\",\n    \"first_name\": \"User\",\n    \"last_name\": \"2\",\n    \"email\": \"user_2@user.com\",\n    \"password\": \"somehighlysecurepassword\",\n    \"groups\": [],\n    \"is_active\": true,\n    \"employee_type\": null,\n    \"address\": \"ABC Street 123\",\n    \"phone\": \"066412345678\",\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": true\n}"
+				},
+				{
+					"id": "80958d28-b830-4224-b7cb-983e5336a833",
+					"name": "Success | with Group",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"User 3\",\r\n    \"first_name\": \"User\",\r\n    \"last_name\": \"3\",\r\n    \"email\": \"user_3@user.com\",\r\n    \"password\": \"somehighlysecurepassword\",\r\n    \"groups\": [\r\n        1\r\n    ],\r\n    \"is_active\": false,\r\n    \"employee_type\": null,\r\n    \"address\": \"ABC Street 123\",\r\n    \"phone\": \"066412345678\",\r\n    \"birth_date\": null,\r\n    \"gender\": null,\r\n    \"drivers_license_status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/employees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 00:13:18 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "287"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"User 3\",\n    \"first_name\": \"User\",\n    \"last_name\": \"3\",\n    \"email\": \"user_3@user.com\",\n    \"password\": \"somehighlysecurepassword\",\n    \"groups\": [\n        \"1\"\n    ],\n    \"is_active\": false,\n    \"employee_type\": null,\n    \"address\": \"ABC Street 123\",\n    \"phone\": \"066412345678\",\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": true\n}"
+				}
+			]
+		}
+	],
 	"event": [
 		{
 			"listen": "prerequest",
