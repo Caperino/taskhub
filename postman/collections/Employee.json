@@ -103,7 +103,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"User 3\",\r\n    \"first_name\": \"User\",\r\n    \"last_name\": \"3\",\r\n    \"email\": \"user_3@user.com\",\r\n    \"password\": \"somehighlysecurepassword\",\r\n    \"groups\": [\r\n        1\r\n    ],\r\n    \"is_active\": false,\r\n    \"employee_type\": 1,\r\n    \"address\": \"ABC Street 123\",\r\n    \"phone\": \"066412345678\",\r\n    \"birth_date\": null,\r\n    \"gender\": null,\r\n    \"drivers_license_status\": true\r\n}",
+					"raw": "{\r\n    \"username\": \"User BirthDate\",\r\n    \"first_name\": \"User\",\r\n    \"last_name\": \"Birth\",\r\n    \"email\": \"user_birth_date@user.com\",\r\n    \"password\": \"somehighlysecurepassword\",\r\n    \"groups\": [],\r\n    \"is_active\": true,\r\n    \"employee_type\": 1,\r\n    \"address\": null,\r\n    \"phone\": null,\r\n    \"birth_date\": \"1998-02-17\",\r\n    \"gender\": null,\r\n    \"drivers_license_status\": null\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -195,6 +195,152 @@
 					"body": "{\n    \"username\": \"User 2\",\n    \"first_name\": \"User\",\n    \"last_name\": \"2\",\n    \"email\": \"user_2@user.com\",\n    \"password\": \"somehighlysecurepassword\",\n    \"groups\": [],\n    \"is_active\": true,\n    \"employee_type\": null,\n    \"address\": \"ABC Street 123\",\n    \"phone\": \"066412345678\",\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": true\n}"
 				},
 				{
+					"id": "0a9a6a63-da3a-47c0-bd90-74a762631028",
+					"name": "Success | minimal",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"User 101\",\r\n    \"first_name\": \"User\",\r\n    \"last_name\": \"101\",\r\n    \"email\": \"user_101@user.com\",\r\n    \"password\": \"somehighlysecurepassword\",\r\n    \"groups\": [],\r\n    \"is_active\": true,\r\n    \"employee_type\": 1,\r\n    \"address\": null,\r\n    \"phone\": null,\r\n    \"birth_date\": null,\r\n    \"gender\": null,\r\n    \"drivers_license_status\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/employees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 19:26:33 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "264"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"User 101\",\n    \"first_name\": \"User\",\n    \"last_name\": \"101\",\n    \"email\": \"user_101@user.com\",\n    \"password\": \"somehighlysecurepassword\",\n    \"groups\": [],\n    \"is_active\": true,\n    \"employee_type\": 1,\n    \"address\": null,\n    \"phone\": null,\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": null\n}"
+				},
+				{
+					"id": "c66e5be0-d856-41ae-ad7d-e69739e5410b",
+					"name": "Success | DateField",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"User BirthDate\",\r\n    \"first_name\": \"User\",\r\n    \"last_name\": \"Birth\",\r\n    \"email\": \"user_birth_date@user.com\",\r\n    \"password\": \"somehighlysecurepassword\",\r\n    \"groups\": [],\r\n    \"is_active\": true,\r\n    \"employee_type\": 1,\r\n    \"address\": null,\r\n    \"phone\": null,\r\n    \"birth_date\": \"1998-02-17\",\r\n    \"gender\": null,\r\n    \"drivers_license_status\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/employees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 19:51:15 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "326"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"pk\": 18,\n    \"username\": \"User BirthDate\",\n    \"first_name\": \"User\",\n    \"last_name\": \"Birth\",\n    \"email\": \"user_birth_date@user.com\",\n    \"password\": null,\n    \"groups\": [],\n    \"is_active\": true,\n    \"employee_type\": {\n        \"id\": 1,\n        \"title\": \"Assembler\",\n        \"description\": \"TestDescr\"\n    },\n    \"address\": null,\n    \"phone\": null,\n    \"birth_date\": \"1998-02-17\",\n    \"gender\": null,\n    \"drivers_license_status\": null\n}"
+				},
+				{
 					"id": "80958d28-b830-4224-b7cb-983e5336a833",
 					"name": "Success | with Group",
 					"originalRequest": {
@@ -266,6 +412,870 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"username\": \"User 3\",\n    \"first_name\": \"User\",\n    \"last_name\": \"3\",\n    \"email\": \"user_3@user.com\",\n    \"password\": \"somehighlysecurepassword\",\n    \"groups\": [\n        \"1\"\n    ],\n    \"is_active\": false,\n    \"employee_type\": null,\n    \"address\": \"ABC Street 123\",\n    \"phone\": \"066412345678\",\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": true\n}"
+				},
+				{
+					"id": "e4c63b3a-bdc3-4b1b-a214-37378e9e06ce",
+					"name": "Success | with group & employee_type",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"User 3\",\r\n    \"first_name\": \"User\",\r\n    \"last_name\": \"3\",\r\n    \"email\": \"user_3@user.com\",\r\n    \"password\": \"somehighlysecurepassword\",\r\n    \"groups\": [\r\n        1\r\n    ],\r\n    \"is_active\": false,\r\n    \"employee_type\": 1,\r\n    \"address\": \"ABC Street 123\",\r\n    \"phone\": \"066412345678\",\r\n    \"birth_date\": null,\r\n    \"gender\": null,\r\n    \"drivers_license_status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/employees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 17:52:49 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "284"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"User 3\",\n    \"first_name\": \"User\",\n    \"last_name\": \"3\",\n    \"email\": \"user_3@user.com\",\n    \"password\": \"somehighlysecurepassword\",\n    \"groups\": [\n        \"1\"\n    ],\n    \"is_active\": false,\n    \"employee_type\": 1,\n    \"address\": \"ABC Street 123\",\n    \"phone\": \"066412345678\",\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": true\n}"
+				},
+				{
+					"id": "31425d35-9206-4567-9e51-dda032b9555b",
+					"name": "Failure | invalid Group id",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"User 3\",\r\n    \"first_name\": \"User\",\r\n    \"last_name\": \"3\",\r\n    \"email\": \"user_3@user.com\",\r\n    \"password\": \"somehighlysecurepassword\",\r\n    \"groups\": [\r\n        187\r\n    ],\r\n    \"is_active\": false,\r\n    \"employee_type\": 1,\r\n    \"address\": \"ABC Street 123\",\r\n    \"phone\": \"066412345678\",\r\n    \"birth_date\": null,\r\n    \"gender\": null,\r\n    \"drivers_license_status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/employees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 19:24:53 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "29"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    \"Invalid group id included\"\n]"
+				},
+				{
+					"id": "c36eee37-ad41-41b2-9408-a041416a616a",
+					"name": "Failure | invalid EmployeeType id",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"User 3\",\r\n    \"first_name\": \"User\",\r\n    \"last_name\": \"3\",\r\n    \"email\": \"user_3@user.com\",\r\n    \"password\": \"somehighlysecurepassword\",\r\n    \"groups\": [\r\n        1\r\n    ],\r\n    \"is_active\": false,\r\n    \"employee_type\": 187,\r\n    \"address\": \"ABC Street 123\",\r\n    \"phone\": \"066412345678\",\r\n    \"birth_date\": null,\r\n    \"gender\": null,\r\n    \"drivers_license_status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/employees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 19:25:13 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    \"Invalid employee type id\"\n]"
+				}
+			]
+		},
+		{
+			"name": "Retrieve",
+			"id": "0178b79b-4111-4722-b48a-00d9da7ba233",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/employees/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"employees",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "5d19636b-4955-4be6-acd0-6a3a64ce319c",
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employees/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 18:14:18 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "245"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"pk\": 1,\n    \"username\": \"timok\",\n    \"first_name\": \"Timo\",\n    \"last_name\": \"Kappel\",\n    \"email\": \"tk@inc.com\",\n    \"password\": null,\n    \"groups\": [],\n    \"is_active\": true,\n    \"employee_type\": null,\n    \"address\": null,\n    \"phone\": null,\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": null\n}"
+				},
+				{
+					"id": "cd5df92d-8248-4bec-ae0b-8a709e9f7c75",
+					"name": "Failure | 404",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employees/187",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								"187"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 18:16:49 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "23"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"detail\": \"Not found.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"id": "765635c6-de23-4c43-9c81-c93ddf6f2454",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"birth_date\":\"2003-07-14\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/employees/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"employees",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "b17e1f0f-7ba0-4376-ae26-af2cae878d06",
+					"name": "Success",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"timok\",\r\n    \"first_name\": \"Timo\",\r\n    \"last_name\": \"Kappel\",\r\n    \"email\": \"tk@inc.com\",\r\n    \"groups\": [],\r\n    \"is_active\": true,\r\n    \"employee_type\": null,\r\n    \"address\": \"Some Address or sth\",\r\n    \"phone\": null,\r\n    \"birth_date\": null,\r\n    \"gender\": null,\r\n    \"drivers_license_status\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/employees/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 18:49:08 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "239"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"timok\",\n    \"first_name\": \"Timo\",\n    \"last_name\": \"Kappel\",\n    \"email\": \"tk@inc.com\",\n    \"groups\": [],\n    \"is_active\": true,\n    \"employee_type\": null,\n    \"address\": \"Some Address or sth\",\n    \"phone\": null,\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": null\n}"
+				},
+				{
+					"id": "a542cf98-1e58-4509-aaef-96171588209f",
+					"name": "Success | only password",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"timok\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/employees/17",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								"17"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 19:36:23 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "328"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"pk\": 17,\n    \"username\": \"User 101\",\n    \"first_name\": \"User\",\n    \"last_name\": \"101\",\n    \"email\": \"user_101@user.com\",\n    \"password\": null,\n    \"groups\": [\n        {\n            \"id\": 1,\n            \"name\": \"GTestG1\"\n        }\n    ],\n    \"is_active\": true,\n    \"employee_type\": {\n        \"id\": 1,\n        \"title\": \"Assembler\",\n        \"description\": \"TestDescr\"\n    },\n    \"address\": null,\n    \"phone\": null,\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": null\n}"
+				},
+				{
+					"id": "a95f7d26-e2d9-4afe-a6ae-1c1a0479f34e",
+					"name": "Success | full model | no PW",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"timok\",\r\n    \"first_name\": \"Timo\",\r\n    \"last_name\": \"Kappel\",\r\n    \"email\": \"tk@inc.com\",\r\n    \"groups\": [\r\n        1\r\n    ],\r\n    \"is_active\": true,\r\n    \"employee_type\": 1,\r\n    \"address\": \"new address\",\r\n    \"phone\": null,\r\n    \"birth_date\": null,\r\n    \"gender\": null,\r\n    \"drivers_license_status\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/employees/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 18:54:58 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "231"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"timok\",\n    \"first_name\": \"Timo\",\n    \"last_name\": \"Kappel\",\n    \"email\": \"tk@inc.com\",\n    \"groups\": [\n        \"1\"\n    ],\n    \"is_active\": true,\n    \"employee_type\": 1,\n    \"address\": \"new address\",\n    \"phone\": null,\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": null\n}"
+				},
+				{
+					"id": "c5ead418-dd98-4b27-92f0-1d065870a7bb",
+					"name": "Failure | invalid Group id",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"timok\",\r\n    \"first_name\": \"Timo\",\r\n    \"last_name\": \"Kappel\",\r\n    \"email\": \"tk@inc.com\",\r\n    \"groups\": [\r\n        187\r\n    ],\r\n    \"is_active\": true,\r\n    \"employee_type\": 1,\r\n    \"address\": \"new address\",\r\n    \"phone\": null,\r\n    \"birth_date\": null,\r\n    \"gender\": null,\r\n    \"drivers_license_status\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/employees/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								"1"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 19:03:39 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "29"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    \"Invalid group id included\"\n]"
+				},
+				{
+					"id": "bf9369eb-7a78-4d65-bb3b-232bc2166a80",
+					"name": "Failure | invalid EmployeeType id",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"timok\",\r\n    \"first_name\": \"Timo\",\r\n    \"last_name\": \"Kappel\",\r\n    \"email\": \"tk@inc.com\",\r\n    \"groups\": [\r\n        1\r\n    ],\r\n    \"is_active\": true,\r\n    \"employee_type\": 187,\r\n    \"address\": \"new address\",\r\n    \"phone\": null,\r\n    \"birth_date\": null,\r\n    \"gender\": null,\r\n    \"drivers_license_status\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/employees/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								"1"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 19:04:08 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    \"Invalid employee type id\"\n]"
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"id": "23b9d4f0-c830-4f68-95aa-6b9cf4e8db05",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/employees/17",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"employees",
+						"17"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "70e854c0-7de6-437e-a748-e15915977464",
+					"name": "Success",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employees/10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								"10"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 12 Nov 2023 18:28:57 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": []
 				}
 			]
 		}
