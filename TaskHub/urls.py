@@ -47,4 +47,7 @@ urlpatterns = [
     path('api/customers/<pk_customer>',
          available_views.CustomerViewSet.as_view({"get": "retrieve", "put": "update", "delete": "delete"}),
          name="direct_customer"),
+    path('api/employees',
+         available_views.EmployeeViewSet.as_view({"get": "list", "post": "create"}),
+         name="employees"),
 ]

@@ -1,6 +1,7 @@
 # External imports
 import string
 
+from django.db.models import Q
 from django.shortcuts import render
 import re
 from rest_framework import viewsets
@@ -9,6 +10,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from datetime import datetime, timedelta
 import django.db.models as django_models
+from django.db import IntegrityError
 import random
 
 # TaskHub imports
@@ -52,8 +54,10 @@ def to_date(date_string: str) -> datetime | None:
         return None
 
 
-
 class ApiView(viewsets.ViewSet):
+    """
+    A simple ViewSet for listing all available endpoints.
+    """
 
     def list(self, request):
         endpoints = []
@@ -69,7 +73,7 @@ class CustomerViewSet(viewsets.ViewSet):
     """
     A simple ViewSet for listing or retrieving costumers.
     """
-
+    # TODO: SECURITY
     def list(self, request):
         is_company: str = request.GET.get("company", "")
         query_string = request.GET.get("query", "")
@@ -80,7 +84,6 @@ class CustomerViewSet(viewsets.ViewSet):
         else:
             customers = models.Customer.objects.filter(name__icontains=query_string)
         return Response(serializers.CustomerSerializer(customers, many=True).data)
-
 
     def retrieve(self, request, pk_customer):
         """
@@ -143,16 +146,41 @@ class EmployeeViewSet(viewsets.ViewSet):
     """
     A simple ViewSet for listing or retrieving employees.
     """
-    renderer_classes = [renderers.PNGRenderer, renderers.JPEGRenderer]
-
+    # TODO: SECURITY
     def list(self, request):
-        pass
+        """
+        Lists all employees
+        :param request: the request
+        :return:
+        """
+        order_by = request.GET.get("order") if request.GET.get("order") in ["first_name", "last_name", "employee_type", "phone", "email", "is_active"] else "last_name"
+        order_dir = request.GET.get("order_dir") if request.GET.get("order_dir") in ["asc", "desc"] else "asc"
+        query_string = request.GET.get("query", "")
+        employees = models.Employee.objects.filter(Q(first_name__icontains=query_string) | Q(last_name__icontains=query_string)).order_by("%s%s" % ("" if order_dir == "asc" else "-", order_by))
+        return_employee_list = []
+        for employee in employees:
+            return_employee_list.append(serializers.manual_employee_serializer(employee))
+        return Response(return_employee_list, status=200)
 
     def retrieve(self, request, pk=None):
         pass
 
     def create(self, request):
-        pass
+        """
+        Creates a new employee
+        :param request: the request
+        :return:
+        """
+        ser = serializers.EmployeeSerializer(data=request.data)
+        if ser.is_valid():
+            try:
+                ser.save()
+            except IntegrityError as e:
+                print(e)
+                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="username or email already exists")).data, status=400)
+            return Response(ser.validated_data, status=201)
+        else:
+            return Response(ser.errors, status=400)
 
     def update(self, request, pk=None):
         pass
