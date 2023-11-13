@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "9868e838-4d60-451a-899d-40dfde6682e1",
 		"name": "Customer Operations",
+		"description": "This collection includes all endpoints for **customer operations**. We only accept **application/json** data in the request body for uploads, download and delete actions do not include a body.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_uid": "20001436-9868e838-4d60-451a-899d-40dfde6682e1"
 	},
@@ -35,7 +36,8 @@
 							"disabled": true
 						}
 					]
-				}
+				},
+				"description": "## Path\n\n/api/customers\n\n## Description\n\nIn this case retrieves a list of customers.\n\n## Query\n\ncompany : boolean, checks if is_company flag is set\n\nquery : checks if string is contained in title"
 			},
 			"response": [
 				{
@@ -45,11 +47,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/customers",
+							"raw": "localhost:8000/api/customers",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"customers"
 							],
 							"query": [
@@ -142,7 +146,8 @@
 					"path": [
 						"customers"
 					]
-				}
+				},
+				"description": "## Path\n\n/api/customers\n\n## Description\n\nIn this case creates a new customer.\n\n## Body\n\njson-string of the new object in according format.\n\n## Exception\n\nmissing fields : 400"
 			},
 			"response": [
 				{
@@ -161,11 +166,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/customers",
+							"raw": "localhost:8000/api/customers",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"customers"
 							]
 						}
@@ -238,7 +245,8 @@
 						"customers",
 						"1"
 					]
-				}
+				},
+				"description": "## Path\n\n/api/customers/PK_OF_CUSTOMER\n\n## Description\n\nIn this case retrieves a single customer with this id.\n\n## Exception\n\nnot found : 404"
 			},
 			"response": [
 				{
@@ -248,11 +256,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/customers/1",
+							"raw": "localhost:8000/api/customers/1",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"customers",
 								"1"
 							]
@@ -335,7 +345,8 @@
 						"customers",
 						"2"
 					]
-				}
+				},
+				"description": "## Path\n\n/api/customers/**PK_OF_CUSTOMER**\n\n## Description\n\nIn this case creates a new customer.\n\n## Body\n\njson-string of the new object in according format.\n\n## Exception\n\nmissing fields : 400"
 			},
 			"response": [
 				{
@@ -354,11 +365,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/customers/2",
+							"raw": "localhost:8000/api/customers/2",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"customers",
 								"2"
 							]
@@ -432,7 +445,8 @@
 						"customers",
 						"2"
 					]
-				}
+				},
+				"description": "## Path\n\n/api/customers/**PK_OF_CUSTOMER**\n\n## Description\n\nIn this case deletes a customer.\n\n## Exception\n\nnot found : 404"
 			},
 			"response": [
 				{
@@ -442,11 +456,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/customers/2",
+							"raw": "localhost:8000/api/customers/2",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"customers",
 								"2"
 							]
