@@ -74,21 +74,33 @@ def authorize_action(request, necessary_groups: list) -> constants.Authorisation
         return constants.AuthorisationError.UNAUTHORIZED
 
 
-def authorize_by_group_or_users(request, necessary_groups: list, pks: list) -> constants.AuthorisationError | None:
+def authorize_action_advanced(request, necessary_groups: list, pks: list = []) -> constants.AuthorisationError | None:
     """
     Authorizes an action (i.e. endpoint) for a user
     :param pks: a dynamically generated list of users who are allowed to access this endpoint in addition to the groups
     :param necessary_groups: all possible groups that have access to this endpoint
     :param request: the request
     :return: True if authorized, False if not
+
+    Receiver Code:
+    match authorize_action_advanced(request, list(constants.UserGroups.ADMINISTRATOR.value)):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
     """
     return None
+    # Basic Authenticated Check
     if request.user.is_authenticated:
+        # Check for access via group (adm, man, sup)
         status = False
         for group in request.user.groups.all():
             if group.name in necessary_groups:
                 status = True
                 break
+        # Check for access via user (e.g. employee can only access his own profile)
         if not status:
             for pk in pks:
                 if request.user.pk == pk:
@@ -120,6 +132,15 @@ class CustomerViewSet(viewsets.ViewSet):
     """
     # TODO: SECURITY
     def list(self, request):
+        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
         is_company: str = request.GET.get("company", "")
         query_string = request.GET.get("query", "")
         if is_company.lower() == "true":
@@ -137,6 +158,15 @@ class CustomerViewSet(viewsets.ViewSet):
         :param pk_customer:
         :return:
         """
+        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
         customer = get_object_or_404(models.Customer, pk=pk_customer)
         return Response(serializers.CustomerSerializer(customer).data)
 
@@ -146,6 +176,15 @@ class CustomerViewSet(viewsets.ViewSet):
         :param request:
         :return:
         """
+        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
         ser = serializers.CustomerSerializer(data=request.data)
         if ser.is_valid():
             ser.save()
@@ -156,10 +195,19 @@ class CustomerViewSet(viewsets.ViewSet):
     def update(self, request, pk_customer):
         """
         Updates a customer
-        :param request:
-        :param pk:
+        :param request: the request
+        :param pk_customer: the id of the requested customer
         :return:
         """
+        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
         customer = get_object_or_404(models.Customer, pk=pk_customer)
         ser = serializers.CustomerSerializer(customer, data=request.data)
         if ser.is_valid():
@@ -175,6 +223,15 @@ class CustomerViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
+        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
         customer = get_object_or_404(models.Customer, pk=pk_customer)
         try:
             customer.delete()
@@ -198,11 +255,13 @@ class EmployeeViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
-        match authorize_action(request, list(constants.UserGroups.ADMINISTRATOR.value)):
+        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
             case constants.AuthorisationError.FORBIDDEN:
-                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
             case constants.AuthorisationError.UNAUTHORIZED:
-                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
             case None:
                 pass
 
@@ -222,7 +281,7 @@ class EmployeeViewSet(viewsets.ViewSet):
         :param employee_pk: the primary key of the employee
         :return:
         """
-        match authorize_action(request, list(constants.UserGroups.ADMINISTRATOR.value)):
+        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), [employee_pk]):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -240,7 +299,7 @@ class EmployeeViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
-        match authorize_action(request, list(constants.UserGroups.ADMINISTRATOR.value)):
+        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -266,7 +325,7 @@ class EmployeeViewSet(viewsets.ViewSet):
         :param employee_pk: the primary key of the employee
         :return:
         """
-        match authorize_action(request, list(constants.UserGroups.ADMINISTRATOR.value)):
+        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), [employee_pk]):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -294,7 +353,7 @@ class EmployeeViewSet(viewsets.ViewSet):
         :param employee_pk: the primary key of the employee
         :return:
         """
-        match authorize_action(request, list(constants.UserGroups.ADMINISTRATOR.value)):
+        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -337,14 +396,19 @@ class ImageUploadViewSet(viewsets.ViewSet):
     def download_pfp(self, request, user_pk):
         """
         Downloads a profile picture from Azure Blob Storage
-        :param request:
-        :param user_pk:
+        :param request: the request
+        :param user_pk: the primary key of the user
         :return:
         """
-        if not request.user.is_authenticated:
-            return Response({"status": "error", "message": "unauthorized"}, status=401)
-        elif request.user.pk != user_pk and not request.user.groups.filter(name=constants.UserGroups.ADMINISTRATOR.value):
-            return Response({"status": "error", "message": "forbidden"}, status=403)
+        match authorize_action_advanced(request, list(constants.UserGroups.EMPLOYEE.value), []):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
         em = get_object_or_404(models.Employee, pk=user_pk)
         if em.pfp_name is None:
             return Response({"status": "no profile picture"}, status=404)
@@ -364,6 +428,15 @@ class ImageUploadViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
+        match authorize_action_advanced(request, list(constants.UserGroups.ADMINISTRATOR.value), [user_pk]):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
         em = get_object_or_404(models.Employee, pk=user_pk)
         for file in request.FILES.getlist('upload'):
             if file.size > 3000000:
@@ -401,6 +474,15 @@ class ImageUploadViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
+        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), [user_pk]):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
         em = get_object_or_404(models.Employee, pk=user_pk)
         if em.pfp_name is None:
             return Response(None, status=204)
@@ -422,6 +504,15 @@ class ImageUploadViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
+        match authorize_action_advanced(request, list(constants.UserGroups.EMPLOYEE.value), []):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
         try:
             selected_image = models.Task.objects.get(pk=task_pk).images.get(pk=image_pk)
         except Exception as e:
@@ -448,6 +539,17 @@ class ImageUploadViewSet(viewsets.ViewSet):
         except Exception as e:
             print(e)
             return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="task not found")).data, status=404, content_type="application/json")
+        # SECURITY DEBUG UNFINISHED
+        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), task.employees.all().values_list("pk", flat=True)):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
+
         count = 0
         uploaded_files: list = []
         for file in request.FILES.getlist('upload'):
