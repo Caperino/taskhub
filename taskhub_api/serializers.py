@@ -7,6 +7,11 @@ from django.db.utils import IntegrityError
 class StringListField(serializers.ListField):
     child = serializers.CharField()
 
+
+class IntegerListField(serializers.ListField):
+    child = serializers.IntegerField()
+
+
 class TaskHubApiResponseSerializer(serializers.ModelSerializer):
     """
     Serializer for TaskHubApiResponse
@@ -41,6 +46,120 @@ class EmployeeTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.EmployeeType
         fields = "__all__"
+
+
+class VehicleSerializer(serializers.Serializer):
+    title = serializers.CharField(required=True)
+    max_load_length = serializers.IntegerField(required=True)
+    max_load_weight = serializers.IntegerField(required=True)
+    vehicle_type = IntegerListField(required=True)
+
+    def create(self, validated_data):
+        """
+        Create and return a new `Vehicle` instance, given the validated data.
+        """
+        vh_types = models.VehicleType.objects.filter(pk__in=validated_data["vehicle_type"])
+        if len(validated_data["vehicle_type"]) != len(vh_types):
+            raise IntegrityError("Invalid vehicle type id included")
+        obj = models.Vehicle.objects.create(
+            title=validated_data["title"],
+            max_load_length=validated_data["max_load_length"],
+            max_load_weight=validated_data["max_load_weight"]
+        )
+        [obj.vehicle_type.add(vh_type) for vh_type in vh_types]
+        obj.save()
+        return obj
+
+    def update(self, instance, validated_data):
+        """
+        Update and return an existing `Vehicle` instance, given the validated data.
+        """
+        for attr, value in validated_data.items():
+            if attr == "vehicle_type" and value is not None:
+                vh_types = models.VehicleType.objects.filter(pk__in=value)
+                if len(value) != len(vh_types):
+                    raise IntegrityError("Invalid vehicle type id included")
+                instance.vehicle_type.clear()
+                [instance.vehicle_type.add(vh_type) for vh_type in vh_types]
+            elif value is not None:
+                setattr(instance, attr, value)
+        instance.save()
+        return instance
+
+
+def manual_vehicle_serializer(data: models.Vehicle):
+    """
+    Manual serializer for Vehicle
+    """
+    vh_types = [{"id": vh_type.pk, "title": vh_type.title} for vh_type in data.vehicle_type.all()]
+    return {
+        "pk": data.pk,
+        "title": data.title,
+        "max_load_length": data.max_load_length,
+        "max_load_weight": data.max_load_weight,
+        "vehicle_type": vh_types
+    }
+
+
+class OrderSerializer(serializers.Serializer):
+    """
+    Serializer for Order
+    """
+    order_nr = serializers.IntegerField(required=True)
+    title = serializers.CharField(required=True)
+    order_date = serializers.DateField(required=False)
+    customer = serializers.IntegerField(required=True)
+    is_completed = serializers.BooleanField(required=False)
+
+    def create(self, validated_data):
+        """
+        Create and return a new `Order` instance, given the validated data.
+        """
+        customer = models.Customer.objects.filter(pk=validated_data["customer"]).first()
+        if customer is None:
+            raise IntegrityError("Invalid customer id")
+        obj = models.Order.objects.create(
+            order_nr=validated_data["order_nr"],
+            title=validated_data["title"],
+            customer=customer
+        )
+        obj.save()
+        return obj
+
+    def update(self, instance, validated_data):
+        """
+        Update and return an existing `Order` instance, given the validated data.
+        """
+        for attr, value in validated_data.items():
+            if attr == "customer" and value is not None:
+                customer = models.Customer.objects.filter(pk=value).first()
+                if customer is None:
+                    raise IntegrityError("Invalid customer id")
+                instance.customer = customer
+            elif value is not None:
+                setattr(instance, attr, value)
+        instance.save()
+        return instance
+
+
+def manual_order_serializer(data: models.Order):
+    """
+    Manual serializer for Order
+    """
+    return {
+        "pk": data.pk,
+        "order_nr": data.order_nr,
+        "title": data.title,
+        "order_date": data.order_date,
+        "customer": {
+            "pk": data.customer.pk,
+            "name": data.customer.name,
+            "address": data.customer.address,
+            "phone": data.customer.phone,
+            "is_company": data.customer.is_company
+        },
+        "is_completed": data.is_completed
+    }
 
 
 class EmployeeSerializer(serializers.Serializer):
@@ -127,7 +246,6 @@ class EmployeeSerializer(serializers.Serializer):
         return instance
 
 
-
 def manual_employee_serializer(data: models.Employee):
     """
     Manual serializer for Employee
@@ -156,4 +274,169 @@ def manual_employee_serializer(data: models.Employee):
         "birth_date": data.birth_date,
         "gender": data.gender,
         "drivers_license_status": data.drivers_license_status
+    }
+
+
+class TaskTypeSerializer(serializers.ModelSerializer):
+    """
+    Serializer for TaskType
+    """
+    class Meta:
+        model = models.TaskType
+        fields = "__all__"
+
+
+class TaskStatusSerializer(serializers.ModelSerializer):
+    """
+    Serializer for TaskStatus
+    """
+    class Meta:
+        model = models.TaskStatus
+        fields = "__all__"
+
+
+class VehicleTypeSerializer(serializers.ModelSerializer):
+    """
+    Serializer for VehicleType
+    """
+    class Meta:
+        model = models.VehicleType
+        fields = "__all__"
+
+
+class TaskSerializer(serializers.Serializer):
+    """
+    Serializer for Task
+    """
+    title = serializers.CharField(required=True)
+    task_type = serializers.IntegerField(required=True)
+    task_status = serializers.IntegerField(required=True)
+    vehicle_type = IntegerListField(required=True)
+    vehicles = IntegerListField(required=True, allow_empty=True)
+    # images = IntegerListField(required=False, allow_empty=True)
+    order = serializers.IntegerField(required=True)
+    employees = IntegerListField(required=True, allow_empty=True)
+    scheduled_from = serializers.DateTimeField(required=True)
+    from_shift = serializers.CharField(required=True)
+    scheduled_to = serializers.DateTimeField(required=True)
+    to_shift = serializers.CharField(required=True)
+
+    def create(self, validated_data):
+        """
+        Create and return a new `Task` instance, given the validated data.
+        """
+        emp = models.Employee.objects.filter(pk__in=validated_data["employees"])
+        if len(validated_data["employees"]) != len(emp):
+            raise IntegrityError("Invalid employee id included")
+        vh = models.Vehicle.objects.filter(pk__in=validated_data["vehicles"])
+        if len(validated_data["vehicles"]) != len(vh):
+            raise IntegrityError("Invalid vehicle id included")
+
+        obj = models.Task.objects.create(
+            title=validated_data["title"],
+            task_type=models.TaskType.objects.filter(pk=validated_data["task_type"]).first(),
+            task_status=models.TaskStatus.objects.filter(pk=validated_data["task_status"]).first(),
+            order=models.Order.objects.filter(pk=validated_data["order"]).first(),
+            scheduled_from=validated_data["scheduled_from"],
+            from_shift=validated_data["from_shift"],
+            scheduled_to=validated_data["scheduled_to"],
+            to_shift=validated_data["to_shift"]
+        )
+        [obj.employees.add(e) for e in emp]
+        [obj.vehicles.add(v) for v in vh]
+        obj.save()
+        return obj
+
+    def update(self, instance, validated_data):
+        """
+        Update and return an existing `Task` instance, given the validated data.
+        """
+        for attr, value in validated_data.items():
+            if attr == "task_type" and value is not None:
+                res = models.TaskType.objects.filter(pk=value).first()
+                if res is None:
+                    raise serializers.ValidationError("Invalid task type id")
+                instance.task_type = res
+            elif attr == "task_status" and value is not None:
+                res = models.TaskStatus.objects.filter(pk=value).first()
+                if res is None:
+                    raise serializers.ValidationError("Invalid task status id")
+                instance.task_status = res
+            elif attr == "order" and value is not None:
+                res = models.Order.objects.filter(pk=value).first()
+                if res is None:
+                    raise serializers.ValidationError("Invalid order id")
+                instance.order = res
+            elif attr == "employees" and value is not None:
+                res = models.Employee.objects.filter(pk__in=value)
+                if len(value) != len(res):
+                    raise serializers.ValidationError("Invalid employee id included")
+                instance.employees.clear()
+                [instance.employees.add(e) for e in res]
+            elif attr == "vehicles" and value is not None:
+                res = models.Vehicle.objects.filter(pk__in=value)
+                if len(value) != len(res):
+                    raise serializers.ValidationError("Invalid vehicle id included")
+                instance.vehicles.clear()
+                [instance.vehicles.add(v) for v in res]
+            elif value is not None:
+                setattr(instance, attr, value)
+        instance.save()
+        return instance
+
+
+def manual_task_serializer(data: models.Task):
+    """
+    Manual serializer for Task
+    """
+    emp_list = [{"id": emp.pk, "username": "%s %s" % (emp.first_name, emp.last_name)} for emp in data.employees.all()]
+    vh_list = [{"id": vh.pk, "title": vh.title} for vh in data.vehicles.all()]
+    img_list = [{"id": img.pk, "title": img.title} for img in data.images.all()]
+    return {
+        "pk": data.pk,
+        "title": data.title,
+        "task_type": {
+            "id": data.task_type.pk,
+            "title": data.task_type.title
+        },
+        "task_status": {
+            "id": data.task_status.pk,
+            "title": data.task_status.title
+        },
+        "order": {
+            "id": data.order.pk,
+            "order_nr": data.order.order_nr,
+            "title": data.order.title,
+            "order_date": data.order.order_date,
+            "customer": {
+                "pk": data.order.customer.pk,
+                "name": data.order.customer.name,
+                "address": data.order.customer.address,
+                "phone": data.order.customer.phone,
+                "is_company": data.order.customer.is_company
+            },
+            "is_completed": data.order.is_completed
+        },
+        "employees": emp_list,
+        "vehicles": vh_list,
+        "images": img_list,
+        "scheduled_from": data.scheduled_from,
+        "from_shift": data.from_shift,
+        "scheduled_to": data.scheduled_to,
+        "to_shift": data.to_shift
+    }
+
+
+def manual_task_serializer_minimal(data: models.Task):
+    """
+    To provide an option for less data transfer (e.g. list view)
+    :param data:
+    :return:
+    """
+    return {
+        "pk": data.pk,
+        "title": data.title,
+        "task_type": data.task_type.title,
+        "task_status": data.task_status.title,
+        "scheduled_to": data.scheduled_to,
     }
