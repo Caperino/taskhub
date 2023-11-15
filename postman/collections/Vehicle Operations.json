@@ -1,0 +1,707 @@
+{
+	"info": {
+		"_postman_id": "46d32618-11d5-467a-9741-2ca13b3509b7",
+		"name": "Vehicle Operations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "20001436-46d32618-11d5-467a-9741-2ca13b3509b7"
+	},
+	"item": [
+		{
+			"name": "List",
+			"id": "9775e0fc-dca4-4c72-a13c-3a79fadc2756",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/vehicles?title=b&length=3&weight=1&type=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"vehicles"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "b",
+							"description": "[STR] the title of the vehicle"
+						},
+						{
+							"key": "length",
+							"value": "3",
+							"description": "[INT] the minimal load length available"
+						},
+						{
+							"key": "weight",
+							"value": "1",
+							"description": "[INT] the minimal load weight available"
+						},
+						{
+							"key": "type",
+							"value": "1",
+							"description": "[INT] the PK of the vehicle type"
+						}
+					]
+				},
+				"description": "## Path\n\n/api/vehicles\n\n## Description\n\nIn this case retrieves a list of vehicles."
+			},
+			"response": [
+				{
+					"id": "bdf428de-67db-4ca8-9151-33cfbb30160a",
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/vehicles?title=b&length=3&weight=1&type=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"vehicles"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "b",
+									"description": "[STR] the title of the vehicle"
+								},
+								{
+									"key": "length",
+									"value": "3",
+									"description": "[INT] the minimal load length available"
+								},
+								{
+									"key": "weight",
+									"value": "1",
+									"description": "[INT] the minimal load weight available"
+								},
+								{
+									"key": "type",
+									"value": "1",
+									"description": "[INT] the PK of the vehicle type"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 13 Nov 2023 22:46:11 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "113"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"pk\": 1,\n        \"title\": \"BMW 310d\",\n        \"max_load_length\": 3,\n        \"max_load_weight\": 580,\n        \"vehicle_type\": [\n            {\n                \"id\": 1,\n                \"title\": \"Combi\"\n            }\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Create",
+			"id": "286113f6-d819-4081-869b-f1d80dae78e6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Mercedes C250\",\r\n    \"max_load_length\": 3,\r\n    \"max_load_weight\": 650,\r\n    \"vehicle_type\": [\r\n        1\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/vehicles",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"vehicles"
+					]
+				},
+				"description": "## Path\n\n/api/vehicles\n\n## Description\n\nIn this case creates a new vehicle."
+			},
+			"response": [
+				{
+					"id": "d160cb6d-3da1-4325-827f-912a76ec96f3",
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Mercedes C250\",\r\n    \"max_load_length\": 3,\r\n    \"max_load_weight\": 650,\r\n    \"vehicle_type\": [\r\n        1\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/vehicles",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"vehicles"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 13 Nov 2023 22:56:13 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "86"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"Mercedes C250\",\n    \"max_load_length\": 3,\n    \"max_load_weight\": 650,\n    \"vehicle_type\": [\n        1\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Retrieve",
+			"id": "b39073af-0967-4edb-aa8f-348c8dfbf510",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/vehicles/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"vehicles",
+						"1"
+					]
+				},
+				"description": "## Path\n\n/api/vehicles/**PK_OF_VEHICLE**\n\n## Description\n\nIn this case retrieves the specified vehicle."
+			},
+			"response": [
+				{
+					"id": "6e805346-530d-4358-b73c-d544cd99a6ff",
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/vehicles/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"vehicles",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 13 Nov 2023 21:59:43 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "111"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"pk\": 1,\n    \"title\": \"BMW 310d\",\n    \"max_load_length\": 3,\n    \"max_load_weight\": 580,\n    \"vehicle_type\": [\n        {\n            \"id\": 1,\n            \"title\": \"Combi\"\n        }\n    ]\n}"
+				},
+				{
+					"id": "f150d93f-7360-4cda-b802-0796613a5922",
+					"name": "Failure",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vehicles/187",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vehicles",
+								"187"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 13 Nov 2023 22:00:13 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "23"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"detail\": \"Not found.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"id": "0600c967-cdeb-4b38-a57a-f89f92885e6f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pk\": 1,\r\n    \"title\": \"BMW 310d\",\r\n    \"max_load_length\": 3,\r\n    \"max_load_weight\": 580,\r\n    \"vehicle_type\": [\r\n        1\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/vehicles/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"vehicles",
+						"1"
+					]
+				},
+				"description": "## Path\n\n/api/vehicles\n\n## Description\n\nIn this case updates a vehicle.\n\n## Note\n\nFunctionality contains **full** and **partial** updates."
+			},
+			"response": [
+				{
+					"id": "6b3420ff-9f11-4ad9-8314-ac61b1f44ec3",
+					"name": "Success",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pk\": 1,\r\n    \"title\": \"BMW 310d\",\r\n    \"max_load_length\": 3,\r\n    \"max_load_weight\": 580,\r\n    \"vehicle_type\": [\r\n        1\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/vehicles/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"vehicles",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 13 Nov 2023 23:02:36 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "81"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"BMW 310d\",\n    \"max_load_length\": 3,\n    \"max_load_weight\": 580,\n    \"vehicle_type\": [\n        1\n    ]\n}"
+				},
+				{
+					"id": "56e1e3bb-d5ca-4b5b-b172-771bf20f1862",
+					"name": "Success | single field",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"max_load_length\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/vehicles/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"vehicles",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 13 Nov 2023 23:01:54 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "21"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"max_load_length\": 4\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"id": "07741b3c-b242-4dd5-8213-b1333bf436ed",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/vehicles/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"vehicles",
+						"2"
+					]
+				},
+				"description": "## Path\n\n/api/vehicles\n\n## Description\n\nIn this case deletes the specified vehicle."
+			},
+			"response": [
+				{
+					"id": "44ecf229-e9ad-4b26-a7e7-7b7ea696b448",
+					"name": "Success",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/vehicles/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"vehicles",
+								"2"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 13 Nov 2023 23:04:31 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c990d244-bddc-4454-a218-7ed0d055d849",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "072c0212-4572-4b56-b078-caccd72e693a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "e73d7bed-6655-4343-be4c-41e7d5edf9fa",
+			"key": "base_url",
+			"value": "localhost:8000/api",
+			"type": "string"
+		}
+	]
+}
