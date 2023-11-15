@@ -1,5 +1,6 @@
 # External imports
 import string
+import traceback
 
 from django.db.models import Q
 from django.shortcuts import render
@@ -55,6 +56,7 @@ def to_date(date_string: str) -> datetime | None:
     try:
         return datetime.strptime(date_string, "%Y-%m-%d")
     except:
+        print("Invalid date string: " + date_string)
         return None
 
 
@@ -942,7 +944,6 @@ class OrderViewSet(viewsets.ViewSet):
                     status=401)
             case None:
                 pass
-
         order = get_object_or_404(models.Order, pk=pk_order)
         return Response(serializers.manual_order_serializer(order))
 
@@ -966,7 +967,10 @@ class OrderViewSet(viewsets.ViewSet):
 
         ser = serializers.OrderSerializer(data=request.data)
         if ser.is_valid():
-            ser.save()
+            try:
+                ser.save()
+            except Exception as e:
+                return Response(e.args, status=400)
             return Response(ser.validated_data, status=201)
         else:
             return Response(ser.errors, status=400)
@@ -993,7 +997,10 @@ class OrderViewSet(viewsets.ViewSet):
         order = get_object_or_404(models.Order, pk=pk_order)
         ser = serializers.OrderSerializer(order, data=request.data, partial=True)
         if ser.is_valid():
-            ser.save()
+            try:
+                ser.save()
+            except Exception as e:
+                return Response(e.args, status=400)
             return Response(ser.validated_data, status=200)
         else:
             return Response(ser.errors, status=400)
@@ -1017,9 +1024,8 @@ class OrderViewSet(viewsets.ViewSet):
             case None:
                 pass
 
-        order = get_object_or_404(models.Order, pk=pk_order)
         try:
-            order.delete()
+            models.Order.objects.filter(pk=pk_order).delete()
             return Response(None, status=204)
         except django_models.ProtectedError as e:
             print(e)
@@ -1027,6 +1033,7 @@ class OrderViewSet(viewsets.ViewSet):
         except Exception as e:
             print(e)
             return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="an unforeseen error happened, please try again")).data, status=500)
+
 
 class TaskViewSet(viewsets.ViewSet):
     """
@@ -1054,7 +1061,20 @@ class TaskViewSet(viewsets.ViewSet):
             begin = datetime.today() - timedelta(weeks=1)
         if end is None:
             end = datetime.today() + timedelta(weeks=3)
-        tasks = models.Task.objects.filter(scheduled_to__gte=begin, scheduled_to__lte=end)
+        g = request.user.groups.filter(name=constants.UserGroups.MANAGER.value)
+        if g.count() == 1:
+            print("manager access")
+            emp_filter = 'INVALID_DATA'
+        else:
+            print("employee access")
+            emp_filter = request.user.pk
+        task_filter = {
+            "employees__pk": emp_filter,
+            "scheduled_to__gte": begin,
+            "scheduled_to__lte": end
+        }
+        filters = {k: v for k, v in task_filter.items() if v != 'INVALID_DATA' and v is not None}
+        tasks = models.Task.objects.filter(**filters)
         output = []
         for task in tasks:
             output.append(serializers.manual_task_serializer_minimal(task))
@@ -1079,8 +1099,24 @@ class TaskViewSet(viewsets.ViewSet):
             case None:
                 pass
 
-        task = get_object_or_404(models.Task, pk=pk_task)
-        return Response(serializers.manual_task_serializer(task))
+        g = request.user.groups.filter(name=constants.UserGroups.MANAGER.value)
+        if g.count() == 1:
+            print("manager access")
+            emp_filter = 'INVALID_DATA'
+        else:
+            print("employee access")
+            emp_filter = request.user.pk
+        task_filter = {
+            "employees__pk": emp_filter,
+            "pk": pk_task
+        }
+        filters = {k: v for k, v in task_filter.items() if v != 'INVALID_DATA' and v is not None}
+        tasks = models.Task.objects.filter(**filters)
+        if tasks.count() != 1:
+            return Response(None, status=404)
+
+        #task = get_object_or_404(models.Task, pk=pk_task)
+        return Response(serializers.manual_task_serializer(tasks[0]))
 
     def create(self, request):
         """
@@ -1100,19 +1136,26 @@ class TaskViewSet(viewsets.ViewSet):
 
         ser = serializers.TaskSerializer(data=request.data)
         if ser.is_valid():
-            ser.save()
+            try:
+                if ser.validated_data['scheduled_from'] > ser.validated_data['scheduled_to']:
+                    return Response({"time span": "begin after end detected"}, status=400)
+                elif ser.validated_data['from_shift'] not in ("am", "pm") or ser.validated_data['to_shift'] not in ("am", "pm"):
+                    return Response({"from_shift or to_shift": "invalid input detected, please only use 'am' or 'pm'"}, 400)
+                ser.save()
+            except Exception as e:
+                return Response(e.args, status=400)
             return Response(ser.validated_data, status=201)
         else:
             return Response(ser.errors, status=400)
 
-    def update(self, request, _task):
+    def update(self, request, pk_task):
         """
         Updates a task
         :param request: the request
         :param _task: the primary key of the task
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), [_task]):
+        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -1122,10 +1165,38 @@ class TaskViewSet(viewsets.ViewSet):
             case None:
                 pass
 
-        task = get_object_or_404(models.Task, pk=_task)
+        task = get_object_or_404(models.Task, pk=pk_task)
         ser = serializers.TaskSerializer(task, data=request.data, partial=True)
         if ser.is_valid():
-            ser.save()
+            try:
+                if 'scheduled_from' in ser.validated_data:
+                    fr = ser.validated_data['scheduled_from']
+                else:
+                    fr = None
+                if 'scheduled_to' in ser.validated_data:
+                    to = ser.validated_data['scheduled_to']
+                else:
+                    to = None
+
+                if fr is not None and to is not None:
+                    if ser.validated_data['scheduled_from'] > ser.validated_data['scheduled_to']:
+                        return Response({"time span": "begin after end detected"}, status=400)
+                elif fr is not None and fr > task.scheduled_to:
+                    return Response({"time span": "begin after end detected"}, status=400)
+                elif to is not None and task.scheduled_from > to:
+                    return Response({"time span": "begin after end detected"}, status=400)
+
+                if 'from_shift' in ser.validated_data and ser.validated_data['from_shift'] not in ("am", "pm"):
+                    return Response(
+                        {"from_shift": "invalid input detected, please only use 'am' or 'pm'"}, 400)
+                elif 'to_shift' in ser.validated_data and ser.validated_data['to_shift'] not in ("am", "pm"):
+                    return Response(
+                        {"to_shift": "invalid input detected, please only use 'am' or 'pm'"}, 400)
+                ser.save()
+            except Exception as e:
+                print(e.args)
+                traceback.print_exc()
+                return Response(e.args, status=400)
             return Response(ser.validated_data, status=200)
         else:
             return Response(ser.errors, status=400)
@@ -1147,9 +1218,8 @@ class TaskViewSet(viewsets.ViewSet):
             case None:
                 pass
 
-        task = get_object_or_404(models.Task, pk=pk_task)
         try:
-            task.delete()
+            models.Task.objects.filter(pk=pk_task).delete()
             return Response(None, status=204)
         except Exception as e:
             print(e)

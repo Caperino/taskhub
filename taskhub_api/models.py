@@ -2,13 +2,13 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
-# Create your models here.
+# Helper function
 def current_date():
     from datetime import date
     return date.today()
 
 
-# ORDERS
+# DOCS created
 class Order(models.Model):
     order_nr = models.IntegerField()
     title = models.CharField(max_length=1024)
@@ -20,6 +20,7 @@ class Order(models.Model):
         return self.title
 
 
+# DOCS created
 class Customer(models.Model):
     """
     A customer is a person or a company, who is ordering something.
@@ -33,7 +34,6 @@ class Customer(models.Model):
         return self.name
 
 
-# TASKS
 class Task(models.Model):
     """
     A task is an activity, which is assigned to an employee.
@@ -59,6 +59,7 @@ class Task(models.Model):
         return "%s - %s" % (self.title, self.order)
 
 
+# DOCS created
 class TaskType(models.Model):
     """
     A task type is a type of a task.
@@ -75,6 +76,7 @@ class TaskType(models.Model):
     title = models.CharField(max_length=2, choices=TASK_TYPES)
 
 
+# DOCS created
 class TaskStatus(models.Model):
     """
     A task status is a status of a task.
@@ -89,6 +91,7 @@ class TaskStatus(models.Model):
     title = models.CharField(max_length=2, choices=TASK_STATUS)
 
 
+# no DOCS required
 class AzureImage(models.Model):
     """
     An Azure Image is an image, which is stored in the Azure Cloud.
@@ -99,7 +102,7 @@ class AzureImage(models.Model):
         return self.image_name
 
 
-# EMPLOYEES
+# DOCS created
 class Employee(AbstractUser):
     """
     An employee is a person, who is working for the company.
@@ -140,6 +143,7 @@ class Employee(AbstractUser):
         return f'{self.first_name} {self.last_name}'
 
 
+# DOCS created
 class EmployeeType(models.Model):
     title = models.CharField(max_length=60)
     description = models.CharField(max_length=1024)
@@ -148,7 +152,7 @@ class EmployeeType(models.Model):
         return self.title
 
 
-# OTHER
+# DOCS created
 class Vehicle(models.Model):
     title = models.CharField(max_length=60)
     vehicle_type = models.ManyToManyField("VehicleType")
@@ -159,6 +163,7 @@ class Vehicle(models.Model):
         return self.title
 
 
+# DOCS created
 class VehicleType(models.Model):
     title = models.CharField(max_length=60)
     description = models.CharField(max_length=1024)
@@ -167,6 +172,7 @@ class VehicleType(models.Model):
         return self.title
 
 
+# no DOCS required
 class TaskHubApiResponse(models.Model):
     """
     A simple API response class

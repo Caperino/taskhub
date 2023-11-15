@@ -311,7 +311,6 @@ class TaskSerializer(serializers.Serializer):
     title = serializers.CharField(required=True)
     task_type = serializers.IntegerField(required=True)
     task_status = serializers.IntegerField(required=True)
-    vehicle_type = IntegerListField(required=True)
     vehicles = IntegerListField(required=True, allow_empty=True)
     # images = IntegerListField(required=False, allow_empty=True)
     order = serializers.IntegerField(required=True)
@@ -331,12 +330,21 @@ class TaskSerializer(serializers.Serializer):
         vh = models.Vehicle.objects.filter(pk__in=validated_data["vehicles"])
         if len(validated_data["vehicles"]) != len(vh):
             raise IntegrityError("Invalid vehicle id included")
+        tt = models.TaskType.objects.filter(pk=validated_data["task_type"]).first()
+        if tt is None:
+            raise IntegrityError("Invalid task_type id included")
+        ts = models.TaskStatus.objects.filter(pk=validated_data["task_status"]).first()
+        if ts is None:
+            raise IntegrityError("Invalid task_status id included")
+        order = models.Order.objects.filter(pk=validated_data["order"]).first()
+        if order is None:
+            raise IntegrityError("Invalid order id included")
 
         obj = models.Task.objects.create(
             title=validated_data["title"],
-            task_type=models.TaskType.objects.filter(pk=validated_data["task_type"]).first(),
-            task_status=models.TaskStatus.objects.filter(pk=validated_data["task_status"]).first(),
-            order=models.Order.objects.filter(pk=validated_data["order"]).first(),
+            task_type=tt,
+            task_status=ts,
+            order=order,
             scheduled_from=validated_data["scheduled_from"],
             from_shift=validated_data["from_shift"],
             scheduled_to=validated_data["scheduled_to"],
@@ -391,7 +399,7 @@ def manual_task_serializer(data: models.Task):
     """
     emp_list = [{"id": emp.pk, "username": "%s %s" % (emp.first_name, emp.last_name)} for emp in data.employees.all()]
     vh_list = [{"id": vh.pk, "title": vh.title} for vh in data.vehicles.all()]
-    img_list = [{"id": img.pk, "title": img.title} for img in data.images.all()]
+    img_list = [{"id": img.pk, "title": img.image_name} for img in data.images.all()]
     return {
         "pk": data.pk,
         "title": data.title,

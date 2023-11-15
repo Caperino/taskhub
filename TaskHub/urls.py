@@ -31,7 +31,7 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-    # Image Action URLs
+    # IMAGE ENDPOINTS
     path('api/users/<user_pk>/image',
          available_views.ImageUploadViewSet.as_view({"get": "download_pfp", "post": "upload_pfp", "delete": "delete_pfp"}),
          name="direct_pfp"),
@@ -41,18 +41,21 @@ urlpatterns = [
     path('api/tasks/<task_pk>/images/<image_pk>',
          available_views.ImageUploadViewSet.as_view({"get": "download_task_image", "delete": "delete_task_image"}),
          name="direct_task_image"),
+    # CUSTOMER
     path('api/customers',
          available_views.CustomerViewSet.as_view({"get": "list", "post": "create"}),
          name="customers"),
     path('api/customers/<pk_customer>',
          available_views.CustomerViewSet.as_view({"get": "retrieve", "put": "update", "delete": "delete"}),
          name="direct_customer"),
+    # EMPLOYEE
     path('api/employees',
          available_views.EmployeeViewSet.as_view({"get": "list", "post": "create"}),
          name="employees"),
     path('api/employees/<employee_pk>',
          available_views.EmployeeViewSet.as_view({"get": "retrieve", "put": "update", "delete": "delete"}),
          name="direct_employee"),
+    # VEHICLE TYPES
     path('api/vehicletypes',
          available_views.VehicleTypeViewSet.as_view({"get": "list"}),
          name="vehicle_types"),
@@ -65,6 +68,7 @@ urlpatterns = [
     path('api/vehicles/<pk_vehicle>',
          available_views.VehicleViewSet.as_view({"get": "retrieve", "put": "update", "delete": "delete"}),
          name="direct_vehicle"),
+    # TASK TYPES
     path('api/tasktypes',
          available_views.TaskTypeViewSet.as_view({"get": "list"}),
          name="task_types"),
@@ -77,18 +81,19 @@ urlpatterns = [
     path('api/taskstatuses/<pk_task_status>',
          available_views.TaskStatusViewSet.as_view({"get": "retrieve"}),
          name="direct_task_status"),
+    path('api/tasks',
+         available_views.TaskViewSet.as_view({"get": "list", "post": "create"}),
+         name="tasks"),
+    path('api/tasks/<pk_task>',
+         available_views.TaskViewSet.as_view({"get": "retrieve", "put": "update", "delete": "delete"}),
+         name="direct_task"),
+    # ORDERS
     path('api/orders',
          available_views.OrderViewSet.as_view({"get": "list", "post": "create"}),
          name="orders"),
     path('api/orders/<pk_order>',
          available_views.OrderViewSet.as_view({"get": "retrieve", "put": "update", "delete": "delete"}),
          name="direct_order"),
-    path('api/tasks',
-            available_views.TaskViewSet.as_view({"get": "list", "post": "create"}),
-            name="tasks"),
-    path('api/tasks/<pk_task>',
-            available_views.TaskViewSet.as_view({"get": "retrieve", "put": "update", "delete": "delete"}),
-            name="direct_task"),
 
     # health checks
     # TODO: add funny health checks
