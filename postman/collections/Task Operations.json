@@ -1,0 +1,1053 @@
+{
+	"info": {
+		"_postman_id": "31a0be1c-7215-4f94-9e3c-566ca657ce13",
+		"name": "Task Operations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "20001436-31a0be1c-7215-4f94-9e3c-566ca657ce13"
+	},
+	"item": [
+		{
+			"name": "List",
+			"id": "d6ffa7e7-9cbf-4446-bd1c-51a0daafe5c1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAwMDg0NzA1LCJpYXQiOjE3MDAwODQ0MDUsImp0aSI6ImJjOGI5OWE0ZjczMjQ0ZWZhODUxYWM2MjU2ZTg2ZjY0IiwidXNlcl9pZCI6MX0.7BeSNC2WeHbiKeVhzgBDMobFms47N2-N6bNIUM_WS9E",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/tasks?begin=anything&end=2023-11-36",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "begin",
+							"value": "anything"
+						},
+						{
+							"key": "end",
+							"value": "2023-11-36"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "5a7d3cad-ae67-4700-a375-185fbfdaee21",
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks?begin=2023-10-01&end=2023-11-30",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "begin",
+									"value": "2023-10-01"
+								},
+								{
+									"key": "end",
+									"value": "2023-11-30"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 15 Nov 2023 20:54:56 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "105"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"pk\": 1,\n        \"title\": \"First Task\",\n        \"task_type\": \"as\",\n        \"task_status\": \"qu\",\n        \"scheduled_to\": \"2023-11-24T14:52:55Z\"\n    }\n]"
+				},
+				{
+					"id": "bd0754a8-1ab6-4920-a044-8bada5269a4e",
+					"name": "Success | wrong input",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks?begin=anything&end=2023-11-36",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "begin",
+									"value": "anything"
+								},
+								{
+									"key": "end",
+									"value": "2023-11-36"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 15 Nov 2023 20:55:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "105"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"pk\": 1,\n        \"title\": \"First Task\",\n        \"task_type\": \"as\",\n        \"task_status\": \"qu\",\n        \"scheduled_to\": \"2023-11-24T14:52:55Z\"\n    }\n]"
+				},
+				{
+					"id": "53533fc3-966f-4e66-bebe-20d6cc8c21db",
+					"name": "Success | tasks filtered by PK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks?begin=anything&end=2023-11-36",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "begin",
+									"value": "anything"
+								},
+								{
+									"key": "end",
+									"value": "2023-11-36"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 15 Nov 2023 21:40:35 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "[]"
+				}
+			]
+		},
+		{
+			"name": "Create",
+			"id": "2cf29087-2b21-4647-a4d7-7f53d77b1951",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"CREATE TEST TASK MINIMAL\",\r\n    \"task_type\":1,\r\n    \"task_status\":1,\r\n    \"vehicles\":[],\r\n    \"order\":1,\r\n    \"employees\":[],\r\n    \"scheduled_from\":\"2023-11-25\",\r\n    \"from_shift\":\"am\",\r\n    \"scheduled_to\":\"2023-12-10\",\r\n    \"to_shift\":\"pm\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "bfb217ac-ac48-421d-a2c3-edea891483ea",
+					"name": "Success | full",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"CREATE TEST TASK\",\r\n    \"task_type\":1,\r\n    \"task_status\":1,\r\n    \"vehicles\":[\r\n        3\r\n    ],\r\n    \"order\":1,\r\n    \"employees\":[\r\n        1\r\n    ],\r\n    \"scheduled_from\":\"2023-11-25\",\r\n    \"from_shift\":\"am\",\r\n    \"scheduled_to\":\"2023-12-10\",\r\n    \"to_shift\":\"pm\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 15 Nov 2023 22:00:55 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "211"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"CREATE TEST TASK\",\n    \"task_type\": 1,\n    \"task_status\": 1,\n    \"vehicles\": [\n        3\n    ],\n    \"order\": 1,\n    \"employees\": [\n        1\n    ],\n    \"scheduled_from\": \"2023-11-25T00:00:00Z\",\n    \"from_shift\": \"am\",\n    \"scheduled_to\": \"2023-12-10T00:00:00Z\",\n    \"to_shift\": \"pm\"\n}"
+				},
+				{
+					"id": "67c47074-40df-442a-87c9-60ccbd1ba5aa",
+					"name": "Success | minimal",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"CREATE TEST TASK MINIMAL\",\r\n    \"task_type\":1,\r\n    \"task_status\":1,\r\n    \"vehicles\":[],\r\n    \"order\":1,\r\n    \"employees\":[],\r\n    \"scheduled_from\":\"2023-11-25\",\r\n    \"from_shift\":\"am\",\r\n    \"scheduled_to\":\"2023-12-10\",\r\n    \"to_shift\":\"pm\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 15 Nov 2023 22:16:17 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "217"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"CREATE TEST TASK MINIMAL\",\n    \"task_type\": 1,\n    \"task_status\": 1,\n    \"vehicles\": [],\n    \"order\": 1,\n    \"employees\": [],\n    \"scheduled_from\": \"2023-11-25T00:00:00Z\",\n    \"from_shift\": \"am\",\n    \"scheduled_to\": \"2023-12-10T00:00:00Z\",\n    \"to_shift\": \"pm\"\n}"
+				},
+				{
+					"id": "46b77645-6cdb-490e-9873-8d2f3cf46eb1",
+					"name": "Failure | generic",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"CREATE TEST TASK MINIMAL\",\r\n    \"task_type\":1,\r\n    \"task_status\":1,\r\n    \"vehicles\":null,\r\n    \"order\":1,\r\n    \"employees\":[],\r\n    \"scheduled_from\":\"2023-11-25\",\r\n    \"from_shift\":\"am\",\r\n    \"scheduled_to\":\"2023-12-10\",\r\n    \"to_shift\":\"pm\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 15 Nov 2023 22:18:32 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, POST, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "44"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"vehicles\": [\n        \"This field may not be null.\"\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Retrieve",
+			"id": "9ebcb758-8bc0-44cb-8560-5f193875523d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/tasks/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "f42f3789-2d9d-484d-a7ee-18b81161f51b",
+					"name": "Success | full",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 15 Nov 2023 20:58:13 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "610"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"pk\": 1,\n    \"title\": \"First Task\",\n    \"task_type\": {\n        \"id\": 1,\n        \"title\": \"as\"\n    },\n    \"task_status\": {\n        \"id\": 1,\n        \"title\": \"qu\"\n    },\n    \"order\": {\n        \"id\": 1,\n        \"order_nr\": 12345,\n        \"title\": \"TK Test Order #1\",\n        \"order_date\": \"2023-11-10\",\n        \"customer\": {\n            \"pk\": 1,\n            \"name\": \"TK Inc.\",\n            \"address\": \"Margarethenstraße 24\",\n            \"phone\": \"+436607039266\",\n            \"is_company\": true\n        },\n        \"is_completed\": false\n    },\n    \"employees\": [\n        {\n            \"id\": 1,\n            \"username\": \"Timo Kappel\"\n        }\n    ],\n    \"vehicles\": [\n        {\n            \"id\": 1,\n            \"title\": \"BMW 310d\"\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Mercedes C250\"\n        }\n    ],\n    \"images\": [\n        {\n            \"id\": 29,\n            \"title\": \"Vorhand_Bruck.jpg_AS6HVT\"\n        }\n    ],\n    \"scheduled_from\": \"2023-11-10T14:52:45Z\",\n    \"from_shift\": \"am\",\n    \"scheduled_to\": \"2023-11-24T14:52:55Z\",\n    \"to_shift\": \"pm\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"id": "d5758f5e-a703-4983-abda-b2fcce334a2c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"scheduled_from\":\"2024-11-25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks/4",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks",
+						"4"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "e4675208-a2d2-49ac-aa56-d6d18d366e29",
+					"name": "Success | full",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"CREATE TEST TASK MINIMAL UPDATED\",\r\n    \"task_type\":1,\r\n    \"task_status\":1,\r\n    \"vehicles\":[],\r\n    \"order\":1,\r\n    \"employees\":[],\r\n    \"scheduled_from\":\"2023-11-25\",\r\n    \"from_shift\":\"am\",\r\n    \"scheduled_to\":\"2023-12-10\",\r\n    \"to_shift\":\"pm\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"4"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 15 Nov 2023 22:22:45 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "225"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"CREATE TEST TASK MINIMAL UPDATED\",\n    \"task_type\": 1,\n    \"task_status\": 1,\n    \"vehicles\": [],\n    \"order\": 1,\n    \"employees\": [],\n    \"scheduled_from\": \"2023-11-25T00:00:00Z\",\n    \"from_shift\": \"am\",\n    \"scheduled_to\": \"2023-12-10T00:00:00Z\",\n    \"to_shift\": \"pm\"\n}"
+				},
+				{
+					"id": "6eb9f6ca-6c0e-4301-951a-cce7335a7190",
+					"name": "Success | minimal",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employees\":[\r\n        1\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"4"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 15 Nov 2023 22:41:12 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "17"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"employees\": [\n        1\n    ]\n}"
+				},
+				{
+					"id": "bb16bbbc-92a8-48bb-8538-dfee6468ea2c",
+					"name": "Failure | 404",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"scheduled_from\":\"2024-11-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"4"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 15 Nov 2023 22:21:50 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "23"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"detail\": \"Not found.\"\n}"
+				},
+				{
+					"id": "65c919a8-ac51-4ade-b3e1-a5f254fb0fa4",
+					"name": "Failure | invalid time span detected",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"scheduled_from\":\"2024-11-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"4"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 15 Nov 2023 22:43:53 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "40"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"time span\": \"begin after end detected\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"id": "267a21c6-daf1-4f12-b674-c4d56a77a5df",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/tasks/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "d2962883-0771-446b-9595-297f3ba32681",
+					"name": "Success",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"2"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 15 Nov 2023 22:12:36 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, DELETE, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "16f9f9ce-e772-488b-b810-071bfbc2ba7f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "303ded45-5da9-4e84-a47b-b80d3c3599a1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "b2fe890b-f406-4a74-b992-59a7091f5c11",
+			"key": "base_url",
+			"value": "localhost:8000/api",
+			"type": "string"
+		}
+	]
+}

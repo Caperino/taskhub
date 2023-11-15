@@ -318,11 +318,7 @@
 						{
 							"key": "upload",
 							"type": "file",
-							"src": [
-								"/C:/Users/timok/Documents/Persönlich/Portraits/TK_r.jpg",
-								"/C:/Users/timok/Documents/Persönlich/Portraits/TK_t.jpg",
-								"/C:/Users/timok/Documents/Persönlich/Portraits/Vorhand_Bruck.jpg"
-							]
+							"src": "/C:/Users/timok/Documents/Persönlich/Portraits/Vorhand_Bruck.jpg"
 						}
 					]
 				},

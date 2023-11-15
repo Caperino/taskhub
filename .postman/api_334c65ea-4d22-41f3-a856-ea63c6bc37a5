@@ -12,6 +12,10 @@ rootDirectory = postman/collections
 files[] = {"id":"20001436-9868e838-4d60-451a-899d-40dfde6682e1","path":"Customer Operations.json","metaData":{}}
 files[] = {"id":"20001436-40b4f072-8f3b-4370-a157-14b2462caa3d","path":"Employee.json","metaData":{}}
 files[] = {"id":"20001436-bc03016d-23ab-40fd-b7ff-e5b53fb15755","path":"Image Operations.json","metaData":{}}
+files[] = {"id":"20001436-31035384-fa6b-47fd-94c0-518f2474a389","path":"Order Operations.json","metaData":{}}
+files[] = {"id":"20001436-31a0be1c-7215-4f94-9e3c-566ca657ce13","path":"Task Operations.json","metaData":{}}
+files[] = {"id":"20001436-99d5228b-376c-4562-b953-572edfac5e5d","path":"Task Status Operations.json","metaData":{}}
+files[] = {"id":"20001436-df1d1685-0499-447b-a531-1f3704b821b1","path":"Task Type Operations.json","metaData":{}}
 files[] = {"id":"20001436-46d32618-11d5-467a-9741-2ca13b3509b7","path":"Vehicle Operations.json","metaData":{}}
 files[] = {"id":"20001436-5ea17a3e-b973-4596-9535-03944eb10718","path":"Vehicle Types Operations.json","metaData":{}}
 
