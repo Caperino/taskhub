@@ -103,7 +103,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"User BirthDate\",\r\n    \"first_name\": \"User\",\r\n    \"last_name\": \"Birth\",\r\n    \"email\": \"user_birth_date@user.com\",\r\n    \"password\": \"somehighlysecurepassword\",\r\n    \"groups\": [],\r\n    \"is_active\": true,\r\n    \"employee_type\": 1,\r\n    \"address\": null,\r\n    \"phone\": null,\r\n    \"birth_date\": \"1998-02-17\",\r\n    \"gender\": null,\r\n    \"drivers_license_status\": null\r\n}",
+					"raw": "{\r\n    \"username\": \"User Check\",\r\n    \"first_name\": \"User\",\r\n    \"last_name\": \"Check\",\r\n    \"email\": \"user_birth_date@user.com\",\r\n    \"password\": \"somehighlysecurepassword\",\r\n    \"groups\": [],\r\n    \"is_active\": true,\r\n    \"employee_type\": 1,\r\n    \"address\": null,\r\n    \"phone\": null,\r\n    \"birth_date\": \"1998-02-17\",\r\n    \"gender\": null,\r\n    \"drivers_license_status\": null\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -798,7 +798,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"birth_date\":\"2003-07-14\"\r\n}",
+					"raw": "{\r\n    //\"username\":\"User BirthDate\"\r\n    //\"employee_type\":1\r\n    \"groups\":[\r\n        1\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -806,13 +806,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/employees/1",
+					"raw": "{{base_url}}/employees/19",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"employees",
-						"1"
+						"19"
 					]
 				}
 			},

@@ -150,7 +150,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Mercedes C250\",\r\n    \"max_load_length\": 3,\r\n    \"max_load_weight\": 650,\r\n    \"vehicle_type\": [\r\n        1\r\n    ]\r\n}",
+					"raw": "{\r\n    \"title\": \"Mercedes G Test Class\",\r\n    \"max_load_length\": 3,\r\n    \"max_load_weight\": 1200,\r\n    \"vehicle_type\": [\r\n        1\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

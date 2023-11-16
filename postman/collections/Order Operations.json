@@ -506,7 +506,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Postman TestOrder PUT FINAL\"\r\n}",
+					"raw": "{\r\n    \"customer\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

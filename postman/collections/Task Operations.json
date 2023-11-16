@@ -281,7 +281,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\":\"CREATE TEST TASK MINIMAL\",\r\n    \"task_type\":1,\r\n    \"task_status\":1,\r\n    \"vehicles\":[],\r\n    \"order\":1,\r\n    \"employees\":[],\r\n    \"scheduled_from\":\"2023-11-25\",\r\n    \"from_shift\":\"am\",\r\n    \"scheduled_to\":\"2023-12-10\",\r\n    \"to_shift\":\"pm\"\r\n}",
+					"raw": "{\r\n    \"title\":\"CREATE TEST TASK OPTIMIZED\",\r\n    \"task_type\":1,\r\n    \"task_status\":1,\r\n    \"vehicles\":[\r\n        1\r\n    ],\r\n    \"order\":1,\r\n    \"employees\":[\r\n        1,\r\n        19\r\n    ],\r\n    \"scheduled_from\":\"2023-11-25\",\r\n    \"from_shift\":\"am\",\r\n    \"scheduled_to\":\"2023-12-10\",\r\n    \"to_shift\":\"pm\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -619,7 +619,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"scheduled_from\":\"2024-11-25\"\r\n}",
+					"raw": "{\r\n    \"title\": \"CREATE TEST TASK MINIMAL UPDATED\",\r\n    \"task_type\": 1,\r\n    \"task_status\": 1,\r\n    \"vehicles\": [\r\n        1,\r\n        3\r\n    ],\r\n    \"order\": 1,\r\n    \"employees\": [\r\n        1\r\n    ],\r\n    \"scheduled_from\": \"2023-11-25T00:00:00Z\",\r\n    \"from_shift\": \"am\",\r\n    \"scheduled_to\": \"2023-12-10T00:00:00Z\",\r\n    \"to_shift\": \"pm\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
