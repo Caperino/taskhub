@@ -48,6 +48,7 @@ class EmployeeTypeSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+# optimized
 class VehicleSerializer(serializers.Serializer):
     title = serializers.CharField(required=True)
     max_load_length = serializers.IntegerField(required=True)
@@ -66,7 +67,7 @@ class VehicleSerializer(serializers.Serializer):
             max_load_length=validated_data["max_load_length"],
             max_load_weight=validated_data["max_load_weight"]
         )
-        [obj.vehicle_type.add(vh_type) for vh_type in vh_types]
+        obj.vehicle_type.add(*vh_types)
         obj.save()
         return obj
 
@@ -80,7 +81,7 @@ class VehicleSerializer(serializers.Serializer):
                 if len(value) != len(vh_types):
                     raise IntegrityError("Invalid vehicle type id included")
                 instance.vehicle_type.clear()
-                [instance.vehicle_type.add(vh_type) for vh_type in vh_types]
+                instance.vehicle_type.add(*vh_types)
             elif value is not None:
                 setattr(instance, attr, value)
         instance.save()
@@ -101,6 +102,7 @@ def manual_vehicle_serializer(data: models.Vehicle):
     }
 
 
+# optimized
 class OrderSerializer(serializers.Serializer):
     """
     Serializer for Order
@@ -115,15 +117,14 @@ class OrderSerializer(serializers.Serializer):
         """
         Create and return a new `Order` instance, given the validated data.
         """
-        customer = models.Customer.objects.filter(pk=validated_data["customer"]).first()
-        if customer is None:
-            raise IntegrityError("Invalid customer id")
+        #customer = models.Customer.objects.filter(pk=validated_data["customer"]).first()
+        #if customer is None:
+            #raise IntegrityError("Invalid customer id")
         obj = models.Order.objects.create(
             order_nr=validated_data["order_nr"],
             title=validated_data["title"],
-            customer=customer
+            customer_id=validated_data["customer"],
         )
-        obj.save()
         return obj
 
     def update(self, instance, validated_data):
@@ -132,10 +133,10 @@ class OrderSerializer(serializers.Serializer):
         """
         for attr, value in validated_data.items():
             if attr == "customer" and value is not None:
-                customer = models.Customer.objects.filter(pk=value).first()
-                if customer is None:
-                    raise IntegrityError("Invalid customer id")
-                instance.customer = customer
+                #customer = models.Customer.objects.filter(pk=value).first()
+                #if customer is None:
+                    #raise IntegrityError("Invalid customer id")
+                instance.customer_id = value
             elif value is not None:
                 setattr(instance, attr, value)
         instance.save()
@@ -162,6 +163,7 @@ def manual_order_serializer(data: models.Order):
     }
 
 
+# optimized
 class EmployeeSerializer(serializers.Serializer):
     """
     Serializer for Employee
@@ -184,21 +186,14 @@ class EmployeeSerializer(serializers.Serializer):
         """
         Create and return a new `Employee` instance, given the validated data.
         """
-        # TODO: SECURITY for group assignment
-        # TODO: PASSWORD handling is incomplete
 
-        # EmployeeType
-        requested_employee_type = models.EmployeeType.objects.filter(pk=validated_data["employee_type"]).first()
-        if requested_employee_type is None:
-            print("Invalid employee type id")
-            raise IntegrityError("Invalid employee type id")
         # Groups
         requested_groups = Group.objects.filter(pk__in=validated_data["groups"])
         if len(validated_data["groups"]) != len(requested_groups):
             print("Invalid group id included")
             raise IntegrityError("Invalid group id included")
 
-        obj = models.Employee.objects.create(
+        obj = models.Employee(
             first_name=validated_data["first_name"],
             last_name=validated_data["last_name"],
             email=validated_data["email"],
@@ -208,41 +203,40 @@ class EmployeeSerializer(serializers.Serializer):
             birth_date=validated_data["birth_date"],
             gender=validated_data["gender"],
             drivers_license_status=validated_data["drivers_license_status"],
-            is_active=validated_data["is_active"]
+            is_active=validated_data["is_active"],
+            employee_type_id=validated_data["employee_type"]
         )
         # PW
         if validated_data["password"] is not None:
             obj.set_password(validated_data["password"])
         else:
             raise IntegrityError("Password is required")
-        # EmployeeType and Groups
-        obj.employee_type = requested_employee_type
-        [obj.groups.add(group) for group in requested_groups]
 
+        # save and add groups
         obj.save()
+        obj.groups.add(*requested_groups)
+
         return obj
 
     def update(self, instance, validated_data):
         """
         Update and return an existing `Employee` instance, given the validated data.
         """
+        groups_to_add = []
         for attr, value in validated_data.items():
             if attr == "password":
                 instance.set_password(value)
             elif attr == "groups" and value is not None:
-                groups = [group for group in Group.objects.filter(pk__in=value)]
-                if len(value) != len(groups):
+                groups_to_add += Group.objects.filter(pk__in=value)
+                if len(value) != len(groups_to_add):
                     raise serializers.ValidationError("Invalid group id included")
-                instance.groups.clear()
-                [instance.groups.add(group) for group in groups]
             elif attr == "employee_type" and value is not None:
-                res = models.EmployeeType.objects.filter(pk=value).first()
-                if res is None:
-                    raise serializers.ValidationError("Invalid employee type id")
-                instance.employee_type = res
+                instance.employee_type_id = value
             elif value is not None:
                 setattr(instance, attr, value)
         instance.save()
+        instance.groups.clear()
+        instance.groups.add(*groups_to_add)
         return instance
 
 
@@ -304,6 +298,7 @@ class VehicleTypeSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+# optimized
 class TaskSerializer(serializers.Serializer):
     """
     Serializer for Task
@@ -330,66 +325,51 @@ class TaskSerializer(serializers.Serializer):
         vh = models.Vehicle.objects.filter(pk__in=validated_data["vehicles"])
         if len(validated_data["vehicles"]) != len(vh):
             raise IntegrityError("Invalid vehicle id included")
-        tt = models.TaskType.objects.filter(pk=validated_data["task_type"]).first()
-        if tt is None:
-            raise IntegrityError("Invalid task_type id included")
-        ts = models.TaskStatus.objects.filter(pk=validated_data["task_status"]).first()
-        if ts is None:
-            raise IntegrityError("Invalid task_status id included")
-        order = models.Order.objects.filter(pk=validated_data["order"]).first()
-        if order is None:
-            raise IntegrityError("Invalid order id included")
 
         obj = models.Task.objects.create(
             title=validated_data["title"],
-            task_type=tt,
-            task_status=ts,
-            order=order,
             scheduled_from=validated_data["scheduled_from"],
             from_shift=validated_data["from_shift"],
             scheduled_to=validated_data["scheduled_to"],
-            to_shift=validated_data["to_shift"]
+            to_shift=validated_data["to_shift"],
+            task_type_id=validated_data["task_type"],
+            task_status_id=validated_data["task_status"],
+            order_id=validated_data["order"]
         )
-        [obj.employees.add(e) for e in emp]
-        [obj.vehicles.add(v) for v in vh]
-        obj.save()
+        obj.employees.add(*emp)
+        obj.vehicles.add(*vh)
         return obj
 
     def update(self, instance, validated_data):
         """
         Update and return an existing `Task` instance, given the validated data.
         """
+        employees_to_add = []
+        vehicles_to_add = []
         for attr, value in validated_data.items():
             if attr == "task_type" and value is not None:
-                res = models.TaskType.objects.filter(pk=value).first()
-                if res is None:
-                    raise serializers.ValidationError("Invalid task type id")
-                instance.task_type = res
+                instance.task_type_id = value
             elif attr == "task_status" and value is not None:
-                res = models.TaskStatus.objects.filter(pk=value).first()
-                if res is None:
-                    raise serializers.ValidationError("Invalid task status id")
-                instance.task_status = res
+                instance.task_status_id = value
             elif attr == "order" and value is not None:
-                res = models.Order.objects.filter(pk=value).first()
-                if res is None:
-                    raise serializers.ValidationError("Invalid order id")
-                instance.order = res
+                instance.order_id = value
             elif attr == "employees" and value is not None:
                 res = models.Employee.objects.filter(pk__in=value)
                 if len(value) != len(res):
                     raise serializers.ValidationError("Invalid employee id included")
-                instance.employees.clear()
-                [instance.employees.add(e) for e in res]
+                employees_to_add += res
             elif attr == "vehicles" and value is not None:
                 res = models.Vehicle.objects.filter(pk__in=value)
                 if len(value) != len(res):
                     raise serializers.ValidationError("Invalid vehicle id included")
-                instance.vehicles.clear()
-                [instance.vehicles.add(v) for v in res]
+                vehicles_to_add += res
             elif value is not None:
                 setattr(instance, attr, value)
         instance.save()
+        instance.employees.clear()
+        instance.employees.add(*employees_to_add)
+        instance.vehicles.clear()
+        instance.vehicles.add(*vehicles_to_add)
         return instance
 
 

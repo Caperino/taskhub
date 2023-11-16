@@ -346,7 +346,10 @@ class EmployeeViewSet(viewsets.ViewSet):
                 emp = ser.save()
             except IntegrityError as e:
                 print(e)
-                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="username or email already exists")).data, status=400)
+                if 'FOREIGN KEY' in str(e.args[0]):
+                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message='invalid association found')).data, status=400)
+                else:
+                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message='username or mail already exists')).data, status=400)
             return Response(serializers.manual_employee_serializer(emp), status=200)
         else:
             return Response(ser.errors, status=400)
@@ -1195,8 +1198,12 @@ class TaskViewSet(viewsets.ViewSet):
                 ser.save()
             except Exception as e:
                 print(e.args)
-                traceback.print_exc()
-                return Response(e.args, status=400)
+                if 'FOREIGN KEY' in str(e.args[0]):
+                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message='invalid association found')).data, status=400)
+                elif 'UNIQUE' in str(e.args[0]):
+                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message='task already exists')).data, status=400)
+                else:
+                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message=str(e.args[0]))).data, status=400)
             return Response(ser.validated_data, status=200)
         else:
             return Response(ser.errors, status=400)
