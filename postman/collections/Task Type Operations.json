@@ -1,14 +1,14 @@
 {
 	"info": {
-		"_postman_id": "df1d1685-0499-447b-a531-1f3704b821b1",
+		"_postman_id": "abf57f99-1519-4e27-bed4-e5df9e6e89d2",
 		"name": "Task Type Operations",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "20001436-df1d1685-0499-447b-a531-1f3704b821b1"
+		"_uid": "20001436-abf57f99-1519-4e27-bed4-e5df9e6e89d2"
 	},
 	"item": [
 		{
 			"name": "List",
-			"id": "7bd089c8-55fc-49db-96d5-c78b540ae0b3",
+			"id": "e92aad30-f069-49bd-8ff0-01c1c7f385e3",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -23,21 +23,24 @@
 					"path": [
 						"tasktypes"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Employee"
 			},
 			"response": [
 				{
-					"id": "aff0ee06-471e-47d1-99d9-24a29cd8c7a2",
+					"id": "72071019-6fc1-4ae7-b5e0-6fe1dc954250",
 					"name": "Success",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/tasktypes",
+							"raw": "localhost:8000/api/tasktypes",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"tasktypes"
 							]
 						}
@@ -94,7 +97,7 @@
 		},
 		{
 			"name": "Retrieve",
-			"id": "021a7e95-6553-49dd-b4a6-bc6af5764532",
+			"id": "e8059b52-cd2e-4752-ae44-8b9060186e12",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -110,21 +113,24 @@
 						"tasktypes",
 						"1"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Employee"
 			},
 			"response": [
 				{
-					"id": "804f15e3-b8a6-4046-8e3d-f88ba08ac5f4",
+					"id": "47e496c1-5505-412c-baf2-7e6a31099022",
 					"name": "Success",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/tasktypes/1",
+							"raw": "localhost:8000/api/tasktypes/1",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"tasktypes",
 								"1"
 							]
@@ -179,7 +185,7 @@
 					"body": "{\n    \"id\": 1,\n    \"title\": \"as\"\n}"
 				},
 				{
-					"id": "afee4565-fcd4-4100-88af-33aac63a70a7",
+					"id": "30336313-9847-4c87-8351-275d0ae5f542",
 					"name": "Failure",
 					"originalRequest": {
 						"method": "GET",
@@ -250,7 +256,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "b78c18d4-8619-4171-b4e3-b6b98983e14c",
+				"id": "1d068247-1993-4cb3-afcb-04420adf652d",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -260,7 +266,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "5ac92984-fb19-46b5-bd8c-381d0b58cdbf",
+				"id": "401941e5-07ad-4bd8-8bcc-12f806afb4c4",
 				"type": "text/javascript",
 				"exec": [
 					""

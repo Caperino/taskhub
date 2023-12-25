@@ -1,14 +1,14 @@
 {
 	"info": {
-		"_postman_id": "5ea17a3e-b973-4596-9535-03944eb10718",
+		"_postman_id": "7681c0b0-5a29-4776-b1b9-a1d9215b3e1b",
 		"name": "Vehicle Types Operations",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "20001436-5ea17a3e-b973-4596-9535-03944eb10718"
+		"_uid": "20001436-7681c0b0-5a29-4776-b1b9-a1d9215b3e1b"
 	},
 	"item": [
 		{
 			"name": "List",
-			"id": "1133b35f-b41d-44dd-b85a-fed5cb543445",
+			"id": "2860f1de-323a-48c7-b09f-1e516e8a2e63",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -23,21 +23,24 @@
 					"path": [
 						"vehicletypes"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Employee"
 			},
 			"response": [
 				{
-					"id": "b1a4419d-2102-4990-83a1-ea916dc41634",
+					"id": "ca4c9042-e6b2-40ed-b774-90df018b329d",
 					"name": "Success",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/vehicletypes",
+							"raw": "localhost:8000/api/vehicletypes",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"vehicletypes"
 							]
 						}
@@ -94,7 +97,7 @@
 		},
 		{
 			"name": "Retrieve",
-			"id": "5ca5b3de-2c32-4930-a294-0f6e61974f46",
+			"id": "b65dde60-f18d-4162-bf9d-218172e59f54",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -110,21 +113,24 @@
 						"vehicletypes",
 						"1"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Manager"
 			},
 			"response": [
 				{
-					"id": "6cff19b9-9058-411e-8b8d-fb4f939440ad",
+					"id": "2ccbb809-6521-4247-ac1c-d9496e405cc5",
 					"name": "Success",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/vehicletypes/1",
+							"raw": "localhost:8000/api/vehicletypes/1",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"vehicletypes",
 								"1"
 							]
@@ -179,7 +185,7 @@
 					"body": "{\n    \"id\": 1,\n    \"title\": \"Combi\",\n    \"description\": \"A medium sized vehicle\"\n}"
 				},
 				{
-					"id": "78ef2262-c387-4df4-8265-83c470d4ebc2",
+					"id": "d01dc588-cdb4-4982-aa46-b8d489b43984",
 					"name": "Failure",
 					"originalRequest": {
 						"method": "GET",
@@ -250,7 +256,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "c9b2b878-31b1-46e6-a854-7a07fedc83f7",
+				"id": "6a4c35a3-2d33-484e-b51a-4b4a92ce3a75",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -260,7 +266,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "10da98db-3846-435d-bac2-54d316a38071",
+				"id": "8c91f537-21d5-43c3-ab99-4bb175238fd2",
 				"type": "text/javascript",
 				"exec": [
 					""

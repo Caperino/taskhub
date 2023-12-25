@@ -1,0 +1,48 @@
+{
+	"info": {
+		"_postman_id": "3acfd8b4-a095-4ed1-ad47-490c22d52986",
+		"name": "Authentication Operations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "20001436-3acfd8b4-a095-4ed1-ad47-490c22d52986"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"id": "8945eaa3-9d12-4a1a-8899-06133e6045bf",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// timok\r\n// admin\r\n// stefan\r\n// PW: always \"timok\"\r\n{\r\n    \"username\":\"timok\",\r\n    \"password\":\"timok\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/token/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"token",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "d4e03501-2498-4ddc-9e67-5e10f121b2e2",
+			"key": "base_url",
+			"value": "localhost:8000/api"
+		}
+	]
+}

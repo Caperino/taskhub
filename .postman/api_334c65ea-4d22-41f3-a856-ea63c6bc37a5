@@ -9,15 +9,16 @@ id = 334c65ea-4d22-41f3-a856-ea63c6bc37a5
 
 [config.relations.collections]
 rootDirectory = postman/collections
-files[] = {"id":"20001436-9868e838-4d60-451a-899d-40dfde6682e1","path":"Customer Operations.json","metaData":{}}
-files[] = {"id":"20001436-40b4f072-8f3b-4370-a157-14b2462caa3d","path":"Employee.json","metaData":{}}
-files[] = {"id":"20001436-bc03016d-23ab-40fd-b7ff-e5b53fb15755","path":"Image Operations.json","metaData":{}}
-files[] = {"id":"20001436-31035384-fa6b-47fd-94c0-518f2474a389","path":"Order Operations.json","metaData":{}}
-files[] = {"id":"20001436-31a0be1c-7215-4f94-9e3c-566ca657ce13","path":"Task Operations.json","metaData":{}}
-files[] = {"id":"20001436-99d5228b-376c-4562-b953-572edfac5e5d","path":"Task Status Operations.json","metaData":{}}
-files[] = {"id":"20001436-df1d1685-0499-447b-a531-1f3704b821b1","path":"Task Type Operations.json","metaData":{}}
-files[] = {"id":"20001436-46d32618-11d5-467a-9741-2ca13b3509b7","path":"Vehicle Operations.json","metaData":{}}
-files[] = {"id":"20001436-5ea17a3e-b973-4596-9535-03944eb10718","path":"Vehicle Types Operations.json","metaData":{}}
+files[] = {"id":"20001436-3acfd8b4-a095-4ed1-ad47-490c22d52986","path":"Authentication Operations.json","metaData":{}}
+files[] = {"id":"20001436-b96cb8f1-e754-4d0d-ad59-4a2e675340cb","path":"Customer Operations.json","metaData":{}}
+files[] = {"id":"20001436-d0e3ff50-50ac-4412-b6ac-1fa30942ff82","path":"Employee.json","metaData":{}}
+files[] = {"id":"20001436-230adf4a-9361-490e-9148-7f443443a1a2","path":"Image Operations.json","metaData":{}}
+files[] = {"id":"20001436-58c13952-4829-4cfa-ace9-8273c249d6a8","path":"Order Operations.json","metaData":{}}
+files[] = {"id":"20001436-44d67fd3-76ea-42a5-9d5d-39034a538994","path":"Task Operations.json","metaData":{}}
+files[] = {"id":"20001436-e7028744-dd15-4b90-8c6b-28b8a55617f6","path":"Task Status Operations.json","metaData":{}}
+files[] = {"id":"20001436-abf57f99-1519-4e27-bed4-e5df9e6e89d2","path":"Task Type Operations.json","metaData":{}}
+files[] = {"id":"20001436-84337c48-4cdd-4fdb-a649-12be4c48e7a0","path":"Vehicle Operations.json","metaData":{}}
+files[] = {"id":"20001436-7681c0b0-5a29-4776-b1b9-a1d9215b3e1b","path":"Vehicle Types Operations.json","metaData":{}}
 
 [config.relations.collections.metaData]
 
@@ -25,3 +26,4 @@ files[] = {"id":"20001436-5ea17a3e-b973-4596-9535-03944eb10718","path":"Vehicle 
 rootDirectory = postman/schemas
 
 [config.relations.apiDefinition.metaData]
+type = openapi:3

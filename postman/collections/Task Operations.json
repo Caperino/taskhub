@@ -1,14 +1,14 @@
 {
 	"info": {
-		"_postman_id": "31a0be1c-7215-4f94-9e3c-566ca657ce13",
+		"_postman_id": "44d67fd3-76ea-42a5-9d5d-39034a538994",
 		"name": "Task Operations",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "20001436-31a0be1c-7215-4f94-9e3c-566ca657ce13"
+		"_uid": "20001436-44d67fd3-76ea-42a5-9d5d-39034a538994"
 	},
 	"item": [
 		{
 			"name": "List",
-			"id": "d6ffa7e7-9cbf-4446-bd1c-51a0daafe5c1",
+			"id": "7df16b2a-c796-4365-be94-4c161aa8426d",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -18,7 +18,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAwMDg0NzA1LCJpYXQiOjE3MDAwODQ0MDUsImp0aSI6ImJjOGI5OWE0ZjczMjQ0ZWZhODUxYWM2MjU2ZTg2ZjY0IiwidXNlcl9pZCI6MX0.7BeSNC2WeHbiKeVhzgBDMobFms47N2-N6bNIUM_WS9E",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzNTIwNjAxLCJpYXQiOjE3MDM1MjAzMDEsImp0aSI6ImE0YjdlMTQ1NDdiMzQzNTY4ZDI2MWY3NTQwYWFkNDlkIiwidXNlcl9pZCI6MjF9.m3lmSSM22SgR2PRDSieN3hJ3nX34SQDGmOa2dYQf8nM",
 							"type": "string"
 						}
 					]
@@ -26,7 +26,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/tasks?begin=anything&end=2023-11-36",
+					"raw": "{{base_url}}/tasks?begin=2023-01-21&end=2024-01-30",
 					"host": [
 						"{{base_url}}"
 					],
@@ -36,28 +36,31 @@
 					"query": [
 						{
 							"key": "begin",
-							"value": "anything"
+							"value": "2023-01-21"
 						},
 						{
 							"key": "end",
-							"value": "2023-11-36"
+							"value": "2024-01-30"
 						}
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Manager\n    \n- Supervisor\n    \n- Employee (only to assigned tasks)"
 			},
 			"response": [
 				{
-					"id": "5a7d3cad-ae67-4700-a375-185fbfdaee21",
+					"id": "112785c5-9dfd-41f8-a07b-50a3c9dbc2b4",
 					"name": "Success",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/tasks?begin=2023-10-01&end=2023-11-30",
+							"raw": "localhost:8000/api/tasks?begin=2023-10-01&end=2023-11-30",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"tasks"
 							],
 							"query": [
@@ -121,7 +124,7 @@
 					"body": "[\n    {\n        \"pk\": 1,\n        \"title\": \"First Task\",\n        \"task_type\": \"as\",\n        \"task_status\": \"qu\",\n        \"scheduled_to\": \"2023-11-24T14:52:55Z\"\n    }\n]"
 				},
 				{
-					"id": "bd0754a8-1ab6-4920-a044-8bada5269a4e",
+					"id": "cef57a1e-41ca-4c15-ba54-f5479c461a58",
 					"name": "Success | wrong input",
 					"originalRequest": {
 						"method": "GET",
@@ -195,7 +198,7 @@
 					"body": "[\n    {\n        \"pk\": 1,\n        \"title\": \"First Task\",\n        \"task_type\": \"as\",\n        \"task_status\": \"qu\",\n        \"scheduled_to\": \"2023-11-24T14:52:55Z\"\n    }\n]"
 				},
 				{
-					"id": "53533fc3-966f-4e66-bebe-20d6cc8c21db",
+					"id": "f975945c-43f0-446d-b13f-624bb1b364c6",
 					"name": "Success | tasks filtered by PK",
 					"originalRequest": {
 						"method": "GET",
@@ -272,7 +275,7 @@
 		},
 		{
 			"name": "Create",
-			"id": "2cf29087-2b21-4647-a4d7-7f53d77b1951",
+			"id": "71454838-079f-4628-9773-82f2482fcfa8",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -296,11 +299,12 @@
 					"path": [
 						"tasks"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Manager"
 			},
 			"response": [
 				{
-					"id": "bfb217ac-ac48-421d-a2c3-edea891483ea",
+					"id": "a912be5b-3fe8-4fbd-ba2a-aec2b68d6c53",
 					"name": "Success | full",
 					"originalRequest": {
 						"method": "POST",
@@ -315,11 +319,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/tasks",
+							"raw": "localhost:8000/api/tasks",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"tasks"
 							]
 						}
@@ -373,7 +379,7 @@
 					"body": "{\n    \"title\": \"CREATE TEST TASK\",\n    \"task_type\": 1,\n    \"task_status\": 1,\n    \"vehicles\": [\n        3\n    ],\n    \"order\": 1,\n    \"employees\": [\n        1\n    ],\n    \"scheduled_from\": \"2023-11-25T00:00:00Z\",\n    \"from_shift\": \"am\",\n    \"scheduled_to\": \"2023-12-10T00:00:00Z\",\n    \"to_shift\": \"pm\"\n}"
 				},
 				{
-					"id": "67c47074-40df-442a-87c9-60ccbd1ba5aa",
+					"id": "5476492c-d8b1-4c96-a2d1-0c7e922e9edd",
 					"name": "Success | minimal",
 					"originalRequest": {
 						"method": "POST",
@@ -446,7 +452,7 @@
 					"body": "{\n    \"title\": \"CREATE TEST TASK MINIMAL\",\n    \"task_type\": 1,\n    \"task_status\": 1,\n    \"vehicles\": [],\n    \"order\": 1,\n    \"employees\": [],\n    \"scheduled_from\": \"2023-11-25T00:00:00Z\",\n    \"from_shift\": \"am\",\n    \"scheduled_to\": \"2023-12-10T00:00:00Z\",\n    \"to_shift\": \"pm\"\n}"
 				},
 				{
-					"id": "46b77645-6cdb-490e-9873-8d2f3cf46eb1",
+					"id": "d43f4760-e2f1-409a-acbd-c1a890743c88",
 					"name": "Failure | generic",
 					"originalRequest": {
 						"method": "POST",
@@ -522,37 +528,50 @@
 		},
 		{
 			"name": "Retrieve",
-			"id": "9ebcb758-8bc0-44cb-8560-5f193875523d",
+			"id": "c12b2ffc-91b9-4792-8f38-f6f0b4e9678f",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzNTUxMjM1LCJpYXQiOjE3MDM1MjI0MzUsImp0aSI6IjViM2VjNDk5N2JhNzRiNzg5NjFjN2ZmNzA0MWE5OTEyIiwidXNlcl9pZCI6MjB9.OXL84GTBh9n5p1trKhJmSZrGtt9Oppb4QR1C1M1Jpj8",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/tasks/2",
+					"raw": "{{base_url}}/tasks/4",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"tasks",
-						"2"
+						"4"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Manager\n    \n- Supervisor\n    \n- Employee (only to assigned tasks)"
 			},
 			"response": [
 				{
-					"id": "f42f3789-2d9d-484d-a7ee-18b81161f51b",
+					"id": "ea46f72e-9900-4302-b6c5-1a8e6c59f1d2",
 					"name": "Success | full",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/tasks/1",
+							"raw": "localhost:8000/api/tasks/1",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"tasks",
 								"1"
 							]
@@ -610,16 +629,26 @@
 		},
 		{
 			"name": "Update",
-			"id": "d5758f5e-a703-4983-abda-b2fcce334a2c",
+			"id": "75e8def0-a5ba-4907-8568-cf87f5ad7315",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzNTY4Mzg0LCJpYXQiOjE3MDM1Mzk1ODQsImp0aSI6ImZkNTgxMGM0MDYxZDQzMWJiYjhiODdkNjlkZmMxYjc1IiwidXNlcl9pZCI6MX0.xmZmnZlpibj8S154qEqGKlHEPUwOHNekBXZXWBvaC6M",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"CREATE TEST TASK MINIMAL UPDATED\",\r\n    \"task_type\": 1,\r\n    \"task_status\": 1,\r\n    \"vehicles\": [\r\n        1,\r\n        3\r\n    ],\r\n    \"order\": 1,\r\n    \"employees\": [\r\n        1\r\n    ],\r\n    \"scheduled_from\": \"2023-11-25T00:00:00Z\",\r\n    \"from_shift\": \"am\",\r\n    \"scheduled_to\": \"2023-12-10T00:00:00Z\",\r\n    \"to_shift\": \"pm\"\r\n}",
+					"raw": "{\r\n    \"title\": \"CREATE TEST TASK MINIMAL UPDATED SEC#1\",\r\n    \"task_type\": 1,\r\n    \"task_status\": 1,\r\n    \"vehicles\": [\r\n        1,\r\n        3\r\n    ],\r\n    \"order\": 1,\r\n    \"employees\": [\r\n        1\r\n    ],\r\n    \"scheduled_from\": \"2023-11-25T00:00:00Z\",\r\n    \"from_shift\": \"am\",\r\n    \"scheduled_to\": \"2023-12-10T00:00:00Z\",\r\n    \"to_shift\": \"pm\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -635,11 +664,12 @@
 						"tasks",
 						"4"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Manager\n    \n- Employee (only to assigned tasks)"
 			},
 			"response": [
 				{
-					"id": "e4675208-a2d2-49ac-aa56-d6d18d366e29",
+					"id": "19203401-1817-4fc0-a82a-4d2e87a06402",
 					"name": "Success | full",
 					"originalRequest": {
 						"method": "PUT",
@@ -654,11 +684,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/tasks/4",
+							"raw": "localhost:8000/api/tasks/4",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"tasks",
 								"4"
 							]
@@ -713,7 +745,7 @@
 					"body": "{\n    \"title\": \"CREATE TEST TASK MINIMAL UPDATED\",\n    \"task_type\": 1,\n    \"task_status\": 1,\n    \"vehicles\": [],\n    \"order\": 1,\n    \"employees\": [],\n    \"scheduled_from\": \"2023-11-25T00:00:00Z\",\n    \"from_shift\": \"am\",\n    \"scheduled_to\": \"2023-12-10T00:00:00Z\",\n    \"to_shift\": \"pm\"\n}"
 				},
 				{
-					"id": "6eb9f6ca-6c0e-4301-951a-cce7335a7190",
+					"id": "8281f8a9-7896-4447-b139-2645f1df6dbc",
 					"name": "Success | minimal",
 					"originalRequest": {
 						"method": "PUT",
@@ -787,7 +819,7 @@
 					"body": "{\n    \"employees\": [\n        1\n    ]\n}"
 				},
 				{
-					"id": "bb16bbbc-92a8-48bb-8538-dfee6468ea2c",
+					"id": "45b71d71-1525-4d7b-a34a-4478f0868f5b",
 					"name": "Failure | 404",
 					"originalRequest": {
 						"method": "PUT",
@@ -861,7 +893,7 @@
 					"body": "{\n    \"detail\": \"Not found.\"\n}"
 				},
 				{
-					"id": "65c919a8-ac51-4ade-b3e1-a5f254fb0fa4",
+					"id": "1d69ed39-cd7f-49ab-9afe-a7f62026d96d",
 					"name": "Failure | invalid time span detected",
 					"originalRequest": {
 						"method": "PUT",
@@ -938,7 +970,7 @@
 		},
 		{
 			"name": "Delete",
-			"id": "267a21c6-daf1-4f12-b674-c4d56a77a5df",
+			"id": "daaa553f-f384-4bc2-b9f8-a9b198855507",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -954,21 +986,24 @@
 						"tasks",
 						"2"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Manager"
 			},
 			"response": [
 				{
-					"id": "d2962883-0771-446b-9595-297f3ba32681",
+					"id": "e13d5732-ccf9-4c8d-93dc-b3dd613f0a3a",
 					"name": "Success",
 					"originalRequest": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/tasks/2",
+							"raw": "localhost:8000/api/tasks/2",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"tasks",
 								"2"
 							]
@@ -1024,7 +1059,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "16f9f9ce-e772-488b-b810-071bfbc2ba7f",
+				"id": "e56df778-1e42-4575-b3ad-111d04bac4e8",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -1034,7 +1069,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "303ded45-5da9-4e84-a47b-b80d3c3599a1",
+				"id": "3d5a4d3c-e398-4e12-a0f8-4bb7384853f8",
 				"type": "text/javascript",
 				"exec": [
 					""

@@ -1,14 +1,14 @@
 {
 	"info": {
-		"_postman_id": "46d32618-11d5-467a-9741-2ca13b3509b7",
+		"_postman_id": "84337c48-4cdd-4fdb-a649-12be4c48e7a0",
 		"name": "Vehicle Operations",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "20001436-46d32618-11d5-467a-9741-2ca13b3509b7"
+		"_uid": "20001436-84337c48-4cdd-4fdb-a649-12be4c48e7a0"
 	},
 	"item": [
 		{
 			"name": "List",
-			"id": "9775e0fc-dca4-4c72-a13c-3a79fadc2756",
+			"id": "fcb7b397-16e1-48df-ad76-635782d66239",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -46,11 +46,11 @@
 						}
 					]
 				},
-				"description": "## Path\n\n/api/vehicles\n\n## Description\n\nIn this case retrieves a list of vehicles."
+				"description": "accessible for:\n\n- Employee\n    \n\n## Path\n\n/api/vehicles\n\n## Description\n\nIn this case retrieves a list of vehicles."
 			},
 			"response": [
 				{
-					"id": "bdf428de-67db-4ca8-9151-33cfbb30160a",
+					"id": "2fdd1fef-6214-4feb-a521-dfe34fea5b13",
 					"name": "Success",
 					"originalRequest": {
 						"method": "GET",
@@ -141,7 +141,7 @@
 		},
 		{
 			"name": "Create",
-			"id": "286113f6-d819-4081-869b-f1d80dae78e6",
+			"id": "8d32d977-6105-4293-9cc0-4b07b5c8dd8c",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -166,11 +166,11 @@
 						"vehicles"
 					]
 				},
-				"description": "## Path\n\n/api/vehicles\n\n## Description\n\nIn this case creates a new vehicle."
+				"description": "accessible for:\n\n- Manager\n    \n\n## Path\n\n/api/vehicles\n\n## Description\n\nIn this case creates a new vehicle."
 			},
 			"response": [
 				{
-					"id": "d160cb6d-3da1-4325-827f-912a76ec96f3",
+					"id": "3b1a3295-c497-4f21-a498-f580d58c0b59",
 					"name": "Success",
 					"originalRequest": {
 						"method": "POST",
@@ -248,7 +248,7 @@
 		},
 		{
 			"name": "Retrieve",
-			"id": "b39073af-0967-4edb-aa8f-348c8dfbf510",
+			"id": "b8d1db4b-ac0c-40be-9aef-bf2beb7d92ad",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -265,11 +265,11 @@
 						"1"
 					]
 				},
-				"description": "## Path\n\n/api/vehicles/**PK_OF_VEHICLE**\n\n## Description\n\nIn this case retrieves the specified vehicle."
+				"description": "accessible for:\n\n- Employee\n    \n\n## Path\n\n/api/vehicles/**PK_OF_VEHICLE**\n\n## Description\n\nIn this case retrieves the specified vehicle."
 			},
 			"response": [
 				{
-					"id": "6e805346-530d-4358-b73c-d544cd99a6ff",
+					"id": "6d4dd9cc-1a39-4702-95ac-5971addc0dd4",
 					"name": "Success",
 					"originalRequest": {
 						"method": "GET",
@@ -336,7 +336,7 @@
 					"body": "{\n    \"pk\": 1,\n    \"title\": \"BMW 310d\",\n    \"max_load_length\": 3,\n    \"max_load_weight\": 580,\n    \"vehicle_type\": [\n        {\n            \"id\": 1,\n            \"title\": \"Combi\"\n        }\n    ]\n}"
 				},
 				{
-					"id": "f150d93f-7360-4cda-b802-0796613a5922",
+					"id": "55276662-eb9b-4208-9fce-bdd9200cf4d1",
 					"name": "Failure",
 					"originalRequest": {
 						"method": "GET",
@@ -404,7 +404,7 @@
 		},
 		{
 			"name": "Update",
-			"id": "0600c967-cdeb-4b38-a57a-f89f92885e6f",
+			"id": "653d278c-1d67-4f23-890c-43661c2cc11f",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -430,11 +430,11 @@
 						"1"
 					]
 				},
-				"description": "## Path\n\n/api/vehicles\n\n## Description\n\nIn this case updates a vehicle.\n\n## Note\n\nFunctionality contains **full** and **partial** updates."
+				"description": "accessible for:\n\n- Manager\n    \n\n## Path\n\n/api/vehicles\n\n## Description\n\nIn this case updates a vehicle.\n\n## Note\n\nFunctionality contains **full** and **partial** updates."
 			},
 			"response": [
 				{
-					"id": "6b3420ff-9f11-4ad9-8314-ac61b1f44ec3",
+					"id": "92add494-2516-43ca-b8be-ea14a9539613",
 					"name": "Success",
 					"originalRequest": {
 						"method": "PUT",
@@ -510,7 +510,7 @@
 					"body": "{\n    \"title\": \"BMW 310d\",\n    \"max_load_length\": 3,\n    \"max_load_weight\": 580,\n    \"vehicle_type\": [\n        1\n    ]\n}"
 				},
 				{
-					"id": "56e1e3bb-d5ca-4b5b-b172-771bf20f1862",
+					"id": "aa0723b4-9839-4951-aacf-9cf8c8ec1d7e",
 					"name": "Success | single field",
 					"originalRequest": {
 						"method": "PUT",
@@ -589,7 +589,7 @@
 		},
 		{
 			"name": "Delete",
-			"id": "07741b3c-b242-4dd5-8213-b1333bf436ed",
+			"id": "cca26887-97f2-44e8-b941-6e0df2389e4d",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -606,11 +606,11 @@
 						"2"
 					]
 				},
-				"description": "## Path\n\n/api/vehicles\n\n## Description\n\nIn this case deletes the specified vehicle."
+				"description": "accessible for:\n\n- Manager\n    \n\n## Path\n\n/api/vehicles\n\n## Description\n\nIn this case deletes the specified vehicle."
 			},
 			"response": [
 				{
-					"id": "44ecf229-e9ad-4b26-a7e7-7b7ea696b448",
+					"id": "386f316e-894e-4a30-93ea-556c76999e64",
 					"name": "Success",
 					"originalRequest": {
 						"method": "DELETE",
@@ -678,7 +678,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "c990d244-bddc-4454-a218-7ed0d055d849",
+				"id": "9724cadb-7a67-493d-926f-270524b10ff1",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -688,7 +688,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "072c0212-4572-4b56-b078-caccd72e693a",
+				"id": "0dffebfd-5753-4bd7-b824-8565ba2c84e8",
 				"type": "text/javascript",
 				"exec": [
 					""

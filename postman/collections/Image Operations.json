@@ -1,15 +1,15 @@
 {
 	"info": {
-		"_postman_id": "bc03016d-23ab-40fd-b7ff-e5b53fb15755",
+		"_postman_id": "230adf4a-9361-490e-9148-7f443443a1a2",
 		"name": "Image Operations",
 		"description": "This collection includes all endpoints for **image operations** as these are handled differently compared to other endpoints. We only accept **multipart/form-data** images of the parameter \"upload\", download and delete actions do not include a body.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "20001436-bc03016d-23ab-40fd-b7ff-e5b53fb15755"
+		"_uid": "20001436-230adf4a-9361-490e-9148-7f443443a1a2"
 	},
 	"item": [
 		{
 			"name": "Upload PFP",
-			"id": "fe1bef00-7445-49c7-9363-7fb1c19d1987",
+			"id": "8307b368-62f4-48d2-abdf-798c1a0f5921",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true,
 				"disabledSystemHeaders": {
@@ -49,11 +49,11 @@
 						"image"
 					]
 				},
-				"description": "## Path\n\n/api/users/**PK_OF_USER**/image\n\n## Description\n\nIn this case uploads new profile picture for user nr. 1\n\n## Body\n\n_**upload**_ : one image-file of type jpg/png"
+				"description": "accessible for:\n\n- Administrator\n- Employee (only for own persona)\n    \n\n## Path\n\n/api/users/**PK_OF_USER**/image\n\n## Description\n\nIn this case uploads new profile picture for user nr. 1\n\n## Body\n\n_**upload**_ : one image-file of type jpg/png"
 			},
 			"response": [
 				{
-					"id": "6f5d6f44-258d-4de2-8790-99b295329d45",
+					"id": "57651f7f-7732-4b71-a9c4-1e176cc2a382",
 					"name": "Success",
 					"originalRequest": {
 						"method": "POST",
@@ -142,7 +142,7 @@
 		},
 		{
 			"name": "Download PFP",
-			"id": "08768395-b9dd-45a0-bf48-db6b339cf858",
+			"id": "0b72b618-7551-4a40-a8cd-f87a526206d3",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -160,11 +160,11 @@
 						"image"
 					]
 				},
-				"description": "## Path\n\n/api/users/**PK_OF_USER**/image\n\n## Description\n\nIn this case downloads the profile picture for user nr. 1"
+				"description": "accessible for:\n\n- Employee\n    \n\n## Path\n\n/api/users/**PK_OF_USER**/image\n\n## Description\n\nIn this case downloads the profile picture for user nr. 1"
 			},
 			"response": [
 				{
-					"id": "9e83cea3-4737-480d-a1b2-69f2f3778f7d",
+					"id": "32da3d95-d718-40d0-a485-f016667456f3",
 					"name": "Success",
 					"originalRequest": {
 						"method": "GET",
@@ -192,7 +192,7 @@
 		},
 		{
 			"name": "Delete PFP",
-			"id": "15d7eac0-c10d-4e5b-8253-1daaafce8c08",
+			"id": "9c89842a-cd0a-40fd-913b-2ce2499dc4cb",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true,
 				"disabledSystemHeaders": {
@@ -219,11 +219,11 @@
 						"image"
 					]
 				},
-				"description": "## Path\n\n/api/users/**PK_OF_USER**/image\n\n## Description\n\nIn this case deletes the profile picture of user nr. 1"
+				"description": "accessible for:\n\n- Administrator\n    \n- Employee (only for own persona)\n    \n\n## Path\n\n/api/users/**PK_OF_USER**/image\n\n## Description\n\nIn this case deletes the profile picture of user nr. 1"
 			},
 			"response": [
 				{
-					"id": "cb1b8525-9a48-4fda-969b-1a9821a13e48",
+					"id": "b2ae56aa-2495-4418-8859-2deb51632304",
 					"name": "Success",
 					"originalRequest": {
 						"method": "DELETE",
@@ -296,7 +296,7 @@
 		},
 		{
 			"name": "Upload Task Image",
-			"id": "3dc85427-8120-4daa-bafb-9373e182bd6a",
+			"id": "d4c5b2b7-1102-44c0-9bbf-bc3949c5c048",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {
 					"accept": true
@@ -333,11 +333,11 @@
 						"images"
 					]
 				},
-				"description": "## Path\n\n/api/tasks/**PK_OF_TASK**/images\n\n## Description\n\nIn this case uploads new task proof image for task nr. 1\n\n## Body\n\n_**upload**_ : **one or more** image-files of type jpg/png\n\n## Exception\n\nfield \"_**message**_\" contains string to display for user including which files have been uploaded successfully"
+				"description": "accessible for:\n\n- Manager\n- Employee (only for assigned tasks)\n    \n\n## Path\n\n/api/tasks/**PK_OF_TASK**/images\n\n## Description\n\nIn this case uploads new task proof image for task nr. 1\n\n## Body\n\n_**upload**_ : **one or more** image-files of type jpg/png\n\n## Exception\n\nfield \"_**message**_\" contains string to display for user including which files have been uploaded successfully"
 			},
 			"response": [
 				{
-					"id": "ec2c3725-8cc1-46bb-90bb-73ccaaa9cb8e",
+					"id": "8b291033-26f0-49de-8cc2-4075550afbed",
 					"name": "Success",
 					"originalRequest": {
 						"method": "POST",
@@ -426,7 +426,7 @@
 		},
 		{
 			"name": "Download Task Image",
-			"id": "fb7954a4-edeb-4947-bd4d-fbbd8697454a",
+			"id": "5a104362-6a83-4e9e-af68-a5841b957c5b",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -445,11 +445,11 @@
 						"29"
 					]
 				},
-				"description": "## Path\n\n/api/tasks/**PK_OF_TASK**/images/**PK_OF_IMAGE**\n\n## Description\n\nIn this case downloads the selected image for the selected task"
+				"description": "accessible for:\n\n- Employee\n    \n\n## Path\n\n/api/tasks/**PK_OF_TASK**/images/**PK_OF_IMAGE**\n\n## Description\n\nIn this case downloads the selected image for the selected task"
 			},
 			"response": [
 				{
-					"id": "b55decb7-6211-4a2f-b077-e98c98590058",
+					"id": "e6b1fc3e-443b-43ba-9cf6-194918dcec30",
 					"name": "Success",
 					"originalRequest": {
 						"method": "GET",
@@ -478,7 +478,7 @@
 		},
 		{
 			"name": "Delete Task Image",
-			"id": "5bedbd7e-23f2-46c1-af4a-7d11742b9ecb",
+			"id": "ba3599ae-47c6-4048-8675-754302727fc9",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -497,11 +497,11 @@
 						"29"
 					]
 				},
-				"description": "## Path\n\n/api/tasks/**PK_OF_TASK**/images/**PK_OF_IMAGE**\n\n## Description\n\nIn this case deletes the selected image for the selected task"
+				"description": "accessible for:\n\n- Manager\n    \n- Employee (only for assigned tasks)\n    \n\n## Path\n\n/api/tasks/**PK_OF_TASK**/images/**PK_OF_IMAGE**\n\n## Description\n\nIn this case deletes the selected image for the selected task"
 			},
 			"response": [
 				{
-					"id": "84f4355d-7fb9-448e-a38a-1ded91ecd9f0",
+					"id": "5f66acf1-d90e-4bc0-b019-cb4ac24fcc73",
 					"name": "Success",
 					"originalRequest": {
 						"method": "DELETE",
@@ -572,7 +572,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "74c0b7bb-1303-44e5-861c-b6208cbb3711",
+				"id": "65635d10-7cfb-4d4d-bc8e-90fffe699f80",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -582,7 +582,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "56423825-8b1c-4b99-bacf-f9830f06ec08",
+				"id": "ce1448de-04cb-480b-9f4b-eaafdefbc39a",
 				"type": "text/javascript",
 				"exec": [
 					""

@@ -1,14 +1,14 @@
 {
 	"info": {
-		"_postman_id": "31035384-fa6b-47fd-94c0-518f2474a389",
+		"_postman_id": "58c13952-4829-4cfa-ace9-8273c249d6a8",
 		"name": "Order Operations",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "20001436-31035384-fa6b-47fd-94c0-518f2474a389"
+		"_uid": "20001436-58c13952-4829-4cfa-ace9-8273c249d6a8"
 	},
 	"item": [
 		{
 			"name": "List",
-			"id": "18e05de2-7a43-47c2-8945-5f95f265d7e4",
+			"id": "07a468c0-5b4f-4794-91c8-0552f3b22ac2",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -23,21 +23,24 @@
 					"path": [
 						"orders"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Manager\n- Supervisor"
 			},
 			"response": [
 				{
-					"id": "dd7d0ad3-fe94-4d4d-b78f-8c32ca37cb55",
+					"id": "8a587b62-857d-47ca-8103-500beab181f7",
 					"name": "Success",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/orders",
+							"raw": "localhost:8000/api/orders",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"orders"
 							]
 						}
@@ -94,7 +97,7 @@
 		},
 		{
 			"name": "Create",
-			"id": "719ac732-7976-42fb-86fd-db8366ce3c2c",
+			"id": "70ce3aa2-7301-40e4-879d-3268aed68d28",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -118,11 +121,12 @@
 					"path": [
 						"orders"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Manager"
 			},
 			"response": [
 				{
-					"id": "ed23c2e8-9cb3-4e3d-bcec-239f2f40e972",
+					"id": "a5860e6b-7701-4ce8-bb5f-5e54198ab4df",
 					"name": "Success",
 					"originalRequest": {
 						"method": "POST",
@@ -137,11 +141,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/orders",
+							"raw": "localhost:8000/api/orders",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"orders"
 							]
 						}
@@ -195,7 +201,7 @@
 					"body": "{\n    \"order_nr\": 67891,\n    \"title\": \"Postman TestOrder POST\",\n    \"order_date\": \"2023-11-15\",\n    \"customer\": 1,\n    \"is_completed\": false\n}"
 				},
 				{
-					"id": "e5a41bc2-9a50-4555-b891-04f3f0d17b58",
+					"id": "48db1cd4-7862-408f-ae14-3c68958f1578",
 					"name": "Success | minimal",
 					"originalRequest": {
 						"method": "POST",
@@ -268,7 +274,7 @@
 					"body": "{\n    \"order_nr\": 67891,\n    \"title\": \"Postman TestOrder POST\",\n    \"customer\": 1\n}"
 				},
 				{
-					"id": "d28c620d-8b01-4225-96b6-cab589cff12e",
+					"id": "4e5771d1-8207-42ba-97cd-5dc8c83d1ca3",
 					"name": "Failure | invalid customer id",
 					"originalRequest": {
 						"method": "POST",
@@ -344,7 +350,7 @@
 		},
 		{
 			"name": "Retrieve",
-			"id": "07c95e1f-b87b-43e8-92b2-a5ed91608884",
+			"id": "a1b45fae-39ad-4638-b6c0-18fa0c440409",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -360,21 +366,24 @@
 						"orders",
 						"187"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Manager\n    \n- Supervisor"
 			},
 			"response": [
 				{
-					"id": "f64963cb-bb68-4b98-9378-56e49e1c1d72",
+					"id": "1533ff37-418c-47ac-89a1-7991218a8fec",
 					"name": "Success",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/orders/1",
+							"raw": "localhost:8000/api/orders/1",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"orders",
 								"1"
 							]
@@ -429,7 +438,7 @@
 					"body": "{\n    \"pk\": 1,\n    \"order_nr\": 12345,\n    \"title\": \"TK Test Order #1\",\n    \"order_date\": \"2023-11-10\",\n    \"customer\": {\n        \"pk\": 1,\n        \"name\": \"TK Inc.\",\n        \"address\": \"Margarethenstraße 24\",\n        \"phone\": \"+436607039266\",\n        \"is_company\": true\n    },\n    \"is_completed\": false\n}"
 				},
 				{
-					"id": "82c02fe1-d6fe-467e-a5c4-c19e2c20ec1b",
+					"id": "6de00134-9e0c-4edd-875e-d85ecb62a438",
 					"name": "Failure",
 					"originalRequest": {
 						"method": "GET",
@@ -497,7 +506,7 @@
 		},
 		{
 			"name": "Update",
-			"id": "075ce616-c6b7-43de-ba1b-3dc06ece1c82",
+			"id": "8799b556-ebc1-4460-9fb6-caf35f5920ea",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -522,11 +531,12 @@
 						"orders",
 						"4"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Manager"
 			},
 			"response": [
 				{
-					"id": "26ce0be4-3afd-4991-b0ea-35ea1a1301a8",
+					"id": "c303946d-4a63-48e7-94cc-6238ef423058",
 					"name": "Success | full",
 					"originalRequest": {
 						"method": "PUT",
@@ -541,11 +551,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/orders/4",
+							"raw": "localhost:8000/api/orders/4",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"orders",
 								"4"
 							]
@@ -600,7 +612,7 @@
 					"body": "{\n    \"order_nr\": 67891,\n    \"title\": \"Postman TestOrder PUT\",\n    \"order_date\": \"2023-11-12\",\n    \"customer\": 1,\n    \"is_completed\": false\n}"
 				},
 				{
-					"id": "6d6d92c7-1c05-46ff-a357-2f84b53669bf",
+					"id": "102d3860-3ef7-4c9d-b42b-08353c81cd79",
 					"name": "Success | minimal",
 					"originalRequest": {
 						"method": "PUT",
@@ -677,7 +689,7 @@
 		},
 		{
 			"name": "Delete",
-			"id": "1b729577-6f02-4dec-acf6-c9972a4d0819",
+			"id": "3205f56d-ea23-4fb8-8800-0c2725648f95",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -693,21 +705,24 @@
 						"orders",
 						"3"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Manager"
 			},
 			"response": [
 				{
-					"id": "f868d28b-99f0-4d4b-a9fe-8e6f981bfdd0",
+					"id": "86889036-8677-4943-aaf7-b94d5bedab03",
 					"name": "Success",
 					"originalRequest": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/orders/3",
+							"raw": "localhost:8000/api/orders/3",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"orders",
 								"3"
 							]
@@ -759,11 +774,21 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzNTY4Mzg0LCJpYXQiOjE3MDM1Mzk1ODQsImp0aSI6ImZkNTgxMGM0MDYxZDQzMWJiYjhiODdkNjlkZmMxYjc1IiwidXNlcl9pZCI6MX0.xmZmnZlpibj8S154qEqGKlHEPUwOHNekBXZXWBvaC6M",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "e69a030a-5e1f-450b-b33d-730b204f265a",
+				"id": "dbfdc428-42d9-49d7-9b29-44ace8fa5466",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -773,7 +798,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "3aa14e38-da7e-4ef5-9daa-350037db461f",
+				"id": "d9e25e6e-3ddb-4bff-9aba-cd1db2062417",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -783,7 +808,7 @@
 	],
 	"variable": [
 		{
-			"id": "82d6fe00-db66-43d7-a0d4-6fd642aa9a59",
+			"id": "c57441c7-9e27-4a03-b67d-76b16d362f5c",
 			"key": "base_url",
 			"value": "localhost:8000/api",
 			"type": "string"

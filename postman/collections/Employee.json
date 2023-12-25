@@ -1,14 +1,14 @@
 {
 	"info": {
-		"_postman_id": "40b4f072-8f3b-4370-a157-14b2462caa3d",
+		"_postman_id": "d0e3ff50-50ac-4412-b6ac-1fa30942ff82",
 		"name": "Employee",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "20001436-40b4f072-8f3b-4370-a157-14b2462caa3d"
+		"_uid": "20001436-d0e3ff50-50ac-4412-b6ac-1fa30942ff82"
 	},
 	"item": [
 		{
 			"name": "List",
-			"id": "1b0db54f-4ec8-4b0d-b829-a626c2c7f696",
+			"id": "30e0ff4a-838e-4f35-bed1-28adf6fbfcd8",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -27,7 +27,7 @@
 			},
 			"response": [
 				{
-					"id": "5212387a-b75d-4de8-a464-74c3a903b4a7",
+					"id": "b9232f4e-f33f-4c2e-9702-a6f3204ad4d1",
 					"name": "Success",
 					"originalRequest": {
 						"method": "GET",
@@ -45,6 +45,7 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -94,7 +95,7 @@
 		},
 		{
 			"name": "Create",
-			"id": "f48c0a34-1c63-4ae7-8f8f-f3b70328c988",
+			"id": "f6c310a7-0da8-43f1-8082-8a356dd2308c",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -122,7 +123,7 @@
 			},
 			"response": [
 				{
-					"id": "d37357fb-0860-4fd6-b9ad-697978537c10",
+					"id": "af523942-5856-4195-ac7e-9c6f109f0646",
 					"name": "Success",
 					"originalRequest": {
 						"method": "POST",
@@ -149,6 +150,7 @@
 					"status": "Created",
 					"code": 201,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -195,7 +197,7 @@
 					"body": "{\n    \"username\": \"User 2\",\n    \"first_name\": \"User\",\n    \"last_name\": \"2\",\n    \"email\": \"user_2@user.com\",\n    \"password\": \"somehighlysecurepassword\",\n    \"groups\": [],\n    \"is_active\": true,\n    \"employee_type\": null,\n    \"address\": \"ABC Street 123\",\n    \"phone\": \"066412345678\",\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": true\n}"
 				},
 				{
-					"id": "0a9a6a63-da3a-47c0-bd90-74a762631028",
+					"id": "9a33290e-184a-4648-af35-cea6443b9347",
 					"name": "Success | minimal",
 					"originalRequest": {
 						"method": "POST",
@@ -222,6 +224,7 @@
 					"status": "Created",
 					"code": 201,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -268,7 +271,7 @@
 					"body": "{\n    \"username\": \"User 101\",\n    \"first_name\": \"User\",\n    \"last_name\": \"101\",\n    \"email\": \"user_101@user.com\",\n    \"password\": \"somehighlysecurepassword\",\n    \"groups\": [],\n    \"is_active\": true,\n    \"employee_type\": 1,\n    \"address\": null,\n    \"phone\": null,\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": null\n}"
 				},
 				{
-					"id": "c66e5be0-d856-41ae-ad7d-e69739e5410b",
+					"id": "82be915c-4222-4873-9e68-591e6e8719b2",
 					"name": "Success | DateField",
 					"originalRequest": {
 						"method": "POST",
@@ -295,6 +298,7 @@
 					"status": "Created",
 					"code": 201,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -341,7 +345,7 @@
 					"body": "{\n    \"pk\": 18,\n    \"username\": \"User BirthDate\",\n    \"first_name\": \"User\",\n    \"last_name\": \"Birth\",\n    \"email\": \"user_birth_date@user.com\",\n    \"password\": null,\n    \"groups\": [],\n    \"is_active\": true,\n    \"employee_type\": {\n        \"id\": 1,\n        \"title\": \"Assembler\",\n        \"description\": \"TestDescr\"\n    },\n    \"address\": null,\n    \"phone\": null,\n    \"birth_date\": \"1998-02-17\",\n    \"gender\": null,\n    \"drivers_license_status\": null\n}"
 				},
 				{
-					"id": "80958d28-b830-4224-b7cb-983e5336a833",
+					"id": "9e981e0c-ada1-4adb-a561-3f43052fee7b",
 					"name": "Success | with Group",
 					"originalRequest": {
 						"method": "POST",
@@ -368,6 +372,7 @@
 					"status": "Created",
 					"code": 201,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -414,7 +419,7 @@
 					"body": "{\n    \"username\": \"User 3\",\n    \"first_name\": \"User\",\n    \"last_name\": \"3\",\n    \"email\": \"user_3@user.com\",\n    \"password\": \"somehighlysecurepassword\",\n    \"groups\": [\n        \"1\"\n    ],\n    \"is_active\": false,\n    \"employee_type\": null,\n    \"address\": \"ABC Street 123\",\n    \"phone\": \"066412345678\",\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": true\n}"
 				},
 				{
-					"id": "e4c63b3a-bdc3-4b1b-a214-37378e9e06ce",
+					"id": "cd8a5375-2999-4d93-abf8-3cae200382de",
 					"name": "Success | with group & employee_type",
 					"originalRequest": {
 						"method": "POST",
@@ -441,6 +446,7 @@
 					"status": "Created",
 					"code": 201,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -487,7 +493,7 @@
 					"body": "{\n    \"username\": \"User 3\",\n    \"first_name\": \"User\",\n    \"last_name\": \"3\",\n    \"email\": \"user_3@user.com\",\n    \"password\": \"somehighlysecurepassword\",\n    \"groups\": [\n        \"1\"\n    ],\n    \"is_active\": false,\n    \"employee_type\": 1,\n    \"address\": \"ABC Street 123\",\n    \"phone\": \"066412345678\",\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": true\n}"
 				},
 				{
-					"id": "31425d35-9206-4567-9e51-dda032b9555b",
+					"id": "fbfe77ca-3a02-4cfd-b81e-d750cd5c1693",
 					"name": "Failure | invalid Group id",
 					"originalRequest": {
 						"method": "POST",
@@ -514,6 +520,7 @@
 					"status": "Bad Request",
 					"code": 400,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -560,7 +567,7 @@
 					"body": "[\n    \"Invalid group id included\"\n]"
 				},
 				{
-					"id": "c36eee37-ad41-41b2-9408-a041416a616a",
+					"id": "3ae548be-b325-433b-a869-cd30d7795e50",
 					"name": "Failure | invalid EmployeeType id",
 					"originalRequest": {
 						"method": "POST",
@@ -587,6 +594,7 @@
 					"status": "Bad Request",
 					"code": 400,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -636,7 +644,7 @@
 		},
 		{
 			"name": "Retrieve",
-			"id": "0178b79b-4111-4722-b48a-00d9da7ba233",
+			"id": "03ea78b2-3492-44b7-bbd5-1118386f0ce7",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -656,7 +664,7 @@
 			},
 			"response": [
 				{
-					"id": "5d19636b-4955-4be6-acd0-6a3a64ce319c",
+					"id": "6c24e3f6-6615-4904-be38-15b0de801bc4",
 					"name": "Success",
 					"originalRequest": {
 						"method": "GET",
@@ -675,6 +683,7 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -721,7 +730,7 @@
 					"body": "{\n    \"pk\": 1,\n    \"username\": \"timok\",\n    \"first_name\": \"Timo\",\n    \"last_name\": \"Kappel\",\n    \"email\": \"tk@inc.com\",\n    \"password\": null,\n    \"groups\": [],\n    \"is_active\": true,\n    \"employee_type\": null,\n    \"address\": null,\n    \"phone\": null,\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": null\n}"
 				},
 				{
-					"id": "cd5df92d-8248-4bec-ae0b-8a709e9f7c75",
+					"id": "b08b6026-195a-4e07-90a1-7b163105191b",
 					"name": "Failure | 404",
 					"originalRequest": {
 						"method": "GET",
@@ -740,6 +749,7 @@
 					"status": "Not Found",
 					"code": 404,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -789,7 +799,7 @@
 		},
 		{
 			"name": "Update",
-			"id": "765635c6-de23-4c43-9c81-c93ddf6f2454",
+			"id": "d29d579f-b6f3-4eff-926f-c3e6ff22d0d1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -818,7 +828,7 @@
 			},
 			"response": [
 				{
-					"id": "b17e1f0f-7ba0-4376-ae26-af2cae878d06",
+					"id": "3eecbd64-d7c8-4653-95aa-38b5e98f8147",
 					"name": "Success",
 					"originalRequest": {
 						"method": "PUT",
@@ -846,6 +856,7 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -892,7 +903,7 @@
 					"body": "{\n    \"username\": \"timok\",\n    \"first_name\": \"Timo\",\n    \"last_name\": \"Kappel\",\n    \"email\": \"tk@inc.com\",\n    \"groups\": [],\n    \"is_active\": true,\n    \"employee_type\": null,\n    \"address\": \"Some Address or sth\",\n    \"phone\": null,\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": null\n}"
 				},
 				{
-					"id": "a542cf98-1e58-4509-aaef-96171588209f",
+					"id": "cc972631-c9bd-4bb2-bc32-d8041483a040",
 					"name": "Success | only password",
 					"originalRequest": {
 						"method": "PUT",
@@ -927,6 +938,7 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -973,7 +985,7 @@
 					"body": "{\n    \"pk\": 17,\n    \"username\": \"User 101\",\n    \"first_name\": \"User\",\n    \"last_name\": \"101\",\n    \"email\": \"user_101@user.com\",\n    \"password\": null,\n    \"groups\": [\n        {\n            \"id\": 1,\n            \"name\": \"GTestG1\"\n        }\n    ],\n    \"is_active\": true,\n    \"employee_type\": {\n        \"id\": 1,\n        \"title\": \"Assembler\",\n        \"description\": \"TestDescr\"\n    },\n    \"address\": null,\n    \"phone\": null,\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": null\n}"
 				},
 				{
-					"id": "a95f7d26-e2d9-4afe-a6ae-1c1a0479f34e",
+					"id": "d708a271-2bac-40e7-b02f-4a46839c37e1",
 					"name": "Success | full model | no PW",
 					"originalRequest": {
 						"method": "PUT",
@@ -1001,6 +1013,7 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -1047,7 +1060,7 @@
 					"body": "{\n    \"username\": \"timok\",\n    \"first_name\": \"Timo\",\n    \"last_name\": \"Kappel\",\n    \"email\": \"tk@inc.com\",\n    \"groups\": [\n        \"1\"\n    ],\n    \"is_active\": true,\n    \"employee_type\": 1,\n    \"address\": \"new address\",\n    \"phone\": null,\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": null\n}"
 				},
 				{
-					"id": "c5ead418-dd98-4b27-92f0-1d065870a7bb",
+					"id": "60c45488-ee42-4107-8a41-adf6c0ee0d81",
 					"name": "Failure | invalid Group id",
 					"originalRequest": {
 						"method": "PUT",
@@ -1075,6 +1088,7 @@
 					"status": "Bad Request",
 					"code": 400,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -1121,7 +1135,7 @@
 					"body": "[\n    \"Invalid group id included\"\n]"
 				},
 				{
-					"id": "bf9369eb-7a78-4d65-bb3b-232bc2166a80",
+					"id": "bbd30068-8c2c-46b8-97cb-5609433ddadc",
 					"name": "Failure | invalid EmployeeType id",
 					"originalRequest": {
 						"method": "PUT",
@@ -1149,6 +1163,7 @@
 					"status": "Bad Request",
 					"code": 400,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -1198,7 +1213,7 @@
 		},
 		{
 			"name": "Delete",
-			"id": "23b9d4f0-c830-4f68-95aa-6b9cf4e8db05",
+			"id": "7694761f-8b8f-40c6-9ccd-81e4495a1141",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -1218,7 +1233,7 @@
 			},
 			"response": [
 				{
-					"id": "70e854c0-7de6-437e-a748-e15915977464",
+					"id": "464df817-8b83-4cd1-8094-e44e429e9196",
 					"name": "Success",
 					"originalRequest": {
 						"method": "DELETE",
@@ -1237,6 +1252,7 @@
 					"status": "No Content",
 					"code": 204,
 					"_postman_previewlanguage": "plain",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -1284,7 +1300,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "be28f888-470d-4f97-89d4-3a2a341f6886",
+				"id": "ca31ea38-b357-4e4c-81ea-72a5a659e716",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -1294,7 +1310,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "94f73ec3-bcb8-472d-a90f-14ffa4971790",
+				"id": "11614220-5465-4aaf-9b33-bac39cf14e9f",
 				"type": "text/javascript",
 				"exec": [
 					""
