@@ -15,10 +15,10 @@ USER_GROUPS = (
 
 
 class UserGroups(Enum):
-    ADMINISTRATOR = 'administrator'
-    MANAGER = 'manager'
-    SUPERVISOR = 'supervisor'
-    EMPLOYEE = 'employee'
+    ADMINISTRATOR = 'Administrator'
+    MANAGER = 'Manager'
+    SUPERVISOR = 'Supervisor'
+    EMPLOYEE = 'Employee'
 
 
 class AuthorisationError(Enum):

@@ -96,12 +96,14 @@ def authorize_action_advanced(request, necessary_groups: list, pks: list = []) -
             case None:
                 pass
     """
-    return None
+    #return None
     # Basic Authenticated Check
     if request.user.is_authenticated:
         # Check for access via group (adm, man, sup)
         status = False
+        print(necessary_groups)
         for group in request.user.groups.all():
+            print(group.name)
             if group.name in necessary_groups:
                 status = True
                 break
@@ -408,7 +410,7 @@ class ImageUploadViewSet(viewsets.ViewSet):
         :param user_pk: the primary key of the user
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.EMPLOYEE.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.EMPLOYEE.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -436,7 +438,7 @@ class ImageUploadViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.ADMINISTRATOR.value), [user_pk]):
+        match authorize_action_advanced(request, [constants.UserGroups.ADMINISTRATOR.value], [user_pk]):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -482,7 +484,7 @@ class ImageUploadViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.ADMINISTRATOR.value), [user_pk]):
+        match authorize_action_advanced(request, [constants.UserGroups.ADMINISTRATOR.value], [user_pk]):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -512,7 +514,7 @@ class ImageUploadViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.EMPLOYEE.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.EMPLOYEE.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -548,7 +550,7 @@ class ImageUploadViewSet(viewsets.ViewSet):
             print(e)
             return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="task not found")).data, status=404, content_type="application/json")
         # SECURITY DEBUG UNFINISHED
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), task.employees.all().values_list("pk", flat=True)):
+        match authorize_action_advanced(request, [constants.UserGroups.MANAGER.value], task.employees.all().values_list("pk", flat=True)):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -631,7 +633,7 @@ class TaskTypeViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.EMPLOYEE.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.EMPLOYEE.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
             case constants.AuthorisationError.UNAUTHORIZED:
@@ -647,7 +649,7 @@ class TaskTypeViewSet(viewsets.ViewSet):
         :param pk_task_type: the primary key of the task type
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.EMPLOYEE.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.EMPLOYEE.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(
                     serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data,
@@ -673,7 +675,7 @@ class TaskStatusViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.EMPLOYEE.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.EMPLOYEE.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(
                     serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data,
@@ -693,7 +695,7 @@ class TaskStatusViewSet(viewsets.ViewSet):
         :param pk_task_status: the primary key of the task status
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.EMPLOYEE.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.EMPLOYEE.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(
                     serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data,
@@ -719,7 +721,7 @@ class VehicleTypeViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.EMPLOYEE.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.EMPLOYEE.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(
                     serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data,
@@ -739,7 +741,7 @@ class VehicleTypeViewSet(viewsets.ViewSet):
         :param pk_vehicle_type: the primary key of the vehicle type
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.EMPLOYEE.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.EMPLOYEE.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(
                     serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data,
@@ -780,7 +782,7 @@ class VehicleViewSet(viewsets.ViewSet):
                     filters[key] = None
         filters = {k: v for k, v in filters.items() if v is not None}
 
-        match authorize_action_advanced(request, list(constants.UserGroups.EMPLOYEE.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.EMPLOYEE.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(
                     serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data,
@@ -805,7 +807,7 @@ class VehicleViewSet(viewsets.ViewSet):
         :param pk_vehicle: the primary key of the vehicle
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.EMPLOYEE.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.EMPLOYEE.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(
                     serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data,
@@ -825,7 +827,7 @@ class VehicleViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.MANAGER.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -852,7 +854,7 @@ class VehicleViewSet(viewsets.ViewSet):
         :param pk_vehicle: the primary key of the vehicle
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.MANAGER.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -880,7 +882,7 @@ class VehicleViewSet(viewsets.ViewSet):
         :param pk_vehicle: the primary key of the vehicle
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.MANAGER.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -912,7 +914,7 @@ class OrderViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.MANAGER.value, constants.UserGroups.SUPERVISOR.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(
                     serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data,
@@ -936,7 +938,7 @@ class OrderViewSet(viewsets.ViewSet):
         :param pk_order: the primary key of the order
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.MANAGER.value, constants.UserGroups.SUPERVISOR.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(
                     serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data,
@@ -956,7 +958,7 @@ class OrderViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.MANAGER.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(
                     serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data,
@@ -985,7 +987,7 @@ class OrderViewSet(viewsets.ViewSet):
         :param pk_order: the primary key of the order
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.MANAGER.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(
                     serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data,
@@ -1015,7 +1017,7 @@ class OrderViewSet(viewsets.ViewSet):
         :param pk_order: the primary key of the order
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.MANAGER.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(
                     serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data,
@@ -1044,7 +1046,7 @@ class TaskViewSet(viewsets.ViewSet):
     """
 
     def list(self, request):
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.EMPLOYEE.value, constants.UserGroups.MANAGER.value, constants.UserGroups.SUPERVISOR.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(
                     serializers.TaskHubApiResponseSerializer(
@@ -1064,7 +1066,7 @@ class TaskViewSet(viewsets.ViewSet):
             begin = datetime.today() - timedelta(weeks=1)
         if end is None:
             end = datetime.today() + timedelta(weeks=3)
-        g = request.user.groups.filter(name=constants.UserGroups.MANAGER.value)
+        g = request.user.groups.filter(name__in=(constants.UserGroups.MANAGER.value, constants.UserGroups.SUPERVISOR.value))
         if g.count() == 1:
             print("manager access")
             emp_filter = 'INVALID_DATA'
@@ -1090,7 +1092,15 @@ class TaskViewSet(viewsets.ViewSet):
         :param pk_task: the primary key of the task
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+        task_filter = {
+            "pk": pk_task
+        }
+        filters = task_filter
+        tasks = models.Task.objects.filter(**filters)
+        if tasks.count() != 1:
+            return Response(None, status=404)
+
+        match authorize_action_advanced(request, [constants.UserGroups.MANAGER.value, constants.UserGroups.SUPERVISOR.value], tasks[0].employees.all().values_list("pk", flat=True)):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(
                     serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="forbidden")).data,
@@ -1101,24 +1111,6 @@ class TaskViewSet(viewsets.ViewSet):
                     status=401)
             case None:
                 pass
-
-        g = request.user.groups.filter(name=constants.UserGroups.MANAGER.value)
-        if g.count() == 1:
-            print("manager access")
-            emp_filter = 'INVALID_DATA'
-        else:
-            print("employee access")
-            emp_filter = request.user.pk
-        task_filter = {
-            "employees__pk": emp_filter,
-            "pk": pk_task
-        }
-        filters = {k: v for k, v in task_filter.items() if v != 'INVALID_DATA' and v is not None}
-        tasks = models.Task.objects.filter(**filters)
-        if tasks.count() != 1:
-            return Response(None, status=404)
-
-        #task = get_object_or_404(models.Task, pk=pk_task)
         return Response(serializers.manual_task_serializer(tasks[0]))
 
     def create(self, request):
@@ -1127,7 +1119,7 @@ class TaskViewSet(viewsets.ViewSet):
         :param request: the request
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.MANAGER.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -1155,10 +1147,11 @@ class TaskViewSet(viewsets.ViewSet):
         """
         Updates a task
         :param request: the request
-        :param _task: the primary key of the task
+        :param pk_task: the primary key of the task
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+        task = get_object_or_404(models.Task, pk=pk_task)
+        match authorize_action_advanced(request, [constants.UserGroups.MANAGER.value], task.employees.all().values_list("pk", flat=True)):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -1168,7 +1161,6 @@ class TaskViewSet(viewsets.ViewSet):
             case None:
                 pass
 
-        task = get_object_or_404(models.Task, pk=pk_task)
         ser = serializers.TaskSerializer(task, data=request.data, partial=True)
         if ser.is_valid():
             try:
@@ -1215,7 +1207,7 @@ class TaskViewSet(viewsets.ViewSet):
         :param pk_task: the primary key of the task
         :return:
         """
-        match authorize_action_advanced(request, list(constants.UserGroups.MANAGER.value), []):
+        match authorize_action_advanced(request, [constants.UserGroups.MANAGER.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
