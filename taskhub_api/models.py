@@ -75,6 +75,9 @@ class TaskType(models.Model):
 
     title = models.CharField(max_length=2, choices=TASK_TYPES)
 
+    def __str__(self):
+        return self.title
+
 
 # DOCS created
 class TaskStatus(models.Model):
@@ -89,6 +92,9 @@ class TaskStatus(models.Model):
     )
 
     title = models.CharField(max_length=2, choices=TASK_STATUS)
+
+    def __str__(self):
+        return self.title
 
 
 # no DOCS required
