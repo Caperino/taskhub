@@ -37,7 +37,7 @@
 						}
 					]
 				},
-				"description": "## Path\n\n/api/customers\n\n## Description\n\nIn this case retrieves a list of customers.\n\n## Query\n\ncompany : boolean, checks if is_company flag is set\n\nquery : checks if string is contained in title"
+				"description": "accessible for:\n\n- Manager\n    \n- Supervisor\n    \n\n## Path\n\n/api/customers\n\n## Description\n\nIn this case retrieves a list of customers.\n\n## Query\n\ncompany : boolean, checks if is_company flag is set\n\nquery : checks if string is contained in title"
 			},
 			"response": [
 				{
@@ -73,7 +73,6 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -132,7 +131,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Customer 1\",\r\n    \"address\": \"Address 1\",\r\n    \"phone\": \"Phone 1\",\r\n    \"is_company\": true\r\n}",
+					"raw": "{\r\n    \"name\": \"Test Customer\",\r\n    \"address\": \"Address 1\",\r\n    \"phone\": \"Phone 1\",\r\n    \"is_company\": true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -148,7 +147,7 @@
 						"customers"
 					]
 				},
-				"description": "## Path\n\n/api/customers\n\n## Description\n\nIn this case creates a new customer.\n\n## Body\n\njson-string of the new object in according format.\n\n## Exception\n\nmissing fields : 400"
+				"description": "accessible for:\n\n- Manager\n    \n\n## Path\n\n/api/customers\n\n## Description\n\nIn this case creates a new customer.\n\n## Body\n\njson-string of the new object in according format.\n\n## Exception\n\nmissing fields : 400"
 			},
 			"response": [
 				{
@@ -181,7 +180,6 @@
 					"status": "Created",
 					"code": 201,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -248,7 +246,7 @@
 						"1"
 					]
 				},
-				"description": "## Path\n\n/api/customers/PK_OF_CUSTOMER\n\n## Description\n\nIn this case retrieves a single customer with this id.\n\n## Exception\n\nnot found : 404"
+				"description": "accessible for:\n\n- Manager\n    \n- Supervisor\n    \n\n## Path\n\n/api/customers/PK_OF_CUSTOMER\n\n## Description\n\nIn this case retrieves a single customer with this id.\n\n## Exception\n\nnot found : 404"
 			},
 			"response": [
 				{
@@ -273,7 +271,6 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -332,7 +329,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Customer 1\",\r\n    \"address\": \"Address 1\",\r\n    \"phone\": \"Phone 1\",\r\n    \"is_company\": false\r\n}",
+					"raw": "{\r\n    \"name\": \"Test Customer UPDATED\",\r\n    \"address\": \"Address 1\",\r\n    \"phone\": \"Phone 1\",\r\n    \"is_company\": false\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -340,16 +337,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/customers/2",
+					"raw": "{{base_url}}/customers/3",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"customers",
-						"2"
+						"3"
 					]
 				},
-				"description": "## Path\n\n/api/customers/**PK_OF_CUSTOMER**\n\n## Description\n\nIn this case creates a new customer.\n\n## Body\n\njson-string of the new object in according format.\n\n## Exception\n\nmissing fields : 400"
+				"description": "accessible for:\n\n- Manager\n    \n\n## Path\n\n/api/customers/**PK_OF_CUSTOMER**\n\n## Description\n\nIn this case creates a new customer.\n\n## Body\n\njson-string of the new object in according format.\n\n## Exception\n\nmissing fields : 400"
 			},
 			"response": [
 				{
@@ -383,7 +380,6 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -441,16 +437,16 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/customers/2",
+					"raw": "{{base_url}}/customers/3",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"customers",
-						"2"
+						"3"
 					]
 				},
-				"description": "## Path\n\n/api/customers/**PK_OF_CUSTOMER**\n\n## Description\n\nIn this case deletes a customer.\n\n## Exception\n\nnot found : 404"
+				"description": "accessible for:\n\n- Manager\n    \n\n## Path\n\n/api/customers/**PK_OF_CUSTOMER**\n\n## Description\n\nIn this case deletes a customer.\n\n## Exception\n\nnot found : 404"
 			},
 			"response": [
 				{
@@ -475,7 +471,6 @@
 					"status": "No Content",
 					"code": 204,
 					"_postman_previewlanguage": "plain",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -519,11 +514,21 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzNjMxMDU0LCJpYXQiOjE3MDM2MDIyNTQsImp0aSI6Ijk0YjE0MWFlMjVlOTQwOGU4MzFiYjM1NzJjZTNhYWM1IiwidXNlcl9pZCI6MjF9.8uFUKK6ZAyund5m8wtVT3V7WM-DbKDnrnuyGXRjuOyo",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "6aba22c4-6e8f-483b-9d90-1003ae0e2d85",
+				"id": "a69b27bc-f02a-455c-ba32-1e1d782d7e78",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -533,7 +538,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "ac6843e6-1619-4ff0-9d42-259572d08638",
+				"id": "912ee097-9565-4c39-b4de-14a26e46cc2f",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -543,7 +548,7 @@
 	],
 	"variable": [
 		{
-			"id": "270b6df9-26f5-4839-a80f-6c4125be862c",
+			"id": "b061102b-1a57-43fb-8fb5-76a0f3859494",
 			"key": "base_url",
 			"value": "localhost:8000/api",
 			"type": "string"

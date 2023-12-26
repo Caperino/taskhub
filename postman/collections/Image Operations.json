@@ -31,10 +31,7 @@
 						{
 							"key": "upload",
 							"type": "file",
-							"src": [
-								"/C:/Users/timok/Documents/Persönlich/Portraits/TK_r.jpg",
-								"/C:/Users/timok/Documents/Persönlich/Portraits/Vorhand_Bruck.jpg"
-							]
+							"src": "/C:/Users/timok/Documents/Persönlich/Portraits/Vorhand_Bruck_dup.jpg"
 						}
 					]
 				},
@@ -318,7 +315,10 @@
 						{
 							"key": "upload",
 							"type": "file",
-							"src": "/C:/Users/timok/Documents/Persönlich/Portraits/Vorhand_Bruck.jpg"
+							"src": [
+								"/C:/Users/timok/Documents/Persönlich/Portraits/Vorhand_Bruck.jpg",
+								"/C:/Users/timok/Documents/Persönlich/Portraits/Vorhand_Bruck_dup.jpg"
+							]
 						}
 					]
 				},
@@ -434,7 +434,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/tasks/1/images/29",
+					"raw": "{{base_url}}/tasks/1/images/34",
 					"host": [
 						"{{base_url}}"
 					],
@@ -442,7 +442,7 @@
 						"tasks",
 						"1",
 						"images",
-						"29"
+						"34"
 					]
 				},
 				"description": "accessible for:\n\n- Employee\n    \n\n## Path\n\n/api/tasks/**PK_OF_TASK**/images/**PK_OF_IMAGE**\n\n## Description\n\nIn this case downloads the selected image for the selected task"
@@ -486,7 +486,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/tasks/1/images/29",
+					"raw": "{{base_url}}/tasks/1/images/35",
 					"host": [
 						"{{base_url}}"
 					],
@@ -494,7 +494,7 @@
 						"tasks",
 						"1",
 						"images",
-						"29"
+						"35"
 					]
 				},
 				"description": "accessible for:\n\n- Manager\n    \n- Employee (only for assigned tasks)\n    \n\n## Path\n\n/api/tasks/**PK_OF_TASK**/images/**PK_OF_IMAGE**\n\n## Description\n\nIn this case deletes the selected image for the selected task"
@@ -568,11 +568,21 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzNjMxMDU0LCJpYXQiOjE3MDM2MDIyNTQsImp0aSI6Ijk0YjE0MWFlMjVlOTQwOGU4MzFiYjM1NzJjZTNhYWM1IiwidXNlcl9pZCI6MjF9.8uFUKK6ZAyund5m8wtVT3V7WM-DbKDnrnuyGXRjuOyo",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "65635d10-7cfb-4d4d-bc8e-90fffe699f80",
+				"id": "6d10f2db-c295-4f00-a0de-2df3cb9e555b",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -582,7 +592,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "ce1448de-04cb-480b-9f4b-eaafdefbc39a",
+				"id": "d63dcf14-f5ff-43ee-838c-23089e028d02",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -592,7 +602,7 @@
 	],
 	"variable": [
 		{
-			"id": "734c8226-df1c-4531-807b-9b475ed0c008",
+			"id": "c13bb7fd-1b1b-466a-a9a8-b416e4ea9466",
 			"key": "base_url",
 			"value": "localhost:8000/api",
 			"type": "string"

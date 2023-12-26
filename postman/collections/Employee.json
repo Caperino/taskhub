@@ -23,7 +23,8 @@
 					"path": [
 						"employees"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Administrator\n- Manager"
 			},
 			"response": [
 				{
@@ -33,11 +34,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/employees",
+							"raw": "localhost:8000/api/employees",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"employees"
 							]
 						}
@@ -45,7 +48,6 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -119,7 +121,8 @@
 					"path": [
 						"employees"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Administrator"
 			},
 			"response": [
 				{
@@ -138,11 +141,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/employees",
+							"raw": "localhost:8000/api/employees",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"employees"
 							]
 						}
@@ -150,7 +155,6 @@
 					"status": "Created",
 					"code": 201,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -224,7 +228,6 @@
 					"status": "Created",
 					"code": 201,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -298,7 +301,6 @@
 					"status": "Created",
 					"code": 201,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -372,7 +374,6 @@
 					"status": "Created",
 					"code": 201,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -446,7 +447,6 @@
 					"status": "Created",
 					"code": 201,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -520,7 +520,6 @@
 					"status": "Bad Request",
 					"code": 400,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -594,7 +593,6 @@
 					"status": "Bad Request",
 					"code": 400,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -660,7 +658,8 @@
 						"employees",
 						"1"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Administrator\n- Manager\n    \n- Employee (only for own persona)"
 			},
 			"response": [
 				{
@@ -670,11 +669,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/employees/1",
+							"raw": "localhost:8000/api/employees/1",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"employees",
 								"1"
 							]
@@ -683,7 +684,6 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -749,7 +749,6 @@
 					"status": "Not Found",
 					"code": 404,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -808,7 +807,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    //\"username\":\"User BirthDate\"\r\n    //\"employee_type\":1\r\n    \"groups\":[\r\n        1\r\n    ]\r\n}",
+					"raw": "{\r\n    \"email\":\"tk@thub.com\"\r\n    //\"username\":\"User BirthDate\"\r\n    //\"employee_type\":1\r\n    /*\"groups\":[\r\n        1\r\n    ]*/\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -816,15 +815,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/employees/19",
+					"raw": "{{base_url}}/employees/1",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"employees",
-						"19"
+						"1"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Administrator\n    \n- Employee (only for own persona)"
 			},
 			"response": [
 				{
@@ -843,11 +843,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/employees/1",
+							"raw": "localhost:8000/api/employees/1",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"employees",
 								"1"
 							]
@@ -856,7 +858,6 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -938,7 +939,6 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -1013,7 +1013,6 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -1088,7 +1087,6 @@
 					"status": "Bad Request",
 					"code": 400,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -1163,7 +1161,6 @@
 					"status": "Bad Request",
 					"code": 400,
 					"_postman_previewlanguage": "json",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -1221,15 +1218,16 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/employees/17",
+					"raw": "{{base_url}}/employees/22",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"employees",
-						"17"
+						"22"
 					]
-				}
+				},
+				"description": "accessible for:\n\n- Administrator"
 			},
 			"response": [
 				{
@@ -1239,11 +1237,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/employees/10",
+							"raw": "localhost:8000/api/employees/10",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "8000",
 							"path": [
+								"api",
 								"employees",
 								"10"
 							]
@@ -1252,7 +1252,6 @@
 					"status": "No Content",
 					"code": 204,
 					"_postman_previewlanguage": "plain",
-					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "Date",
@@ -1296,11 +1295,21 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzNjMxMDU0LCJpYXQiOjE3MDM2MDIyNTQsImp0aSI6Ijk0YjE0MWFlMjVlOTQwOGU4MzFiYjM1NzJjZTNhYWM1IiwidXNlcl9pZCI6MjF9.8uFUKK6ZAyund5m8wtVT3V7WM-DbKDnrnuyGXRjuOyo",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "ca31ea38-b357-4e4c-81ea-72a5a659e716",
+				"id": "eab1921c-3b06-4171-9be7-673d830895b3",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -1310,7 +1319,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "11614220-5465-4aaf-9b33-bac39cf14e9f",
+				"id": "9bab709b-234b-4cef-8129-fbf6a31362a6",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -1320,7 +1329,7 @@
 	],
 	"variable": [
 		{
-			"id": "8c64839c-7efd-4740-a6b7-f4ed8196d605",
+			"id": "5ec01bb0-5cdf-45d9-a516-3fa3fb94a557",
 			"key": "base_url",
 			"value": "localhost:8000/api",
 			"type": "string"
