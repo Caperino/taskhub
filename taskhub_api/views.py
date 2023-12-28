@@ -15,6 +15,9 @@ from django.db import IntegrityError
 from rest_framework import serializers as drf_serializers
 import random
 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 # TaskHub imports
 from TaskHub import urls
 from . import renderers
@@ -1227,3 +1230,13 @@ class TaskViewSet(viewsets.ViewSet):
                     status="error",
                     message="an unforeseen error happened, please try again")).data,
                             status=500)
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token['groups'] = list(user.groups.all().values_list("name", flat=True))
+        return token
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer

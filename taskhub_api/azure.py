@@ -15,7 +15,7 @@ Example Usage
 """
 
 # Storage Account Location
-ACCOUNT_URL = "https://taskhubtktest.blob.core.windows.net"
+ACCOUNT_URL = "https://taskhub.blob.core.windows.net"
 CONST_BLOB_CLIENT = None
 
 # Container Name Constants

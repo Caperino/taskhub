@@ -130,7 +130,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "taskhub_api.Employee"
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=8)
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=8),
+    'TOKEN_OBTAIN_SERIALIZER': "taskhub_api.views.MyTokenObtainPairSerializer"
 }
 
 # DRF Config
