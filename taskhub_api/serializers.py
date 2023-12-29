@@ -94,7 +94,7 @@ def manual_vehicle_serializer(data: models.Vehicle):
     """
     vh_types = [{"id": vh_type.pk, "title": vh_type.title} for vh_type in data.vehicle_type.all()]
     return {
-        "pk": data.pk,
+        "id": data.pk,
         "title": data.title,
         "max_load_length": data.max_load_length,
         "max_load_weight": data.max_load_weight,
@@ -148,12 +148,12 @@ def manual_order_serializer(data: models.Order):
     Manual serializer for Order
     """
     return {
-        "pk": data.pk,
+        "id": data.pk,
         "order_nr": data.order_nr,
         "title": data.title,
         "order_date": data.order_date,
         "customer": {
-            "pk": data.customer.pk,
+            "id": data.customer.pk,
             "name": data.customer.name,
             "address": data.customer.address,
             "phone": data.customer.phone,
@@ -254,7 +254,7 @@ def manual_employee_serializer(data: models.Employee):
             "description": data.employee_type.description
         }
     return {
-        "pk": data.pk,
+        "id": data.pk,
         "username": data.username,
         "first_name": data.first_name,
         "last_name": data.last_name,
@@ -381,7 +381,7 @@ def manual_task_serializer(data: models.Task):
     vh_list = [{"id": vh.pk, "title": vh.title} for vh in data.vehicles.all()]
     img_list = [{"id": img.pk, "title": img.image_name} for img in data.images.all()]
     return {
-        "pk": data.pk,
+        "id": data.pk,
         "title": data.title,
         "task_type": {
             "id": data.task_type.pk,
@@ -397,7 +397,7 @@ def manual_task_serializer(data: models.Task):
             "title": data.order.title,
             "order_date": data.order.order_date,
             "customer": {
-                "pk": data.order.customer.pk,
+                "id": data.order.customer.pk,
                 "name": data.order.customer.name,
                 "address": data.order.customer.address,
                 "phone": data.order.customer.phone,
@@ -422,7 +422,7 @@ def manual_task_serializer_minimal(data: models.Task):
     :return:
     """
     return {
-        "pk": data.pk,
+        "id": data.pk,
         "title": data.title,
         "task_type": data.task_type.title,
         "task_status": data.task_status.title,
