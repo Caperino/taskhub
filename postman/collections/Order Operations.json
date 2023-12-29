@@ -91,7 +91,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "[\n    {\n        \"pk\": 1,\n        \"order_nr\": 12345,\n        \"title\": \"TK Test Order #1\",\n        \"order_date\": \"2023-11-10\",\n        \"customer\": {\n            \"pk\": 1,\n            \"name\": \"TK Inc.\",\n            \"address\": \"Margarethenstraße 24\",\n            \"phone\": \"+436607039266\",\n            \"is_company\": true\n        },\n        \"is_completed\": false\n    }\n]"
+					"body": "[\n    {\n        \"id\": 1,\n        \"order_nr\": 12345,\n        \"title\": \"TK Test Order #1\",\n        \"order_date\": \"2023-11-10\",\n        \"customer\": {\n            \"id\": 1,\n            \"name\": \"TK Inc.\",\n            \"address\": \"Margarethenstraße 24\",\n            \"phone\": \"+436607039266\",\n            \"is_company\": true\n        },\n        \"is_completed\": false\n    }\n]"
 				}
 			]
 		},
@@ -435,7 +435,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"pk\": 1,\n    \"order_nr\": 12345,\n    \"title\": \"TK Test Order #1\",\n    \"order_date\": \"2023-11-10\",\n    \"customer\": {\n        \"pk\": 1,\n        \"name\": \"TK Inc.\",\n        \"address\": \"Margarethenstraße 24\",\n        \"phone\": \"+436607039266\",\n        \"is_company\": true\n    },\n    \"is_completed\": false\n}"
+					"body": "{\n    \"id\": 1,\n    \"order_nr\": 12345,\n    \"title\": \"TK Test Order #1\",\n    \"order_date\": \"2023-11-10\",\n    \"customer\": {\n        \"id\": 1,\n        \"name\": \"TK Inc.\",\n        \"address\": \"Margarethenstraße 24\",\n        \"phone\": \"+436607039266\",\n        \"is_company\": true\n    },\n    \"is_completed\": false\n}"
 				},
 				{
 					"id": "6de00134-9e0c-4edd-875e-d85ecb62a438",

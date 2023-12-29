@@ -135,7 +135,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "[\n    {\n        \"pk\": 1,\n        \"title\": \"BMW 310d\",\n        \"max_load_length\": 3,\n        \"max_load_weight\": 580,\n        \"vehicle_type\": [\n            {\n                \"id\": 1,\n                \"title\": \"Combi\"\n            }\n        ]\n    }\n]"
+					"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"BMW 310d\",\n        \"max_load_length\": 3,\n        \"max_load_weight\": 580,\n        \"vehicle_type\": [\n            {\n                \"id\": 1,\n                \"title\": \"Combi\"\n            }\n        ]\n    }\n]"
 				}
 			]
 		},
@@ -333,7 +333,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"pk\": 1,\n    \"title\": \"BMW 310d\",\n    \"max_load_length\": 3,\n    \"max_load_weight\": 580,\n    \"vehicle_type\": [\n        {\n            \"id\": 1,\n            \"title\": \"Combi\"\n        }\n    ]\n}"
+					"body": "{\n    \"id\": 1,\n    \"title\": \"BMW 310d\",\n    \"max_load_length\": 3,\n    \"max_load_weight\": 580,\n    \"vehicle_type\": [\n        {\n            \"id\": 1,\n            \"title\": \"Combi\"\n        }\n    ]\n}"
 				},
 				{
 					"id": "55276662-eb9b-4208-9fce-bdd9200cf4d1",

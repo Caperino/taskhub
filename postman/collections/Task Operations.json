@@ -121,7 +121,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "[\n    {\n        \"pk\": 1,\n        \"title\": \"First Task\",\n        \"task_type\": \"as\",\n        \"task_status\": \"qu\",\n        \"scheduled_to\": \"2023-11-24T14:52:55Z\"\n    }\n]"
+					"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"First Task\",\n        \"task_type\": \"as\",\n        \"task_status\": \"qu\",\n        \"scheduled_to\": \"2023-11-24T14:52:55Z\"\n    }\n]"
 				},
 				{
 					"id": "cef57a1e-41ca-4c15-ba54-f5479c461a58",
@@ -195,7 +195,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "[\n    {\n        \"pk\": 1,\n        \"title\": \"First Task\",\n        \"task_type\": \"as\",\n        \"task_status\": \"qu\",\n        \"scheduled_to\": \"2023-11-24T14:52:55Z\"\n    }\n]"
+					"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"First Task\",\n        \"task_type\": \"as\",\n        \"task_status\": \"qu\",\n        \"scheduled_to\": \"2023-11-24T14:52:55Z\"\n    }\n]"
 				},
 				{
 					"id": "f975945c-43f0-446d-b13f-624bb1b364c6",
@@ -623,7 +623,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"pk\": 1,\n    \"title\": \"First Task\",\n    \"task_type\": {\n        \"id\": 1,\n        \"title\": \"as\"\n    },\n    \"task_status\": {\n        \"id\": 1,\n        \"title\": \"qu\"\n    },\n    \"order\": {\n        \"id\": 1,\n        \"order_nr\": 12345,\n        \"title\": \"TK Test Order #1\",\n        \"order_date\": \"2023-11-10\",\n        \"customer\": {\n            \"pk\": 1,\n            \"name\": \"TK Inc.\",\n            \"address\": \"Margarethenstraße 24\",\n            \"phone\": \"+436607039266\",\n            \"is_company\": true\n        },\n        \"is_completed\": false\n    },\n    \"employees\": [\n        {\n            \"id\": 1,\n            \"username\": \"Timo Kappel\"\n        }\n    ],\n    \"vehicles\": [\n        {\n            \"id\": 1,\n            \"title\": \"BMW 310d\"\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Mercedes C250\"\n        }\n    ],\n    \"images\": [\n        {\n            \"id\": 29,\n            \"title\": \"Vorhand_Bruck.jpg_AS6HVT\"\n        }\n    ],\n    \"scheduled_from\": \"2023-11-10T14:52:45Z\",\n    \"from_shift\": \"am\",\n    \"scheduled_to\": \"2023-11-24T14:52:55Z\",\n    \"to_shift\": \"pm\"\n}"
+					"body": "{\n    \"id\": 1,\n    \"title\": \"First Task\",\n    \"task_type\": {\n        \"id\": 1,\n        \"title\": \"as\"\n    },\n    \"task_status\": {\n        \"id\": 1,\n        \"title\": \"qu\"\n    },\n    \"order\": {\n        \"id\": 1,\n        \"order_nr\": 12345,\n        \"title\": \"TK Test Order #1\",\n        \"order_date\": \"2023-11-10\",\n        \"customer\": {\n            \"id\": 1,\n            \"name\": \"TK Inc.\",\n            \"address\": \"Margarethenstraße 24\",\n            \"phone\": \"+436607039266\",\n            \"is_company\": true\n        },\n        \"is_completed\": false\n    },\n    \"employees\": [\n        {\n            \"id\": 1,\n            \"username\": \"Timo Kappel\"\n        }\n    ],\n    \"vehicles\": [\n        {\n            \"id\": 1,\n            \"title\": \"BMW 310d\"\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Mercedes C250\"\n        }\n    ],\n    \"images\": [\n        {\n            \"id\": 29,\n            \"title\": \"Vorhand_Bruck.jpg_AS6HVT\"\n        }\n    ],\n    \"scheduled_from\": \"2023-11-10T14:52:45Z\",\n    \"from_shift\": \"am\",\n    \"scheduled_to\": \"2023-11-24T14:52:55Z\",\n    \"to_shift\": \"pm\"\n}"
 				}
 			]
 		},

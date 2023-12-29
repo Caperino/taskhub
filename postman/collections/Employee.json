@@ -91,7 +91,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "[\n    {\n        \"pk\": 5,\n        \"username\": \"User 2\",\n        \"first_name\": \"User\",\n        \"last_name\": \"2\",\n        \"email\": \"user_2@user.com\",\n        \"password\": null,\n        \"groups\": [],\n        \"is_active\": true,\n        \"employee_type\": null,\n        \"address\": \"ABC Street 123\",\n        \"phone\": \"066412345678\",\n        \"birth_date\": null,\n        \"gender\": null,\n        \"drivers_license_status\": true\n    },\n    {\n        \"pk\": 1,\n        \"username\": \"timok\",\n        \"first_name\": \"Timo\",\n        \"last_name\": \"Kappel\",\n        \"email\": \"tk@inc.com\",\n        \"password\": null,\n        \"groups\": [],\n        \"is_active\": true,\n        \"employee_type\": null,\n        \"address\": null,\n        \"phone\": null,\n        \"birth_date\": null,\n        \"gender\": null,\n        \"drivers_license_status\": null\n    }\n]"
+					"body": "[\n    {\n        \"id\": 5,\n        \"username\": \"User 2\",\n        \"first_name\": \"User\",\n        \"last_name\": \"2\",\n        \"email\": \"user_2@user.com\",\n        \"password\": null,\n        \"groups\": [],\n        \"is_active\": true,\n        \"employee_type\": null,\n        \"address\": \"ABC Street 123\",\n        \"phone\": \"066412345678\",\n        \"birth_date\": null,\n        \"gender\": null,\n        \"drivers_license_status\": true\n    },\n    {\n        \"id\": 1,\n        \"username\": \"timok\",\n        \"first_name\": \"Timo\",\n        \"last_name\": \"Kappel\",\n        \"email\": \"tk@inc.com\",\n        \"password\": null,\n        \"groups\": [],\n        \"is_active\": true,\n        \"employee_type\": null,\n        \"address\": null,\n        \"phone\": null,\n        \"birth_date\": null,\n        \"gender\": null,\n        \"drivers_license_status\": null\n    }\n]"
 				}
 			]
 		},
@@ -727,7 +727,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"pk\": 1,\n    \"username\": \"timok\",\n    \"first_name\": \"Timo\",\n    \"last_name\": \"Kappel\",\n    \"email\": \"tk@inc.com\",\n    \"password\": null,\n    \"groups\": [],\n    \"is_active\": true,\n    \"employee_type\": null,\n    \"address\": null,\n    \"phone\": null,\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": null\n}"
+					"body": "{\n    \"id\": 1,\n    \"username\": \"timok\",\n    \"first_name\": \"Timo\",\n    \"last_name\": \"Kappel\",\n    \"email\": \"tk@inc.com\",\n    \"password\": null,\n    \"groups\": [],\n    \"is_active\": true,\n    \"employee_type\": null,\n    \"address\": null,\n    \"phone\": null,\n    \"birth_date\": null,\n    \"gender\": null,\n    \"drivers_license_status\": null\n}"
 				},
 				{
 					"id": "b08b6026-195a-4e07-90a1-7b163105191b",

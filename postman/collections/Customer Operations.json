@@ -337,13 +337,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/customers/3",
+					"raw": "{{base_url}}/customers/2",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"customers",
-						"3"
+						"2"
 					]
 				},
 				"description": "accessible for:\n\n- Manager\n    \n\n## Path\n\n/api/customers/**PK_OF_CUSTOMER**\n\n## Description\n\nIn this case creates a new customer.\n\n## Body\n\njson-string of the new object in according format.\n\n## Exception\n\nmissing fields : 400"
@@ -437,13 +437,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/customers/3",
+					"raw": "{{base_url}}/customers/4",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"customers",
-						"3"
+						"4"
 					]
 				},
 				"description": "accessible for:\n\n- Manager\n    \n\n## Path\n\n/api/customers/**PK_OF_CUSTOMER**\n\n## Description\n\nIn this case deletes a customer.\n\n## Exception\n\nnot found : 404"
@@ -519,7 +519,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzNjMxMDU0LCJpYXQiOjE3MDM2MDIyNTQsImp0aSI6Ijk0YjE0MWFlMjVlOTQwOGU4MzFiYjM1NzJjZTNhYWM1IiwidXNlcl9pZCI6MjF9.8uFUKK6ZAyund5m8wtVT3V7WM-DbKDnrnuyGXRjuOyo",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzOTA2NzkzLCJpYXQiOjE3MDM4Nzc5OTMsImp0aSI6ImM3NjI5NjViYjgyNDQ5MjhiN2ZiYmQ2MGI5MGQzZmRkIiwidXNlcl9pZCI6MjF9.N2vI6H_H7Kq6IhEDzLAtEehn4jgaBwN1PTH0qS8ig78",
 				"type": "string"
 			}
 		]
@@ -528,7 +528,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "a69b27bc-f02a-455c-ba32-1e1d782d7e78",
+				"id": "20a4c7a0-495a-4f4c-8aaa-e52818fd3b8a",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -538,7 +538,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "912ee097-9565-4c39-b4de-14a26e46cc2f",
+				"id": "d6141691-3271-43fe-86d7-487c0833a123",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -548,7 +548,7 @@
 	],
 	"variable": [
 		{
-			"id": "b061102b-1a57-43fb-8fb5-76a0f3859494",
+			"id": "2534e141-04d7-4439-b3f9-377ef570e6f9",
 			"key": "base_url",
 			"value": "localhost:8000/api",
 			"type": "string"
