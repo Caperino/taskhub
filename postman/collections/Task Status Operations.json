@@ -252,11 +252,21 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Nzk0Mjc2LCJpYXQiOjE3MDU3NjU0NzYsImp0aSI6IjQyZGJmZDQ1OThkODQxYmViMGY1NWEwOTNhZDQ3OTcxIiwidXNlcl9pZCI6MjEsImdyb3VwcyI6WyJNYW5hZ2VyIiwiRW1wbG95ZWUiLCJBZG1pbmlzdHJhdG9yIl19.aMD-Gz11b63VAjPZLbxrs-od0ntQKJvoWO3Gs_N6m5g",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "54c9744b-fe09-4a30-a5b2-77ec98f31474",
+				"id": "9401463f-6520-4111-9e1d-80a5a8723ee2",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -266,7 +276,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "e2bdad58-fadd-41bd-9c5c-20f326f1d327",
+				"id": "2af50cfc-806d-4e3e-8f7f-85a4138e9f4a",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -276,7 +286,7 @@
 	],
 	"variable": [
 		{
-			"id": "d4fdf3bd-6b10-43d2-818f-a950e9ff5c77",
+			"id": "505553a4-bb33-44af-bc11-5255c74dceb1",
 			"key": "base_url",
 			"value": "localhost:8000/api",
 			"type": "string"

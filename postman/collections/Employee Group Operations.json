@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "1fe50b6e-ffff-4448-94f5-f6c5a7df37d0",
+		"name": "Employee Group Operations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "20001436-1fe50b6e-ffff-4448-94f5-f6c5a7df37d0"
+	},
+	"item": [
+		{
+			"name": "List",
+			"id": "e1ac4aa6-d21f-4d14-b9bf-f678a820251e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/employeegroups",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"employeegroups"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "61b4e0ea-d25a-4446-82f7-72deb7a24970",
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employeegroups",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employeegroups"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 20 Jan 2024 16:41:00 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "269"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"GTestG1\",\n        \"permissions\": []\n    },\n    {\n        \"id\": 2,\n        \"name\": \"GTestG2\",\n        \"permissions\": []\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Manager\",\n        \"permissions\": []\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Employee\",\n        \"permissions\": []\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Supervisor\",\n        \"permissions\": []\n    },\n    {\n        \"id\": 6,\n        \"name\": \"Administrator\",\n        \"permissions\": []\n    }\n]"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Nzk2NzMzLCJpYXQiOjE3MDU3Njc5MzMsImp0aSI6IjMzYjQzMmIxNzkxYTRmYjlhMWFlODE3ZmM2YzgwNDI5IiwidXNlcl9pZCI6MjEsImdyb3VwcyI6WyJNYW5hZ2VyIiwiRW1wbG95ZWUiLCJBZG1pbmlzdHJhdG9yIl19.Y4_TCIctVwyULuU-nidqC_0x6MJ6SyOyrUIGhXheegY",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d4aa66c5-3e0a-41da-9598-be9343da2a72",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e4264238-63cf-4e1f-a19c-fa90641dba1e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "c50a3ea7-d2b1-4dff-8e9b-05cbd3920393",
+			"key": "base_url",
+			"value": "http://localhost:8000/api"
+		}
+	]
+}

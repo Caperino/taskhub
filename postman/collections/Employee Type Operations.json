@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "21f63804-5e66-4854-8f70-8ac605ed2688",
+		"name": "Employee Type Operations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "20001436-21f63804-5e66-4854-8f70-8ac605ed2688"
+	},
+	"item": [
+		{
+			"name": "List",
+			"id": "0fea2f4f-ad84-441a-9118-777d449e2f3c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/employeetypes",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"employeetypes"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "51ff56d5-1809-41bf-ad35-5684a48eb64a",
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employeetypes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employeetypes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 20 Jan 2024 16:42:09 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.11.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"Assembler\",\n        \"description\": \"TestDescr\"\n    }\n]"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Nzk2NzMzLCJpYXQiOjE3MDU3Njc5MzMsImp0aSI6IjMzYjQzMmIxNzkxYTRmYjlhMWFlODE3ZmM2YzgwNDI5IiwidXNlcl9pZCI6MjEsImdyb3VwcyI6WyJNYW5hZ2VyIiwiRW1wbG95ZWUiLCJBZG1pbmlzdHJhdG9yIl19.Y4_TCIctVwyULuU-nidqC_0x6MJ6SyOyrUIGhXheegY",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1c1fc460-c60b-47bb-885b-756801ee7404",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "8294114d-27d1-4a94-b050-768e4f6402b1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "2b3da472-b60b-470c-add5-60696376d127",
+			"key": "base_url",
+			"value": "http://localhost:8000/api"
+		}
+	]
+}
