@@ -66,14 +66,14 @@ class TaskType(models.Model):
     possibilities: assembly, delivery, installation, repair, service
     """
     TASK_TYPES = (
-        ('as', 'assembly'),
-        ('de', 'delivery'),
-        ('in', 'installation'),
-        ('re', 'repair'),
-        ('se', 'service')
+        ('assembly', 'assembly'),
+        ('delivery', 'delivery'),
+        ('installation', 'installation'),
+        ('repair', 'repair'),
+        ('service', 'service')
     )
 
-    title = models.CharField(max_length=2, choices=TASK_TYPES)
+    title = models.CharField(max_length=20, choices=TASK_TYPES)
 
     def __str__(self):
         return self.title
@@ -86,12 +86,12 @@ class TaskStatus(models.Model):
     possibilities: queued, in progress, done
     """
     TASK_STATUS = (
-        ('qu', 'queued'),
-        ('ip', 'in progress'),
-        ('do', 'done')
+        ('queued', 'queued'),
+        ('in progress', 'in progress'),
+        ('done', 'done')
     )
 
-    title = models.CharField(max_length=2, choices=TASK_STATUS)
+    title = models.CharField(max_length=20, choices=TASK_STATUS)
 
     def __str__(self):
         return self.title
