@@ -48,6 +48,15 @@ class EmployeeTypeSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class EmployeeGroupSerializer(serializers.ModelSerializer):
+    """
+    Serializer for EmployeeGroup
+    """
+    class Meta:
+        model = Group
+        fields = "__all__"
+
+
 # optimized
 class VehicleSerializer(serializers.Serializer):
     title = serializers.CharField(required=True)

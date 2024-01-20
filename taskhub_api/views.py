@@ -3,6 +3,7 @@ import string
 import traceback
 
 from django.db.models import Q
+from django.contrib.auth.models import Group
 from django.shortcuts import render
 import re
 from rest_framework import viewsets
@@ -252,6 +253,56 @@ class CustomerViewSet(viewsets.ViewSet):
         except Exception as e:
             print(e)
             return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="an unforeseen error happened, please try again")).data, status=500)
+
+
+class EmployeeTypeViewSet(viewsets.ViewSet):
+    """
+    A simple ViewSet for listing or retrieving employee types.
+    """
+
+    def list(self, request):
+        """
+        Lists all employee types
+        :param request: the request
+        :return:
+        """
+        match authorize_action_advanced(request,
+                                        [constants.UserGroups.EMPLOYEE.value, constants.UserGroups.MANAGER.value], []):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
+
+        return Response(serializers.EmployeeTypeSerializer(models.EmployeeType.objects.all(), many=True).data)
+
+
+class EmployeeGroupViewSet(viewsets.ViewSet):
+    """
+    A simple ViewSet for listing or retrieving employee groups.
+    """
+
+    def list(self, request):
+        """
+        Lists all employee groups
+        :param request: the request
+        :return:
+        """
+        match authorize_action_advanced(request,
+                                        [constants.UserGroups.EMPLOYEE.value, constants.UserGroups.MANAGER.value], []):
+            case constants.AuthorisationError.FORBIDDEN:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
+            case constants.AuthorisationError.UNAUTHORIZED:
+                return Response(serializers.TaskHubApiResponseSerializer(
+                    models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
+            case None:
+                pass
+
+        return Response(serializers.EmployeeGroupSerializer(Group.objects.all(), many=True).data)
 
 
 class EmployeeViewSet(viewsets.ViewSet):
@@ -1231,12 +1282,14 @@ class TaskViewSet(viewsets.ViewSet):
                     message="an unforeseen error happened, please try again")).data,
                             status=500)
 
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
         token['groups'] = list(user.groups.all().values_list("name", flat=True))
         return token
+
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer

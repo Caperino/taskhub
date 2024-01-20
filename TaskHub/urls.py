@@ -57,6 +57,14 @@ urlpatterns = [
     path('api/employees/<employee_pk>',
          available_views.EmployeeViewSet.as_view({"get": "retrieve", "put": "update", "delete": "delete"}),
          name="direct_employee"),
+    # EMPLOYEE TYPES
+    path('api/employeetypes',
+         available_views.EmployeeTypeViewSet.as_view({"get": "list"}),
+         name="employee_types"),
+    # EMPLOYEE GROUPS
+    path('api/employeegroups',
+         available_views.EmployeeGroupViewSet.as_view({"get": "list"}),
+         name="employee_groups"),
     # VEHICLE TYPES
     path('api/vehicletypes',
          available_views.VehicleTypeViewSet.as_view({"get": "list"}),
