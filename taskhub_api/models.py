@@ -132,9 +132,9 @@ class Employee(AbstractUser):
     """
 
     GENDER_CHOICES = (
-        ('m', 'male'),
-        ('f', 'female'),
-        ('x', 'diverse'),
+        ('male', 'male'),
+        ('female', 'female'),
+        ('diverse', 'diverse'),
     )
 
     pfp_name = models.ForeignKey("AzureImage", on_delete=models.SET_NULL, null=True, blank=True)
@@ -142,7 +142,7 @@ class Employee(AbstractUser):
     address = models.CharField(max_length=1024, null=True, blank=True)
     phone = models.CharField(max_length=20, null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True, blank=True)
+    gender = models.CharField(max_length=7, choices=GENDER_CHOICES, null=True, blank=True)
     drivers_license_status = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
