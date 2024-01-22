@@ -12,7 +12,6 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from datetime import datetime, timedelta
 import django.db.models as django_models
-from django.db import IntegrityError
 from rest_framework import serializers as drf_serializers
 import random
 
@@ -100,7 +99,7 @@ def authorize_action_advanced(request, necessary_groups: list, pks: list = []) -
             case None:
                 pass
     """
-    #return None
+    return None
     # Basic Authenticated Check
     if request.user.is_authenticated:
         # Check for access via group (adm, man, sup)
@@ -373,7 +372,7 @@ class EmployeeViewSet(viewsets.ViewSet):
         if ser.is_valid():
             try:
                 emp = ser.save()
-            except IntegrityError as e:
+            except Exception as e:
                 return Response(e.args, status=400)
             return Response(serializers.manual_employee_serializer(emp), status=201)
         else:
@@ -400,7 +399,7 @@ class EmployeeViewSet(viewsets.ViewSet):
         if ser.is_valid():
             try:
                 emp = ser.save()
-            except IntegrityError as e:
+            except Exception as e:
                 print(e)
                 if 'FOREIGN KEY' in str(e.args[0]):
                     return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message='invalid association found')).data, status=400)

@@ -198,7 +198,7 @@ class EmployeeSerializer(serializers.Serializer):
 
         # Groups
         requested_groups = Group.objects.filter(pk__in=validated_data["groups"])
-        if len(validated_data["groups"]) != len(requested_groups):
+        if len(validated_data.get("groups", None)) != len(requested_groups):
             print("Invalid group id included")
             raise IntegrityError("Invalid group id included")
 
@@ -207,16 +207,16 @@ class EmployeeSerializer(serializers.Serializer):
             last_name=validated_data["last_name"],
             email=validated_data["email"],
             username=validated_data["username"],
-            address=validated_data["address"],
-            phone=validated_data["phone"],
-            birth_date=validated_data["birth_date"],
-            gender=validated_data["gender"],
-            drivers_license_status=validated_data["drivers_license_status"],
-            is_active=validated_data["is_active"],
+            address=validated_data.get("address", ''),
+            phone=validated_data.get("phone", ''),
+            birth_date=validated_data.get("birth_date", None),
+            gender=validated_data.get("gender", None),
+            drivers_license_status=validated_data.get("drivers_license_status", False),
+            is_active=validated_data.get('is_active', True),
             employee_type_id=validated_data["employee_type"]
         )
         # PW
-        if validated_data["password"] is not None:
+        if validated_data.get("password", None) is not None:
             obj.set_password(validated_data["password"])
         else:
             raise IntegrityError("Password is required")
