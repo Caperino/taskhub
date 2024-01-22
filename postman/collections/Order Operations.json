@@ -122,7 +122,7 @@
 						"orders"
 					]
 				},
-				"description": "accessible for:\n\n- Manager"
+				"description": "accessible for:\n\n- Manager\n    \n\n### Fields\n\n``` django\n    order_nr = serializers.IntegerField(required=True)\n    title = serializers.CharField(required=True)\n    # disregarded & auto-generated in backend on upload\n    order_date = serializers.DateField(required=False)\n    customer = serializers.IntegerField(required=True)\n    # default false\n    is_completed = serializers.BooleanField(required=False)\n\n ```"
 			},
 			"response": [
 				{

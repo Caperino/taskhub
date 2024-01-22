@@ -147,7 +147,7 @@
 						"customers"
 					]
 				},
-				"description": "accessible for:\n\n- Manager\n    \n\n## Path\n\n/api/customers\n\n## Description\n\nIn this case creates a new customer.\n\n## Body\n\njson-string of the new object in according format.\n\n## Exception\n\nmissing fields : 400\n\n## Fields\n\nname - REQ\n\naddress - REQ\n\nphone - REQ\n\nis_company - OPT"
+				"description": "accessible for:\n\n- Manager\n    \n\n## Path\n\n/api/customers\n\n## Description\n\nIn this case creates a new customer.\n\n## Body\n\njson-string of the new object in according format.\n\n## Exception\n\nmissing fields : 400\n\n## Fields\n\n``` django\nname = serializers.CharField(required=True)\naddress = serializers.CharField(required=True)\nphone = serializers.CharField(required=True)\nis_company = serializers.BooleanField(required=False)\n\n ```"
 			},
 			"response": [
 				{

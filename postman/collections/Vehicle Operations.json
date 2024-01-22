@@ -166,7 +166,7 @@
 						"vehicles"
 					]
 				},
-				"description": "accessible for:\n\n- Manager\n    \n\n## Path\n\n/api/vehicles\n\n## Description\n\nIn this case creates a new vehicle."
+				"description": "accessible for:\n\n- Manager\n    \n\n## Path\n\n/api/vehicles\n\n## Description\n\nIn this case creates a new vehicle.\n\n### Fields\n\n``` django\n    title = serializers.CharField(required=True)\n    max_load_length = serializers.IntegerField(required=True)\n    max_load_weight = serializers.IntegerField(required=True)\n    vehicle_type = IntegerListField(required=True)\n\n ```"
 			},
 			"response": [
 				{

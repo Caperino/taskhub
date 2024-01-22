@@ -300,7 +300,7 @@
 						"tasks"
 					]
 				},
-				"description": "accessible for:\n\n- Manager"
+				"description": "accessible for:\n\n- Manager\n    \n\n### Fields\n\n``` django\n    title = serializers.CharField(required=True)\n    task_type = serializers.IntegerField(required=True)\n    task_status = serializers.IntegerField(required=True)\n    vehicles = IntegerListField(required=True, allow_empty=True)\n    order = serializers.IntegerField(required=True)\n    employees = IntegerListField(required=True, allow_empty=True)\n    # YYYY-MM-DD\n    scheduled_from = serializers.DateTimeField(required=True)\n    # am, pm\n    from_shift = serializers.CharField(required=True)\n    # YYYY-MM-DD\n    scheduled_to = serializers.DateTimeField(required=True)\n    # am, pm\n    to_shift = serializers.CharField(required=True)\n\n ```"
 			},
 			"response": [
 				{

@@ -106,7 +106,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"User Check\",\r\n    \"first_name\": \"User\",\r\n    \"last_name\": \"Check\",\r\n    \"email\": \"user_birth_date@user.com\",\r\n    \"password\": \"somehighlysecurepassword\",\r\n    \"groups\": [],\r\n    \"is_active\": true,\r\n    \"employee_type\": 1,\r\n    \"address\": null,\r\n    \"phone\": null,\r\n    \"birth_date\": \"1998-02-17\",\r\n    \"gender\": null,\r\n    \"drivers_license_status\": null\r\n}",
+					"raw": "{\r\n    \"username\": \"User Check\",\r\n    \"first_name\": \"User\",\r\n    \"last_name\": \"Check\",\r\n    \"email\": \"user_birth_date@user.com\",\r\n    \"password\": \"somehighlysecurepassword\",\r\n    \"groups\": [\r\n        1\r\n    ],\r\n    \"is_active\": true,\r\n    \"employee_type\": 2,\r\n    \"address\": \"bruh he\",\r\n    \"phone\": null,\r\n    \"birth_date\": null,\r\n    \"gender\": null,\r\n    \"drivers_license_status\": null\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -122,7 +122,7 @@
 						"employees"
 					]
 				},
-				"description": "accessible for:\n\n- Administrator\n    \n\n### Fields\n\nusername - REQ - string\n\nfirst_name - REQ - string\n\nlast_name - REQ - string\n\nemail - REQ - string\n\ngroups - REQ - array of int | empty array\n\npassword - REQ - string\n\nemployee_type - REQ - int | null\n\nis_active - OPT - boolean\n\naddress - OPT - string | null\n\nphone - OPT - string | null\n\nbirth_date - OPT - string | null\n\ngender - OPT - string | null (male, female, diverse)\n\ndrivers_license_status - OPT - boolean | null"
+				"description": "accessible for:\n\n- Administrator\n    \n\n### Fields\n\n``` django\n    username = serializers.CharField(required=True)\n    first_name = serializers.CharField(required=True)\n    last_name = serializers.CharField(required=True)\n    email = serializers.CharField(required=True)\n    password = serializers.CharField(required=False)\n    groups = StringListField(required=True, allow_null=True, allow_empty=True)\n    is_active = serializers.BooleanField(required=False)\n    employee_type = serializers.IntegerField(required=True, allow_null=True)\n    address = serializers.CharField(required=False, allow_null=True, allow_blank=True)\n    phone = serializers.CharField(required=False, allow_null=True, allow_blank=True)\n    # YYYY-MM-DD\n    birth_date = serializers.DateField(required=False, allow_null=True)\n    # male, female, diverse\n    gender = serializers.CharField(required=False, allow_null=True, allow_blank=True)\n    drivers_license_status = serializers.BooleanField(required=False, allow_null=True)\n\n ```"
 			},
 			"response": [
 				{
@@ -807,7 +807,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"gender\":\"male\"\r\n}",
+					"raw": "{\r\n    \"password\":\"betterpassword\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -815,13 +815,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/employees/21",
+					"raw": "{{base_url}}/employees/3",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"employees",
-						"21"
+						"3"
 					]
 				},
 				"description": "accessible for:\n\n- Administrator\n    \n- Employee (only for own persona)"
