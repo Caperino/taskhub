@@ -122,7 +122,7 @@
 						"employees"
 					]
 				},
-				"description": "accessible for:\n\n- Administrator"
+				"description": "accessible for:\n\n- Administrator\n    \n\n### Fields\n\nusername - REQ - string\n\nfirst_name - REQ - string\n\nlast_name - REQ - string\n\nemail - REQ - string\n\ngroups - REQ - array of int | empty array\n\npassword - REQ - string\n\nemployee_type - REQ - int | null\n\nis_active - OPT - boolean\n\naddress - OPT - string | null\n\nphone - OPT - string | null\n\nbirth_date - OPT - string | null\n\ngender - OPT - string | null (male, female, diverse)\n\ndrivers_license_status - OPT - boolean | null"
 			},
 			"response": [
 				{
@@ -650,13 +650,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/employees/1",
+					"raw": "{{base_url}}/employees/21",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"employees",
-						"1"
+						"21"
 					]
 				},
 				"description": "accessible for:\n\n- Administrator\n- Manager\n    \n- Employee (only for own persona)"
@@ -807,7 +807,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"tk@thub.com\"\r\n    //\"username\":\"User BirthDate\"\r\n    //\"employee_type\":1\r\n    /*\"groups\":[\r\n        1\r\n    ]*/\r\n}",
+					"raw": "{\r\n    \"gender\":\"male\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -815,13 +815,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/employees/1",
+					"raw": "{{base_url}}/employees/21",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"employees",
-						"1"
+						"21"
 					]
 				},
 				"description": "accessible for:\n\n- Administrator\n    \n- Employee (only for own persona)"
@@ -1300,7 +1300,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1Nzk0Mjc2LCJpYXQiOjE3MDU3NjU0NzYsImp0aSI6IjQyZGJmZDQ1OThkODQxYmViMGY1NWEwOTNhZDQ3OTcxIiwidXNlcl9pZCI6MjEsImdyb3VwcyI6WyJNYW5hZ2VyIiwiRW1wbG95ZWUiLCJBZG1pbmlzdHJhdG9yIl19.aMD-Gz11b63VAjPZLbxrs-od0ntQKJvoWO3Gs_N6m5g",
+				"value": "{{auth}}",
 				"type": "string"
 			}
 		]
@@ -1309,7 +1309,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "4b13221f-4e6f-437c-a083-6fc04d8064ac",
+				"id": "59caa1a4-6211-4000-99e6-80904d8de07d",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -1319,7 +1319,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "da926cd7-921c-444e-ba00-2bb9ba038128",
+				"id": "fa43243d-3728-45b2-b3ce-3bd5e5b08fe5",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -1329,7 +1329,7 @@
 	],
 	"variable": [
 		{
-			"id": "e6913a25-99c6-4ca5-b61c-05fc3e90af51",
+			"id": "3af24848-03fa-4f30-a771-e005597f72cc",
 			"key": "base_url",
 			"value": "localhost:8000/api",
 			"type": "string"

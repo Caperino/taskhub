@@ -17,7 +17,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "// timok\r\n// admin\r\n// stefan\r\n// PW: always \"timok\"\r\n{\r\n    \"username\":\"admin\",\r\n    \"password\":\"timok\"\r\n}\r\n",
+					"raw": "// timok\r\n// admin\r\n// stefan\r\n// PW: always \"timok\"\r\n{\r\n    //\"username\":\"admin\",\r\n    //\"username\":\"manager\",\r\n    //\"username\":\"employee\",\r\n    //\"username\":\"supervisor\",\r\n    \"username\":\"timok\",\r\n    \"password\":\"timok\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"

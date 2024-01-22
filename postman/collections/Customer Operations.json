@@ -131,7 +131,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Test Customer\",\r\n    \"address\": \"Address 1\",\r\n    \"phone\": \"Phone 1\",\r\n    \"is_company\": true\r\n}",
+					"raw": "{\r\n    \"name\": \"Test Customer\",\r\n    \"address\": \"Address 1\",\r\n    \"phone\": \"Phone 1\"\r\n    //\"is_company\": true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -147,7 +147,7 @@
 						"customers"
 					]
 				},
-				"description": "accessible for:\n\n- Manager\n    \n\n## Path\n\n/api/customers\n\n## Description\n\nIn this case creates a new customer.\n\n## Body\n\njson-string of the new object in according format.\n\n## Exception\n\nmissing fields : 400"
+				"description": "accessible for:\n\n- Manager\n    \n\n## Path\n\n/api/customers\n\n## Description\n\nIn this case creates a new customer.\n\n## Body\n\njson-string of the new object in according format.\n\n## Exception\n\nmissing fields : 400\n\n## Fields\n\nname - REQ\n\naddress - REQ\n\nphone - REQ\n\nis_company - OPT"
 			},
 			"response": [
 				{
@@ -519,7 +519,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzOTA2NzkzLCJpYXQiOjE3MDM4Nzc5OTMsImp0aSI6ImM3NjI5NjViYjgyNDQ5MjhiN2ZiYmQ2MGI5MGQzZmRkIiwidXNlcl9pZCI6MjF9.N2vI6H_H7Kq6IhEDzLAtEehn4jgaBwN1PTH0qS8ig78",
+				"value": "{{auth}}",
 				"type": "string"
 			}
 		]
@@ -528,7 +528,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "20a4c7a0-495a-4f4c-8aaa-e52818fd3b8a",
+				"id": "4fa4c462-4bcf-4386-9ea1-df5b0aeac58f",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -538,7 +538,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "d6141691-3271-43fe-86d7-487c0833a123",
+				"id": "025bd294-6ac6-4de9-aaee-c657b90dafe1",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -548,7 +548,7 @@
 	],
 	"variable": [
 		{
-			"id": "2534e141-04d7-4439-b3f9-377ef570e6f9",
+			"id": "a705f7ef-eb84-4af4-b8e1-12c2d4110c7c",
 			"key": "base_url",
 			"value": "localhost:8000/api",
 			"type": "string"
