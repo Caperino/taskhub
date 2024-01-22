@@ -197,7 +197,7 @@ class EmployeeSerializer(serializers.Serializer):
         """
 
         # Groups
-        requested_groups = Group.objects.filter(pk__in=validated_data["groups"])
+        requested_groups = Group.objects.filter(pk__in=validated_data.get("groups", []))
         if len(validated_data.get("groups", None)) != len(requested_groups):
             print("Invalid group id included")
             raise IntegrityError("Invalid group id included")
@@ -207,8 +207,8 @@ class EmployeeSerializer(serializers.Serializer):
             last_name=validated_data["last_name"],
             email=validated_data["email"],
             username=validated_data["username"],
-            address=validated_data.get("address", ''),
-            phone=validated_data.get("phone", ''),
+            address=validated_data.get("address", None),
+            phone=validated_data.get("phone", None),
             birth_date=validated_data.get("birth_date", None),
             gender=validated_data.get("gender", None),
             drivers_license_status=validated_data.get("drivers_license_status", False),
@@ -276,7 +276,8 @@ def manual_employee_serializer(data: models.Employee):
         "phone": data.phone,
         "birth_date": data.birth_date,
         "gender": data.gender,
-        "drivers_license_status": data.drivers_license_status
+        "drivers_license_status": data.drivers_license_status,
+        "has_image": data.pfp_name is not None
     }
 
 
