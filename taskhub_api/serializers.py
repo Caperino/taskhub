@@ -2,6 +2,7 @@ from . import models
 from rest_framework import serializers
 from django.contrib.auth.models import Group
 from django.db.utils import IntegrityError
+from django.contrib.auth.password_validation import validate_password
 
 
 class StringListField(serializers.ListField):
@@ -217,6 +218,7 @@ class EmployeeSerializer(serializers.Serializer):
         )
         # PW
         if validated_data.get("password", None) is not None:
+            validate_password(validated_data["password"], obj)
             obj.set_password(validated_data["password"])
         else:
             raise IntegrityError("Password is required")
@@ -234,6 +236,7 @@ class EmployeeSerializer(serializers.Serializer):
         groups_to_add = []
         for attr, value in validated_data.items():
             if attr == "password":
+                validate_password(validated_data["password"], instance)
                 instance.set_password(value)
             elif attr == "groups" and value is not None:
                 groups_to_add += Group.objects.filter(pk__in=value)

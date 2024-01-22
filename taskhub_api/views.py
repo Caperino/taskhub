@@ -403,6 +403,8 @@ class EmployeeViewSet(viewsets.ViewSet):
                 print(e)
                 if 'FOREIGN KEY' in str(e.args[0]):
                     return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message='invalid association found')).data, status=400)
+                elif 'This password is too short' in str(e.args[0]):
+                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message='password too short')).data, status=400)
                 else:
                     return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message='username or mail already exists')).data, status=400)
             return Response(serializers.manual_employee_serializer(emp), status=200)
