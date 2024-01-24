@@ -99,7 +99,7 @@ def authorize_action_advanced(request, necessary_groups: list, pks: list = []) -
             case None:
                 pass
     """
-    return None
+    #return None
     # Basic Authenticated Check
     if request.user.is_authenticated:
         # Check for access via group (adm, man, sup)
@@ -398,6 +398,8 @@ class EmployeeViewSet(viewsets.ViewSet):
         ser = serializers.EmployeeSerializer(employee, data=request.data, partial=True)
         if ser.is_valid():
             try:
+                if request.user.pk == int(employee_pk) and not "1" in ser.validated_data['groups']:
+                    ser.validated_data['groups'].append("1")
                 emp = ser.save()
             except Exception as e:
                 print(e)
@@ -427,6 +429,8 @@ class EmployeeViewSet(viewsets.ViewSet):
                     models.TaskHubApiResponse(status="error", message="unauthorized")).data, status=401)
             case None:
                 pass
+        if request.user.pk == int(employee_pk):
+            return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="you can't delete yourself")).data, status=418)
         try:
             models.Employee.objects.filter(pk=employee_pk).delete()
             return Response(None, status=204)

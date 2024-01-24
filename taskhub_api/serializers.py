@@ -119,7 +119,7 @@ class OrderSerializer(serializers.Serializer):
     """
     order_nr = serializers.IntegerField(required=True)
     title = serializers.CharField(required=True)
-    order_date = serializers.DateField(required=False)
+    order_date = serializers.DateTimeField(required=False)
     customer = serializers.IntegerField(required=True)
     is_completed = serializers.BooleanField(required=False)
 
@@ -188,7 +188,7 @@ class EmployeeSerializer(serializers.Serializer):
     employee_type = serializers.IntegerField(required=True, allow_null=True)
     address = serializers.CharField(required=False, allow_null=True, allow_blank=True)
     phone = serializers.CharField(required=False, allow_null=True, allow_blank=True)
-    birth_date = serializers.DateField(required=False, allow_null=True)
+    birth_date = serializers.DateTimeField(required=False, allow_null=True)
     gender = serializers.CharField(required=False, allow_null=True, allow_blank=True)
     drivers_license_status = serializers.BooleanField(required=False, allow_null=True)
 

@@ -13,7 +13,7 @@ class Order(models.Model):
     order_nr = models.IntegerField()
     title = models.CharField(max_length=1024)
     customer = models.ForeignKey("Customer", on_delete=models.PROTECT)
-    order_date = models.DateField(default=current_date)
+    order_date = models.DateTimeField(default=current_date)
     is_completed = models.BooleanField(default=False)
 
     def __str__(self):
@@ -141,7 +141,7 @@ class Employee(AbstractUser):
     employee_type = models.ForeignKey("EmployeeType", on_delete=models.SET_NULL, null=True, blank=True)
     address = models.CharField(max_length=1024, null=True, blank=True)
     phone = models.CharField(max_length=20, null=True, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
+    birth_date = models.DateTimeField(null=True, blank=True)
     gender = models.CharField(max_length=7, choices=GENDER_CHOICES, null=True, blank=True)
     drivers_license_status = models.BooleanField(null=True, blank=True)
 
