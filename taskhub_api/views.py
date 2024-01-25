@@ -1,4 +1,5 @@
 # External imports
+import json
 import string
 import traceback
 
@@ -14,6 +15,7 @@ from datetime import datetime, timedelta
 import django.db.models as django_models
 from rest_framework import serializers as drf_serializers
 import random
+import base64
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -479,11 +481,14 @@ class ImageUploadViewSet(viewsets.ViewSet):
             case None:
                 pass
         em = get_object_or_404(models.Employee, pk=user_pk)
+        print("application/json" in request.META.get("HTTP_ACCEPT"))
         if em.pfp_name is None:
             return Response({"status": "no profile picture"}, status=404)
         else:
             try:
                 c = azure.download_profile_picture(em.pfp_name.image_name)
+                if "application/json" in request.META.get("HTTP_ACCEPT"):
+                    c = base64.b64encode(c)
                 return Response(c, status=200)
             except Exception as e:
                 print(e)
@@ -590,6 +595,8 @@ class ImageUploadViewSet(viewsets.ViewSet):
 
         try:
             c = azure.download_task_image(selected_image.image_name)
+            if "application/json" in request.META.get("HTTP_ACCEPT"):
+                c = base64.b64encode(c)
             return Response(c, status=200)
         except Exception as e:
             print(e)
