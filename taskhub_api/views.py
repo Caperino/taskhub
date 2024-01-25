@@ -400,7 +400,7 @@ class EmployeeViewSet(viewsets.ViewSet):
         ser = serializers.EmployeeSerializer(employee, data=request.data, partial=True)
         if ser.is_valid():
             try:
-                if request.user.pk == int(employee_pk) and not "1" in ser.validated_data['groups']:
+                if request.user.pk == int(employee_pk) and request.user.groups.filter(name='Administrator').exists() and not "1" in ser.validated_data['groups']:
                     ser.validated_data['groups'].append("1")
                 emp = ser.save()
             except Exception as e:
@@ -1229,6 +1229,16 @@ class TaskViewSet(viewsets.ViewSet):
 
         ser = serializers.TaskSerializer(task, data=request.data, partial=True)
         if ser.is_valid():
+            if request.user.groups.filter(name=constants.UserGroups.MANAGER.value).count() == 0:
+                #task = get_object_or_404(models.Task, pk=pk_task)
+                #task.task_status = get_object_or_404(models.TaskStatus, pk=ser.validated_data['task_status'])
+                #task.save()
+                try:
+                    models.Task.objects.filter(pk=pk_task).update(task_status=ser.validated_data['task_status'])
+                except Exception as e:
+                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="invalid status id")).data, status=400)
+                return Response(serializers.manual_task_serializer(task), status=200)
+
             try:
                 if 'scheduled_from' in ser.validated_data:
                     fr = ser.validated_data['scheduled_from']
