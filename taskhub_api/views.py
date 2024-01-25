@@ -293,7 +293,7 @@ class EmployeeGroupViewSet(viewsets.ViewSet):
         :return:
         """
         match authorize_action_advanced(request,
-                                        [constants.UserGroups.EMPLOYEE.value, constants.UserGroups.MANAGER.value], []):
+                                        [constants.UserGroups.EMPLOYEE.value, constants.UserGroups.ADMINISTRATOR.value], []):
             case constants.AuthorisationError.FORBIDDEN:
                 return Response(serializers.TaskHubApiResponseSerializer(
                     models.TaskHubApiResponse(status="error", message="forbidden")).data, status=403)
@@ -310,7 +310,6 @@ class EmployeeViewSet(viewsets.ViewSet):
     """
     A simple ViewSet for listing or retrieving employees.
     """
-    # TODO: SECURITY
     def list(self, request):
         """
         Lists all employees
@@ -400,8 +399,9 @@ class EmployeeViewSet(viewsets.ViewSet):
         ser = serializers.EmployeeSerializer(employee, data=request.data, partial=True)
         if ser.is_valid():
             try:
-                if request.user.pk == int(employee_pk) and request.user.groups.filter(name='Administrator').exists() and not "1" in ser.validated_data['groups']:
-                    ser.validated_data['groups'].append("1")
+                if request.user.pk == int(employee_pk) and request.user.groups.filter(name="Administrator").count() == 1:
+                    ser.validated_data['groups'].append(1)
+                    ser.validated_data['groups'].append(4)
                 emp = ser.save()
             except Exception as e:
                 print(e)

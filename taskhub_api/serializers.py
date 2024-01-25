@@ -240,8 +240,8 @@ class EmployeeSerializer(serializers.Serializer):
                 instance.set_password(value)
             elif attr == "groups" and value is not None:
                 groups_to_add += Group.objects.filter(pk__in=value)
-                if len(value) != len(groups_to_add):
-                    raise serializers.ValidationError("Invalid group id included")
+                #if len(value) != len(groups_to_add):
+                    #raise serializers.ValidationError("Invalid group id included")
             elif attr == "employee_type" and value is not None:
                 instance.employee_type_id = value
             elif value is not None:
