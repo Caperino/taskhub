@@ -27,10 +27,19 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'backend.taskhub.cloud',
-    'taskhub.cloud'
-]
+if os.environ.get('USE_AZURE_DB') == "true":
+    DEBUG = False
+    ALLOWED_HOSTS = [
+        'backend.taskhub.cloud',
+        'taskhub.cloud'
+    ]
+
+    CSRF_TRUSTED_ORIGINS = [
+        'backend.taskhub.cloud',
+        'taskhub.cloud'
+    ]
+else:
+    DEBUG = True
 
 
 # Application definition
