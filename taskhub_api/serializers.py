@@ -437,6 +437,7 @@ def manual_task_serializer_minimal(data: models.Task):
     return {
         "id": data.pk,
         "title": data.title,
+        "order_title": data.order.title,
         "task_type": data.task_type.title,
         "task_status": data.task_status.title,
         "scheduled_to": data.scheduled_to,

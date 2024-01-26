@@ -199,8 +199,8 @@ class CustomerViewSet(viewsets.ViewSet):
                 pass
         ser = serializers.CustomerSerializer(data=request.data)
         if ser.is_valid():
-            ser.save()
-            return Response(ser.validated_data, status=201)
+            obj = ser.save()
+            return Response(serializers.CustomerSerializer(obj).data, status=201)
         else:
             return Response(ser.errors, status=400)
 
@@ -402,6 +402,14 @@ class EmployeeViewSet(viewsets.ViewSet):
                 if request.user.pk == int(employee_pk) and request.user.groups.filter(name="Administrator").count() == 1:
                     ser.validated_data['groups'].append(1)
                     ser.validated_data['groups'].append(4)
+                elif request.user.pk == int(employee_pk) and request.user.groups.filter(name="Administrator").count() == 0:
+                    customer_self_allowance = ('phone', 'birth_date', 'address', 'password', 'email', 'drivers_license_status')
+                    for key in list(ser.validated_data.keys()):
+                        if not key in customer_self_allowance:
+                            ser.validated_data.pop(key)
+                    ser.validated_data['groups'] = []
+                    for g in employee.groups.all().values_list("pk", flat=True):
+                        ser.validated_data['groups'].append(g)
                 emp = ser.save()
             except Exception as e:
                 print(e)
@@ -410,7 +418,9 @@ class EmployeeViewSet(viewsets.ViewSet):
                 elif 'This password is too short' in str(e.args[0]):
                     return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message='password too short')).data, status=400)
                 else:
-                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message='username or mail already exists')).data, status=400)
+                    #return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message='username or mail already exists')).data, status=400)
+                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message=e.args)).data, status=400)
+
             return Response(serializers.manual_employee_serializer(emp), status=200)
         else:
             return Response(ser.errors, status=400)
