@@ -38,6 +38,11 @@ if os.environ.get('USE_AZURE_DB') == "true":
         'backend.taskhub.cloud',
         'taskhub.cloud'
     ]
+    REST_FRAMEWORK = {
+        "DEFAULT_RENDERER_CLASSES": [
+            "rest_framework.renderers.JSONRenderer"
+        ]
+    }
 else:
     DEBUG = True
 
