@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import datetime
+import os
 from pathlib import Path
 from decouple import config
 
@@ -26,7 +27,24 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+if os.environ.get('USE_AZURE_DB') == "true":
+    DEBUG = False
+    ALLOWED_HOSTS = [
+        'backend.taskhub.cloud',
+        'taskhub.cloud'
+    ]
+
+    CSRF_TRUSTED_ORIGINS = [
+        'backend.taskhub.cloud',
+        'taskhub.cloud'
+    ]
+    REST_FRAMEWORK = {
+        "DEFAULT_RENDERER_CLASSES": [
+            "rest_framework.renderers.JSONRenderer"
+        ]
+    }
+else:
+    DEBUG = True
 
 
 # Application definition
@@ -73,16 +91,34 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'TaskHub.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if os.environ.get('USE_AZURE_DB') == "true":
+    DATABASES = {
+      'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'taskhub',
+        'USER': os.environ.get('DB_user'),
+        'PASSWORD': os.environ.get('DB_password'),
+        'HOST': 'wapdev2.postgres.database.azure.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '5432',
+        },
     }
-}
+else:
+    DATABASES = {
+      'default': {
+          'ENGINE': 'django.db.backends.sqlite3',
+          'NAME': BASE_DIR / 'db.sqlite3',
+      }
+    }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
 
 
 # Password validation
