@@ -31,7 +31,8 @@ if os.environ.get('USE_AZURE_DB') == "true":
     DEBUG = False
     ALLOWED_HOSTS = [
         'backend.taskhub.cloud',
-        'taskhub.cloud'
+        'taskhub.cloud',
+        'taskhub-backend.azurewebsites.net'
     ]
 
     CSRF_TRUSTED_ORIGINS = [
@@ -43,7 +44,6 @@ if os.environ.get('USE_AZURE_DB') == "true":
             'rest_framework.renderers.JSONRenderer',
         )
     }
-
     ADMIN_ENABLED = False
 else:
     DEBUG = True
@@ -109,11 +109,21 @@ if os.environ.get('USE_AZURE_DB') == "true":
     }
 else:
     DATABASES = {
-      'default': {
-          'ENGINE': 'django.db.backends.sqlite3',
-          'NAME': BASE_DIR / 'db.sqlite3',
-      }
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'taskhub',
+            'USER': 'taskhub-backend',
+            'PASSWORD': 'Chefdei1.MurmeltierundChefdeiGoarten',
+            'HOST': 'wapdev2.postgres.database.azure.com',  # Or an IP Address that your DB is hosted on
+            'PORT': '5432',
+        },
     }
+#    DATABASES = {
+#      'default': {
+#          'ENGINE': 'django.db.backends.sqlite3',
+#          'NAME': BASE_DIR / 'db.sqlite3',
+#      }
+#    }
 
 #DATABASES = {
 #    'default': {
