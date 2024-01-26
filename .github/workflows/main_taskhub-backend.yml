@@ -6,8 +6,6 @@ name: Build and deploy Python app to Azure Web App - taskhub-backend
 
 on:
   push:
-    branches:
-      - main
     tags: ["deployment**"]
   workflow_dispatch:
 
