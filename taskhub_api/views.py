@@ -3,6 +3,7 @@ import json
 import string
 import traceback
 
+from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.contrib.auth.models import Group
 from django.shortcuts import render
@@ -373,6 +374,8 @@ class EmployeeViewSet(viewsets.ViewSet):
         if ser.is_valid():
             try:
                 emp = ser.save()
+            except ValidationError as e:
+                return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message=e.args)).data, status=400)
             except Exception as e:
                 return Response(e.args, status=400)
             return Response(serializers.manual_employee_serializer(emp), status=201)
