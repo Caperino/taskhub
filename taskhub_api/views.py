@@ -1212,9 +1212,9 @@ class TaskViewSet(viewsets.ViewSet):
         if ser.is_valid():
             try:
                 if ser.validated_data['scheduled_from'] > ser.validated_data['scheduled_to']:
-                    return Response({"time span": "begin after end detected"}, status=400)
+                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="time span: begin after end detected")).data, status=400)
                 elif ser.validated_data['from_shift'] not in ("am", "pm") or ser.validated_data['to_shift'] not in ("am", "pm"):
-                    return Response({"from_shift or to_shift": "invalid input detected, please only use 'am' or 'pm'"}, 400)
+                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="from_shift or to_shift: invalid input detected, please only use 'am' or 'pm'")).data, status=400)
                 ser.save()
             except Exception as e:
                 return Response(e.args, status=400)
@@ -1264,18 +1264,16 @@ class TaskViewSet(viewsets.ViewSet):
 
                 if fr is not None and to is not None:
                     if ser.validated_data['scheduled_from'] > ser.validated_data['scheduled_to']:
-                        return Response({"time span": "begin after end detected"}, status=400)
+                        return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="time span: begin after end detected")).data, status=400)
                 elif fr is not None and fr > task.scheduled_to:
-                    return Response({"time span": "begin after end detected"}, status=400)
+                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="time span: begin after end detected")).data, status=400)
                 elif to is not None and task.scheduled_from > to:
-                    return Response({"time span": "begin after end detected"}, status=400)
+                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="time span: begin after end detected")).data, status=400)
 
                 if 'from_shift' in ser.validated_data and ser.validated_data['from_shift'] not in ("am", "pm"):
-                    return Response(
-                        {"from_shift": "invalid input detected, please only use 'am' or 'pm'"}, 400)
+                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="from shift: invalid input detected, please only use 'am' or 'pm'")).data, status=400)
                 elif 'to_shift' in ser.validated_data and ser.validated_data['to_shift'] not in ("am", "pm"):
-                    return Response(
-                        {"to_shift": "invalid input detected, please only use 'am' or 'pm'"}, 400)
+                    return Response(serializers.TaskHubApiResponseSerializer(models.TaskHubApiResponse(status="error", message="to shift: invalid input detected, please only use 'am' or 'pm'")).data, status=400)
                 ser.save()
             except Exception as e:
                 print(e.args)
