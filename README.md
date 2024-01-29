@@ -24,13 +24,13 @@ It is designed to be a simple and easy to use tool for managing tasks and resour
 It is not intended to be a complete ERP system, but rather a tool for managing tasks and resources.
 Many different aspects like employee management, vehicle management, task management, etc. are covered.
 
-Django DRF is used for the API and the official frontend is built with Angular.
+Django Rest Framework (DRF) is used for the API and the official frontend is built with Angular.
 Incoming requests are serialized and validated with DRF serializers, before being processed by our business logic and saved to the database.
 PostgreSQL is used as the database and Azure Blob Storage is used for file storage for task proofs or profile pictures.
 An Azure deployment with several resources allows for fast communication between the frontend and backend/data storage.
 This fact also makes the application very scalable, as the frontend and backend can be scaled independently of each other.
 
-The module azure.py was written for this project (TK) and simplifies the use of Azure BLOB storage by wrapping necessary commands behind the scenes.
+The module azure.py was written for this project (TaskHub) and simplifies the use of Azure BLOB storage by wrapping necessary commands behind the scenes.
 
 ###### Version 1.0.0 existing resources
 
