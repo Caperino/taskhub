@@ -10,13 +10,13 @@ def fill_employees(apps, schema_editor):
     Employee = apps.get_model('taskhub_api', "Employee")
     Groups = apps.get_model('auth', "Group")
     employees = (
-        ('kaptim72', 'Timo', 'Kappel', 'timo.kappel@thub.com', 'securepassword', Groups.objects.filter(Q(pk=1) | Q(pk=4)), EmployeeType.objects.get(pk=1),
+        ('timkap63', 'Timo', 'Kappel', 'timo.kappel@thub.com', 'securepassword', Groups.objects.filter(Q(pk=1) | Q(pk=4)), EmployeeType.objects.get(pk=1),
         'My Address 1', '1234567890', datetime.datetime(2003,7,14), 'male', True),
-        ('csihub29', 'Huba', 'Csicsics', 'huba.csicsics@thub.com', 'securepassword', Groups.objects.filter(Q(pk=3) | Q(pk=4)), EmployeeType.objects.get(pk=2),
+        ('hubcsi29', 'Huba', 'Csicsics', 'huba.csicsics@thub.com', 'securepassword', Groups.objects.filter(Q(pk=3) | Q(pk=4)), EmployeeType.objects.get(pk=2),
          'My Address 2', '987654321', datetime.datetime(2002, 5, 5), 'male', True),
-        ('jöbste91', 'Stefan', 'Jöbstl', 'stefan.joebstl@thub.com', 'securepassword', Groups.objects.filter(Q(pk=2) | Q(pk=4)), EmployeeType.objects.get(pk=4),
+        ('stejöb91', 'Stefan', 'Jöbstl', 'stefan.joebstl@thub.com', 'securepassword', Groups.objects.filter(Q(pk=2) | Q(pk=4)), EmployeeType.objects.get(pk=4),
          'My Kärntner Address 3', '8716923712', datetime.datetime(2002, 8, 30), 'male', True),
-        ('wolale54', 'Alexander', 'Wolf', 'alexander.wolf@thub.com', 'securepassword', Groups.objects.filter(pk=4), EmployeeType.objects.get(pk=5),
+        ('alewol54', 'Alexander', 'Wolf', 'alexander.wolf@thub.com', 'securepassword', Groups.objects.filter(pk=4), EmployeeType.objects.get(pk=5),
          'My Heimschuher Address 4', '672926372', datetime.datetime(2000, 9, 24), 'male', True),
     )
     e = [Employee.objects.create(username=employee[0], first_name=employee[1], last_name=employee[2], email=employee[3],

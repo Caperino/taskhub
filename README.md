@@ -9,17 +9,16 @@ TaskHub is an MES for smaller businesses that do not want to / cannot pay large 
 - 'python create_secretkey'
 - 'python manage.py makemigrations'
 - 'python manage.py migrate'
-- 'python manage.py createsuperuser'
-- 'az login'
+- [ 'python manage.py createsuperuser' optional ]
+- 'az login' if Azure connection is possible
 - 'python manage.py runserver'
 
-###### Version 0.1.0
-
-#### Common Start Types for proper Actions
-#### check https://docs.djangoproject.com/en/5.0/topics/migrations/#data-migrations for reference
+###### Version 1.0.0
 
 - Group : Administrator, Manager, Supervisor, Employee
 - EmployeeType : Office, Assembly, Printing, Sales, Contact
 - TaskType : assembly, delivery, installation, repair, service
 - TaskStatus : in progress, queued, done
 - VehicleType : Sedan, Combi, Truck, Roof Storage, Business
+- additionally various employees and other resources
+- passwords for test users: 'securepassword'
