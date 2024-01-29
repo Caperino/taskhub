@@ -10,7 +10,7 @@ def fill_employees(apps, schema_editor):
     Employee = apps.get_model('taskhub_api', "Employee")
     Groups = apps.get_model('auth', "Group")
     employees = (
-        ('kaptim7', 'Timo', 'Kappel', 'timo.kappel@thub.com', 'securepassword', Groups.objects.filter(Q(pk=1) | Q(pk=4)), EmployeeType.objects.get(pk=1),
+        ('kaptim72', 'Timo', 'Kappel', 'timo.kappel@thub.com', 'securepassword', Groups.objects.filter(Q(pk=1) | Q(pk=4)), EmployeeType.objects.get(pk=1),
         'My Address 1', '1234567890', datetime.datetime(2003,7,14), 'male', True),
         ('csihub29', 'Huba', 'Csicsics', 'huba.csicsics@thub.com', 'securepassword', Groups.objects.filter(Q(pk=3) | Q(pk=4)), EmployeeType.objects.get(pk=2),
          'My Address 2', '987654321', datetime.datetime(2002, 5, 5), 'male', True),
