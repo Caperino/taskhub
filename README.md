@@ -19,7 +19,7 @@ From there onwards, this user needs to be given the groups 'Administrator' and '
 Since the system was implemented in a hierarchical way, every active user needs the group 'Employee' to see all the necessary information, despite maybe being assigned to a higher group as well.
 Administrators have access to user management, while Managers can modify every operational aspect (Orders, Customers, Tasks, Vehicles, ...).
 Supervisor have the same access span as Managers, but read-only access and thereby cannot modify anything except their own tasks.
-Employees can only see their own tasks and are not allowed to modify anything.
+Employees can only see their own tasks and are not allowed to modify anything except some parts of their profile as well as the status of their tasks.
 
 ## Setup Notes 2 | Azure
 The application works perfectly fine without Azure access, except for the file storage. No files can be uploaded if such storage location is not connected.
