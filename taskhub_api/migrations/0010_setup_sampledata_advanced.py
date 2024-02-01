@@ -1,31 +1,7 @@
 from django.db import migrations
 import datetime
 from django.contrib.auth.hashers import make_password
-
 from django.db.models import Q
-
-
-def fill_employees(apps, schema_editor):
-    EmployeeType = apps.get_model('taskhub_api', "EmployeeType")
-    Employee = apps.get_model('taskhub_api', "Employee")
-    Groups = apps.get_model('auth', "Group")
-    employees = (
-        ('timkap63', 'Timo', 'Kappel', 'timo.kappel@thub.com', 'securepassword', Groups.objects.filter(Q(pk=1) | Q(pk=4)), EmployeeType.objects.get(pk=1),
-        'My Address 1', '1234567890', datetime.datetime(2003,7,14), 'male', True),
-        ('hubcsi29', 'Huba', 'Csicsics', 'huba.csicsics@thub.com', 'securepassword', Groups.objects.filter(Q(pk=3) | Q(pk=4)), EmployeeType.objects.get(pk=2),
-         'My Address 2', '987654321', datetime.datetime(2002, 5, 5), 'male', True),
-        ('stejöb91', 'Stefan', 'Jöbstl', 'stefan.joebstl@thub.com', 'securepassword', Groups.objects.filter(Q(pk=2) | Q(pk=4)), EmployeeType.objects.get(pk=4),
-         'My Kärntner Address 3', '8716923712', datetime.datetime(2002, 8, 30), 'male', True),
-        ('alewol54', 'Alexander', 'Wolf', 'alexander.wolf@thub.com', 'securepassword', Groups.objects.filter(pk=4), EmployeeType.objects.get(pk=5),
-         'My Heimschuher Address 4', '672926372', datetime.datetime(2000, 9, 24), 'male', True),
-    )
-    e = [Employee.objects.create(username=employee[0], first_name=employee[1], last_name=employee[2], email=employee[3],
-    employee_type=employee[6], address=employee[7], phone=employee[8],
-    birth_date=employee[9], gender=employee[10], drivers_license_status=employee[11]) for employee in employees]
-    for i in range(len(employees)):
-        e[i].password = make_password(employees[i][4])
-        [e[i].groups.add(group) for group in employees[i][5]]
-        e[i].save()
 
 
 def fill_customer(apps, schema_editor):
@@ -70,26 +46,22 @@ def fill_task(apps, schema_editor):
     Task = apps.get_model('taskhub_api', "Task")
     TaskType = apps.get_model('taskhub_api', "TaskType")
     TaskStatus = apps.get_model('taskhub_api', "TaskStatus")
-    Employee = apps.get_model('taskhub_api', "Employee")
     Vehicle = apps.get_model('taskhub_api', "Vehicle")
     Order = apps.get_model('taskhub_api', "Order")
     tasks = (
         (Order.objects.get(pk=1), 'Cutting', TaskType.objects.get(pk=1), TaskStatus.objects.get(pk=2),
-         Employee.objects.filter(pk__in=(3, 4)), Vehicle.objects.filter(pk__in=[1]),
+         [], Vehicle.objects.filter(pk__in=[1]),
          datetime.datetime(2024, 1, 29), 'am', datetime.datetime(2024, 2, 2), 'pm'),
         (Order.objects.get(pk=2), 'Designen', TaskType.objects.get(pk=5), TaskStatus.objects.get(pk=3),
-         Employee.objects.filter(pk__in=(1, 4)), [], datetime.datetime(2024, 1, 16),
+         [], [], datetime.datetime(2024, 1, 16),
          'am', datetime.datetime(2024, 2, 9), 'pm'),
         (Order.objects.get(pk=3), 'Ausbessern', TaskType.objects.get(pk=4), TaskStatus.objects.get(pk=1),
-         Employee.objects.filter(pk__in=(3, 4)), Vehicle.objects.filter(pk__in=[3]),
+         [], Vehicle.objects.filter(pk__in=[3]),
          datetime.datetime(2024, 2, 1), 'am', datetime.datetime(2024, 2, 5), 'pm'),
     )
     [Task.objects.create(order=task[0], title=task[1], task_type=task[2], task_status=task[3],
                          scheduled_from=task[6], from_shift=task[7], scheduled_to=task[8], to_shift=task[9]) for task in tasks]
     for task in tasks:
-        for employee in task[4]:
-            Task.objects.get(order=task[0], title=task[1], task_type=task[2], task_status=task[3],
-                             scheduled_from=task[6], from_shift=task[7], scheduled_to=task[8], to_shift=task[9]).employees.add(employee)
         for vehicle in task[5]:
             Task.objects.get(order=task[0], title=task[1], task_type=task[2], task_status=task[3],
                              scheduled_from=task[6], from_shift=task[7], scheduled_to=task[8], to_shift=task[9]).vehicles.add(vehicle)
@@ -101,7 +73,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(fill_employees),
         migrations.RunPython(fill_customer),
         migrations.RunPython(fill_vehicle),
         migrations.RunPython(fill_order),
